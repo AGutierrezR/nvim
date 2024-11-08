@@ -18,6 +18,9 @@ return {
           prompt = "❯ "
         }
       },
+      marks = {
+        marks = "[a-zA-Z]"
+      }
     })
 
     vim.keymap.set('n', '<leader>f', require('fzf-lua').files, { desc = 'Search File' })
