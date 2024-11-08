@@ -29,11 +29,11 @@ return {
           end
 
           map('gd', require('fzf-lua').lsp_definitions, 'Goto Definition')
-          map('gi', require('fzf-lua').lsp_implementations, 'Goto Implementation')
+          map('gI', require('fzf-lua').lsp_implementations, 'Goto Implementation')
           map('gr', require('fzf-lua').lsp_references, 'Goto References')
-          map('gD', vim.lsp.buf.declaration, '')
+          map('gD', require('fzf-lua').lsp_typedefs, 'Goto Type Definition')
           map('K', vim.lsp.buf.hover, '')
-          map('<leader>a', vim.lsp.buf.code_action, 'Code Action')
+          map('<leader>a', require('fzf-lua').lsp_code_actions, 'Code Action')
           map('<leader>s', require('fzf-lua').lsp_document_symbols, 'Goto Document Symbols')
           map('<leader>S', require('fzf-lua').lsp_live_workspace_symbols, 'GoTo Workspace Symbols')
           map('<leader>r', vim.lsp.buf.rename, 'Rename Symbol')
@@ -107,10 +107,12 @@ return {
               },
             },
           },
+          -- root_dir = function() return vim.loop.cwd() end
         },
         jsonls = {},
         cssls = {},
-        emmet_ls = {}
+        emmet_ls = {},
+        custom_elements_ls = {}
       }
 
       -- Ensure the servers and tools above are installed
