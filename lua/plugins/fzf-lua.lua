@@ -26,6 +26,7 @@ return {
     vim.keymap.set('n', '<leader>f', require('fzf-lua').files, { desc = 'Search File' })
     vim.keymap.set('n', '<leader>/', require('fzf-lua').live_grep, { desc = 'Search by Grep' })
     vim.keymap.set('n', '<leader>b', require('fzf-lua').buffers, { desc = 'Find existing buffers' })
+    vim.keymap.set('n', '<leader>R', require('fzf-lua').oldfiles, { desc = 'Recently used files' })
     vim.keymap.set('n', '<leader>?', require('fzf-lua').commands, { desc = 'Find Commands' })
   end
 }
