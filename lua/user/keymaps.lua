@@ -3,6 +3,9 @@ local opts = { noremap = true, silent = true }
 
 keymap('i', 'jk', '<Esc>', { desc = 'Exit insert mode with jk' } )
 
+keymap("n", "<C-d>", "<C-d>zz")
+keymap("n", "<C-u>", "<C-u>zz")
+
 -- remove Q keymap
 keymap('n', 'Q', '<nop>')
 
