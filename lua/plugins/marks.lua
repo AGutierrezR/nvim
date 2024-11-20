@@ -6,7 +6,9 @@ return {
     require('marks').setup({
       mappings = {
         next = ']`',
-        prev = '[`'
+        prev = '[`',
+        next_bookmark = false,
+        prev_bookmark = false,
       }
     })
   end
