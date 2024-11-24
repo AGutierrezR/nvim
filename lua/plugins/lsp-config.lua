@@ -125,6 +125,16 @@ return {
 				cssls = {},
 				emmet_ls = {},
 				custom_elements_ls = {},
+				html = {
+					init_options = {
+						configurationSection = { "html", "css", "javascript" },
+						embeddedLanguages = {
+							css = true,
+							javascript = true,
+						},
+						provideFormatter = true,
+					},
+				},
 			}
 
 			-- Ensure the servers and tools above are installed
