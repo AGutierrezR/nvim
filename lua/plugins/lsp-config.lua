@@ -45,8 +45,11 @@ return {
 					map("<leader>s", require("fzf-lua").lsp_document_symbols, "Goto Document Symbols")
 					map("<leader>S", require("fzf-lua").lsp_live_workspace_symbols, "GoTo Workspace Symbols")
 					map("<leader>r", vim.lsp.buf.rename, "Rename Symbol")
+					map("<leader>d", require("fzf-lua").diagnostics_document, "Document Diagnostics")
 
-					-- Navbuddy keymap
+					vim.keymap.set("n", "<leader>l", function()
+						vim.diagnostic.open_float(0, { scope = "line" })
+					end, { desc = "Line Diagnostics" }) -- Navbuddy keymap
 					vim.keymap.set("n", "<leader>O", vim.cmd.Navbuddy, { desc = "Toggle Navbuddy" })
 
 					-- The following two autocommands are used to highlight references of the
@@ -164,6 +167,27 @@ return {
 					end,
 				},
 			})
+
+			-- LSP Prevents inline buffer annotations
+			vim.diagnostic.open_float()
+			vim.lsp.handlers["textDocument/publishDiagnostics"] =
+				vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+					virtual_text = false,
+					signs = true,
+					underline = true,
+					update_on_insert = false,
+				})
+
+			local signs = {
+				Error = "󰅚 ",
+				Warn = "󰳦 ",
+				Hint = "󱡄 ",
+				Info = " ",
+			}
+			for type, icon in pairs(signs) do
+				local hl = "DiagnosticSign" .. type
+				vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = nil })
+			end
 		end,
 	},
 }
