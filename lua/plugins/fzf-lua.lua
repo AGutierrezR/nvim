@@ -36,5 +36,8 @@ return {
     -- Git related keymaps 
     vim.keymap.set('n', '<leader>gc', require('fzf-lua').git_bcommits, { desc = 'Browse File Commits' })
     vim.keymap.set('n', '<leader>gs', require('fzf-lua').git_status, { desc = 'Git Status' })
+
+    -- Vim features
+    vim.keymap.set('n', 'z=', require('fzf-lua').spell_suggest, { desc = 'Spelling suggestions' })
   end
 }

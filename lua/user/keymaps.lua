@@ -39,7 +39,7 @@ keymap('x', 'K', ":move '<-2<CR>gv-gv", { desc = 'Move line down in x mode' })
 keymap('n', 'x', '"_x')
 
 -- Switch to last accessed buffer
-keymap('n', 'ga', '<cmd>b#<CR>')
+keymap('n', 'ga', '<cmd>b#<CR>', { desc = 'Switch to last accessed buffer' })
 
 keymap('n', '<C-k>', 'k')
 

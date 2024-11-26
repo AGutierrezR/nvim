@@ -14,8 +14,9 @@ return {
   config = function (_, opts)
     require('gitsigns').setup(opts)
 
-    vim.keymap.set('n', '<leader>gp', ':Gitsigns preview_hunk<CR>', { silent = true })
-    vim.keymap.set('n', '<leader>gt', ':Gitsigns toggle_current_line_blame<CR>', { silent = true })
-    vim.keymap.set('n', '<leader>gr', ':Gitsigns reset_hunk<CR>')
+    vim.keymap.set('n', '<leader>gp', ':Gitsigns preview_hunk<CR>', { desc = 'Preview hunk', silent = true })
+    vim.keymap.set('n', '<leader>gt', ':Gitsigns toggle_current_line_blame<CR>', { desc = 'Toggle line blame', silent = true })
+    vim.keymap.set('n', '<leader>gr', ':Gitsigns reset_hunk<CR>', { desc = 'Reset hunk', silent = true })
+    vim.keymap.set('n', '<leader>gR', ':Gitsigns reset_buffer<CR>', { desc = 'Reset buffer', silent = true })
   end
 }
