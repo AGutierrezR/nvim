@@ -27,6 +27,12 @@ local function show_macro_recording()
 	end
 end
 
+local function place()
+	local linePre = "L:"
+	local line = "%l/%L"
+	return string.format("%s%s", linePre, line)
+end
+
 return {
 	"nvim-lualine/lualine.nvim",
 	dependencies = {
@@ -62,7 +68,8 @@ return {
 				},
 			},
 			lualine_x = { "encoding", "filetype" },
-			lualine_y = { nil }
+			lualine_y = { nil },
+			lualine_z = { { place, padding = { left = 1, right = 1 } } },
 		},
 	},
 	config = function(_, opts)
