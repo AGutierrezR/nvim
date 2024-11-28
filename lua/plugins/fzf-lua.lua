@@ -20,7 +20,15 @@ return {
       },
       marks = {
         marks = "[a-zA-Z]"
-      }
+      },
+      git = {
+        files = {
+          prompt = "❯ "
+        },
+        status = {
+          prompt = "❯ "
+        }
+      },
     })
 
     vim.keymap.set('n', '<leader><leader>', require('fzf-lua').resume, { desc = 'FZF Resume' })
@@ -35,7 +43,10 @@ return {
 
     -- Git related keymaps 
     vim.keymap.set('n', '<leader>gc', require('fzf-lua').git_bcommits, { desc = 'Browse File Commits' })
+    vim.keymap.set('n', '<leader>gC', require('fzf-lua').git_commits, { desc = 'Browse Commits' })
     vim.keymap.set('n', '<leader>gs', require('fzf-lua').git_status, { desc = 'Git Status' })
+    vim.keymap.set('n', '<leader>gf', require('fzf-lua').git_files, { desc = 'Git Files' })
+    vim.keymap.set('n', '<leader>gS', require('fzf-lua').git_stash, { desc = 'Git Stash' })
 
     -- Vim features
     vim.keymap.set('n', 'z=', require('fzf-lua').spell_suggest, { desc = 'Spelling suggestions' })
