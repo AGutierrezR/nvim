@@ -14,6 +14,8 @@ return {
 					"markdown_inline",
 					"css",
 					"scss",
+					"yaml",
+					"toml",
 				},
 
 				highlight = {
@@ -23,8 +25,8 @@ return {
 				incremental_selection = {
 					enable = true,
 					keymaps = {
-						node_incremental = "v",
-						node_decremental = "V",
+						node_incremental = "<Enter>",
+						node_decremental = "<Tab>",
 						scope_incremental = false,
 					},
 				},
