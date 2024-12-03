@@ -9,6 +9,8 @@ keymap("n", "<C-u>", "<C-u>zz")
 -- remove Q keymap
 keymap('n', 'Q', '<nop>')
 
+keymap('n', '<leader>q', ':bw<CR>', { desc = 'Wipeout buffer', silent = true })
+
 -- clear search highlighting
 keymap('n', '<Esc>', ':nohlsearch<cr>', { silent = true, desc = 'Clear search highlighting' })
 
