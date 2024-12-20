@@ -46,3 +46,7 @@ keymap('n', 'ga', '<cmd>b#<CR>', { desc = 'Switch to last accessed buffer' })
 keymap('n', '<C-k>', 'k')
 
 keymap('n', '<C-f>', '<cmd>silent !tmux neww tmux-sessionizer<CR>')
+
+-- Quickfix (Unimpaird style)
+keymap('n', '[q', '<cmd>cprev<CR>', { desc = 'Go to prev quickfix item'})
+keymap('n', ']q', '<cmd>cnext<CR>', { desc = 'Go to next quickfix item'})
