@@ -10,6 +10,7 @@ keymap("n", "<C-u>", "<C-u>zz")
 keymap('n', 'Q', '<nop>')
 
 keymap('n', '<leader>q', ':bw<CR>', { desc = 'Wipeout buffer', silent = true })
+keymap('n', '<leader>w', ':w<CR>', { desc = 'Save buffer', silent = true })
 
 -- clear search highlighting
 keymap('n', '<Esc>', ':nohlsearch<cr>', { silent = true, desc = 'Clear search highlighting' })

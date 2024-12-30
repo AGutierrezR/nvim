@@ -10,6 +10,11 @@ vim.api.nvim_create_user_command("BufOnly", function()
   ]])
 end, {})
 
+vim.api.nvim_create_user_command("FilePath", function()
+  local file_path = vim.fn.expand("%:p")
+  print(file_path)
+end, {})
+
 -- Util function for YankToClipboard and MoveYankToRegister 
 local function move_yank_to_register(target_register)
   -- Validate the target register

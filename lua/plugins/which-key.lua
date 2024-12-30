@@ -27,6 +27,15 @@ return {
 			group = "󰹍 ",
 		},
 	},
+	keys = {
+		{
+			"<leader>gg",
+			function()
+				require("which-key").show({ keys = '<leader>g', loop = true })
+			end,
+			desc = "Git (Hydra Mode)",
+		},
+	},
 	config = function(_, opts)
 		local wk = require("which-key")
 		wk.setup(opts)

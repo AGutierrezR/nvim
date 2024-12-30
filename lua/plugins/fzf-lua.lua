@@ -41,6 +41,7 @@ return {
     vim.keymap.set('n', '<leader>b', require('fzf-lua').buffers, { desc = 'Find existing buffers' })
     vim.keymap.set('n', '<leader>R', require('fzf-lua').registers, { desc = 'Registers' })
     vim.keymap.set('n', '<leader>?', require('fzf-lua').commands, { desc = 'Find Commands' })
+    vim.keymap.set('n', '<leader>m', require('fzf-lua').marks, { desc = 'Marks' })
 
     -- Git related keymaps 
     vim.keymap.set('n', '<leader>gb', require('fzf-lua').git_branches, { desc = 'Branches' })
