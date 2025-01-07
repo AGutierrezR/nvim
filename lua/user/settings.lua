@@ -2,6 +2,9 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+vim.g.netrw_banner = 0 -- gets rid of the banner for netrw
+vim.g.netrw_altv = 1   -- change from left splitting to right splitting
+
 -- Line number related settings
 vim.opt.nu = true
 vim.opt.relativenumber = true
