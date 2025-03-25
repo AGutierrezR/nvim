@@ -54,13 +54,13 @@ return {
 				"diagnostics",
 			},
 			lualine_c = {
-				{
-					"filename",
-					symbols = {
-						modified = "󰐖", -- Text to show when the file is modified.
-						readonly = "", -- Text to show when the file is non-modifiable or readonly.
-					},
-				},
+				-- {
+				-- 	"filename",
+				-- 	symbols = {
+				-- 		modified = "󰐖", -- Text to show when the file is modified.
+				-- 		readonly = "", -- Text to show when the file is non-modifiable or readonly.
+				-- 	},
+				-- },
 				{
 					show_macro_recording,
 					color = { fg = "#333333", bg = "#ff6666" },

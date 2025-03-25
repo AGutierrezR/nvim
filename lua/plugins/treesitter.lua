@@ -65,7 +65,6 @@ return {
 						goto_next_start = {
 							["]f"] = "@function.outer",
 							["]c"] = "@class.outer",
-							["]s"] = "@assignment.inner",
 							["]g"] = "@block.outer",
 							["]a"] = "@parameter.outer",
 							["]k"] = "@call.outer",
@@ -77,7 +76,6 @@ return {
 						goto_next_end = {
 							["]F"] = "@function.outer",
 							["]C"] = "@class.outer",
-							["]S"] = "@assignment.inner",
 							["]G"] = "@block.outer",
 							["]A"] = "@parameter.outer",
 							["]K"] = "@call.outer",
@@ -89,7 +87,6 @@ return {
 						goto_previous_start = {
 							["[f"] = "@function.outer",
 							["[c"] = "@class.outer",
-							["[s"] = "@assignment.inner",
 							["[g"] = "@block.outer",
 							["[a"] = "@parameter.outer",
 							["[k"] = "@call.outer",
@@ -101,7 +98,6 @@ return {
 						goto_previous_end = {
 							["[F"] = "@function.outer",
 							["[C"] = "@class.outer",
-							["[S"] = "@assignment.inner",
 							["[G"] = "@block.outer",
 							["[A"] = "@parameter.outer",
 							["[K"] = "@call.outer",
