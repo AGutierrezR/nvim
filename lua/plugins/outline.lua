@@ -1,3 +1,4 @@
+-- A sidebar with a tree-like outline of symbols from your code, powered by LSP.
 return {
   "hedyhli/outline.nvim",
   lazy = true,
