@@ -37,24 +37,24 @@ return {
 						lookahead = true,
 						include_surrounding_whitespace = false,
 						keymaps = {
-							-- ["af"] = "@function.outer",
-							-- ["if"] = "@function.inner",
-							-- ["ac"] = "@class.outer",
-							-- ["ic"] = "@class.inner",
-							["is"] = "@assignment.inner",
-							["as"] = "@assignment.outer",
-							-- ["ig"] = "@block.inner",
-							-- ["ag"] = "@block.outer",
-							-- ["ia"] = "@parameter.inner",
-							-- ["aa"] = "@parameter.outer",
-							["ik"] = "@call.inner",
-							["ak"] = "@call.outer",
+							-- ["af"] = "@function.outer", -- Use mini.ai instead
+							-- ["if"] = "@function.inner", -- Use mini.ai instead
+							-- ["ac"] = "@class.outer",	-- Use mini.ai instead
+							-- ["ic"] = "@class.inner",	-- Use mini.ai instead
+							-- ["is"] = "@assignment.inner",
+							-- ["as"] = "@assignment.outer",
+							-- ["ig"] = "@block.inner", -- Use mini.ai instead
+							-- ["ag"] = "@block.outer", -- Use mini.ai instead
+							-- ["ia"] = "@parameter.inner", -- Use mini.ai instead
+							-- ["aa"] = "@parameter.outer", -- Use mini.ai instead
+							-- ["ik"] = "@call.inner",
+							-- ["ak"] = "@call.outer",
 							["i/"] = "@comment.inner", -- Not working in Javascript
 							["a/"] = "@comment.outer",
-							-- ["ir"] = "@conditional.inner",
-							-- ["ar"] = "@conditional.outer",
-							-- ["io"] = "@loop.inner",
-							-- ["ao"] = "@loop.outer",
+							-- ["ir"] = "@conditional.inner", -- Use mini.ai instead
+							-- ["ar"] = "@conditional.outer", -- Use mini.ai instead
+							-- ["io"] = "@loop.inner", -- Use mini.ai instead
+							-- ["ao"] = "@loop.outer", -- Use mini.ai instead
 							["it"] = "@return.inner", -- Not working in Javascript
 							["at"] = "@return.outer", -- Not working in Javascript
 						},
@@ -64,6 +64,7 @@ return {
 						set_jumps = true,
 						goto_next_start = {
 							["]f"] = "@function.outer",
+							["]="] = "@assignment.outer",
 							["]c"] = "@class.outer",
 							["]g"] = "@block.outer",
 							["]a"] = "@parameter.outer",
@@ -86,6 +87,7 @@ return {
 						},
 						goto_previous_start = {
 							["[f"] = "@function.outer",
+							["[="] = "@assignment.outer",
 							["[c"] = "@class.outer",
 							["[g"] = "@block.outer",
 							["[a"] = "@parameter.outer",
