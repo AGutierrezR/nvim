@@ -35,6 +35,7 @@ end
 
 return {
 	"nvim-lualine/lualine.nvim",
+	event = 'VeryLazy',
 	dependencies = {
 		"nvim-tree/nvim-web-devicons",
 	},
@@ -61,11 +62,11 @@ return {
 				-- 		readonly = "", -- Text to show when the file is non-modifiable or readonly.
 				-- 	},
 				-- },
-				{
-					show_macro_recording,
-					color = { fg = "#333333", bg = "#ff6666" },
-					separator = { left = "", right = "" },
-				},
+				-- {
+				-- 	show_macro_recording,
+				-- 	color = { fg = "#333333", bg = "#ff6666" },
+				-- 	separator = { left = "", right = "" },
+				-- },
 			},
 			lualine_x = { "encoding", "filetype" },
 			lualine_y = { nil },
