@@ -24,7 +24,7 @@ return {
       dashboard.button("/", "󱘞   Find word", ":FzfLua live_grep<CR>"),
       dashboard.button("r", "󱀸   Recently used files", ":FzfLua oldfiles<CR>"),
       dashboard.button("b", "󰐃   Bookmarks", ":Arrow open<CR>"),
-      dashboard.button("s", "󰁯   Restore Session", ":SessionRestore<CR>"),
+      dashboard.button("s", "󰁯   Restore Session", ":lua require('persistence').load()<CR>"),
       dashboard.button("l", "󰒲   Lazy", ":Lazy<CR>"),
       dashboard.button("q", "󰗼   Quit NVIM", ":qa<CR>"),
     }
