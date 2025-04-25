@@ -1,7 +1,6 @@
 return {
   "saghen/blink.cmp",
-  event = 'VimEnter',
-  dependencies = { "rafamadriz/friendly-snippets" },
+  event = 'InsertEnter',
   version = "1.*",
   dependencies = {
     -- Snippet Engine
