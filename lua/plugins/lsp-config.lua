@@ -10,20 +10,11 @@ return {
 			"williamboman/mason-lspconfig.nvim",
 			"WhoIsSethDaniel/mason-tool-installer.nvim",
 
-			-- Useful status updates for LSP.
-			-- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-			{ "j-hui/fidget.nvim", opts = {} },
+      -- Useful status updates for LSP.
+      { 'j-hui/fidget.nvim', opts = {} },
 
-			-- Allows extra capabilities provided by nvim-cmp
-			"hrsh7th/cmp-nvim-lsp",
-			{
-				"SmiteshP/nvim-navbuddy",
-				dependencies = {
-					"SmiteshP/nvim-navic",
-					"MunifTanjim/nui.nvim",
-				},
-				opts = { lsp = { auto_attach = true } },
-			},
+      -- Allows extra capabilities provided by blink.cmp
+      'saghen/blink.cmp',
 		},
 		config = function()
 			--  This function gets run when an LSP attaches to a particular buffer.
@@ -50,8 +41,7 @@ return {
 
 					vim.keymap.set("n", "<leader>cl", function()
 						vim.diagnostic.open_float(0, { scope = "line" })
-					end, { desc = "Line Diagnostics" }) -- Navbuddy keymap
-					vim.keymap.set("n", "<leader>cO", vim.cmd.Navbuddy, { desc = "Toggle Navbuddy" })
+					end, { desc = "Line Diagnostics" }) 
 
 					-- The following two autocommands are used to highlight references of the
 					-- word under your cursor when your cursor rests there for a little while.
@@ -95,8 +85,35 @@ return {
 				end,
 			})
 
-			local capabilities = vim.lsp.protocol.make_client_capabilities()
-			capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
+      -- Diagnostics configuration
+			-- LSP Prevents inline buffer annotations
+			vim.diagnostic.open_float()
+			vim.lsp.handlers["textDocument/publishDiagnostics"] =
+				vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+					virtual_text = false,
+					signs = true,
+					underline = true,
+					update_on_insert = false,
+				})
+
+			local signs = {
+				Error = "󰅚 ",
+				Warn = "󰳦 ",
+				Hint = "󱡄 ",
+				Info = " ",
+			}
+			for type, icon in pairs(signs) do
+				local hl = "DiagnosticSign" .. type
+				vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = nil })
+			end
+ 
+
+      -- LSP servers and clients are able to communicate to each other what features they support.
+      --  By default, Neovim doesn't support everything that is in the LSP specification.
+      --  When you add blink.cmp, luasnip, etc. Neovim now has *more* capabilities.
+      --  So, we create new capabilities with blink.cmp, and then broadcast that to the servers.			
+      local original_capabilities = vim.lsp.protocol.make_client_capabilities()
+			local capabilities = require('blink.cmp').get_lsp_capabilities(original_capabilities)
 
 			local servers = {
 				lua_ls = {
@@ -156,7 +173,8 @@ return {
 			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
 			require("mason-lspconfig").setup({
-				auto_install = true,
+        ensure_installed = {},
+        automatic_installation = false,
 				handlers = {
 					function(server_name)
 						local server = servers[server_name] or {}
@@ -169,26 +187,6 @@ return {
 				},
 			})
 
-			-- LSP Prevents inline buffer annotations
-			vim.diagnostic.open_float()
-			vim.lsp.handlers["textDocument/publishDiagnostics"] =
-				vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-					virtual_text = false,
-					signs = true,
-					underline = true,
-					update_on_insert = false,
-				})
-
-			local signs = {
-				Error = "󰅚 ",
-				Warn = "󰳦 ",
-				Hint = "󱡄 ",
-				Info = " ",
-			}
-			for type, icon in pairs(signs) do
-				local hl = "DiagnosticSign" .. type
-				vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = nil })
-			end
 		end,
 	},
 }
