@@ -3,6 +3,7 @@ return {
 	{
 		-- Main LSP Configuration
 		"neovim/nvim-lspconfig",
+    event = "VeryLazy",
 		dependencies = {
 			-- Automatically install LSPs and related tools to stdpath for Neovim
 			{ "williamboman/mason.nvim", config = true }, -- NOTE: Must be loaded before dependants
@@ -41,16 +42,16 @@ return {
 					map("gr", require("fzf-lua").lsp_references, "Goto References")
 					map("gD", require("fzf-lua").lsp_typedefs, "Goto Type Definition")
 					map("K", vim.lsp.buf.hover, "")
-					map("<leader>a", require("fzf-lua").lsp_code_actions, "Code Action")
-					map("<leader>s", require("fzf-lua").lsp_document_symbols, "Goto Document Symbols")
-					map("<leader>S", require("fzf-lua").lsp_live_workspace_symbols, "GoTo Workspace Symbols")
-					map("<leader>r", vim.lsp.buf.rename, "Rename Symbol")
-					map("<leader>d", require("fzf-lua").diagnostics_document, "Document Diagnostics")
+					map("<leader>ca", require("fzf-lua").lsp_code_actions, "Code Action")
+					map("<leader>cs", require("fzf-lua").lsp_document_symbols, "Goto Document Symbols")
+					map("<leader>cS", require("fzf-lua").lsp_live_workspace_symbols, "GoTo Workspace Symbols")
+					map("<leader>cr", vim.lsp.buf.rename, "Rename Symbol")
+					map("<leader>cd", require("fzf-lua").diagnostics_document, "Document Diagnostics")
 
-					vim.keymap.set("n", "<leader>l", function()
+					vim.keymap.set("n", "<leader>cl", function()
 						vim.diagnostic.open_float(0, { scope = "line" })
 					end, { desc = "Line Diagnostics" }) -- Navbuddy keymap
-					vim.keymap.set("n", "<leader>O", vim.cmd.Navbuddy, { desc = "Toggle Navbuddy" })
+					vim.keymap.set("n", "<leader>cO", vim.cmd.Navbuddy, { desc = "Toggle Navbuddy" })
 
 					-- The following two autocommands are used to highlight references of the
 					-- word under your cursor when your cursor rests there for a little while.
@@ -87,9 +88,9 @@ return {
 					--
 					-- This may be unwanted, since they displace some of your code
 					if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
-						map("<leader>th", function()
+						map("<leader>ct", function()
 							vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }))
-						end, "[T]oggle Inlay [H]ints")
+						end, "[T]oggle Inlay Hints")
 					end
 				end,
 			})

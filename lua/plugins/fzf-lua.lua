@@ -43,16 +43,32 @@ return {
 		-- use `fzf-lua` for replace vim.ui.select
 		require("fzf-lua").register_ui_select()
 
-		vim.keymap.set("n", "<leader>'", require("fzf-lua").resume, { desc = "FZF Resume" })
+		vim.keymap.set("n", "<leader>sb", require("fzf-lua").lgrep_curbuf, { desc = "Buffer Lines" })
+		vim.keymap.set("n", "<leader>sc", require("fzf-lua").command_history, { desc = "Command History" })
+		vim.keymap.set("n", "<leader>sC", require("fzf-lua").commands, { desc = "Commands" })
+		vim.keymap.set("n", "<leader>sd", require("fzf-lua").diagnostics_document, { desc = "Buffer Diagnostics" })
+		vim.keymap.set("n", "<leader>sD", require("fzf-lua").diagnostics_workspace, { desc = "Diagnostics" })
+		vim.keymap.set("n", "<leader>sg", require("fzf-lua").live_grep, { desc = "Grep" })
+		vim.keymap.set("n", "<leader>sj", require("fzf-lua").jumps, { desc = "Jumps" })
+		vim.keymap.set("n", "<leader>sk", require("fzf-lua").keymaps, { desc = "Keymaps" })
+		vim.keymap.set("n", "<leader>sm", require("fzf-lua").marks, { desc = "Marks" })
+		vim.keymap.set("n", "<leader>sq", require("fzf-lua").quickfix, { desc = "Quickfix List" })
+		vim.keymap.set("n", "<leader>sR", require("fzf-lua").resume, { desc = "Resume" })
+		vim.keymap.set("n", "<leader>sw", require("fzf-lua").grep_cword, { desc = "Search Word" })
+		vim.keymap.set("v", "<leader>sw", require("fzf-lua").grep_visual, { desc = "Search Word" })
+		vim.keymap.set("n", '<leader>s"', require("fzf-lua").registers, { desc = "Registers" })
+		vim.keymap.set("n", "<leader>s/", require("fzf-lua").search_history, { desc = "Search History" })
+
+
 
 		vim.keymap.set("n", "<leader>f", require("fzf-lua").files, { desc = "Search File" })
 		vim.keymap.set("n", "<leader>F", require("fzf-lua").oldfiles, { desc = "Search File" })
 		vim.keymap.set("n", "<leader>/", require("fzf-lua").live_grep, { desc = "Search by Grep" })
-		vim.keymap.set("v", "<leader>/", require("fzf-lua").grep_visual, { desc = "Find Selection" })
-		vim.keymap.set("n", "<leader>7", require("fzf-lua").grep_cword, { desc = "Search Word (under cursor)" })
+		-- vim.keymap.set("v", "<leader>/", require("fzf-lua").grep_visual, { desc = "Find Selection" })
+		-- vim.keymap.set("n", "<leader>7", require("fzf-lua").grep_cword, { desc = "Search Word (under cursor)" })
 		vim.keymap.set("n", "<leader>b", require("fzf-lua").buffers, { desc = "Find existing buffers" })
-		vim.keymap.set("n", "<leader>R", require("fzf-lua").registers, { desc = "Registers" })
-		vim.keymap.set("n", "<leader>?", require("fzf-lua").commands, { desc = "Find Commands" })
+		-- vim.keymap.set("n", "<leader>R", require("fzf-lua").registers, { desc = "Registers" })
+		-- vim.keymap.set("n", "<leader>?", require("fzf-lua").commands, { desc = "Find Commands" })
 		vim.keymap.set("n", "<leader>z", require("fzf-lua").lgrep_curbuf, { desc = "Find on current buffer" })
 		vim.keymap.set("n", "<leader>m", require("fzf-lua").marks, { desc = "Marks" })
 

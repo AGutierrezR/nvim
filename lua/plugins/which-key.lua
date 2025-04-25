@@ -6,9 +6,11 @@ return {
 		preset = "helix",
 		delay = 300,
 		spec = {
-			{ "<leader>g", group = "Git" },
+			{ "<leader>g", group = "+Git" },
 			{ "[`", desc = "Prev mark" },
 			{ "]`", desc = "Next mark" },
+			{ "<leader>c", group = "+Code" },
+			{ "<leader>s", group = "+Search" },
 		},
 		win = {
 			height = {
