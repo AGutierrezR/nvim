@@ -50,14 +50,14 @@ return {
               -- ["aa"] = "@parameter.outer", -- Use mini.ai instead
               -- ["ik"] = "@call.inner",
               -- ["ak"] = "@call.outer",
-              ["i/"] = "@comment.inner", -- Not working in Javascript
-              ["a/"] = "@comment.outer",
+              -- ["i/"] = "@comment.inner", -- Not working in Javascript
+              -- ["a/"] = "@comment.outer",
               -- ["ir"] = "@conditional.inner", -- Use mini.ai instead
               -- ["ar"] = "@conditional.outer", -- Use mini.ai instead
               -- ["io"] = "@loop.inner", -- Use mini.ai instead
               -- ["ao"] = "@loop.outer", -- Use mini.ai instead
-              ["it"] = "@return.inner", -- Not working in Javascript
-              ["at"] = "@return.outer", -- Not working in Javascript
+              -- ["it"] = "@return.inner", -- Not working in Javascript
+              -- ["at"] = "@return.outer", -- Not working in Javascript
             },
           },
           move = {
@@ -73,7 +73,7 @@ return {
               ["]/"] = "@comment.outer",
               ["]r"] = "@conditional.outer",
               ["]o"] = "@loop.outer",
-              ["]t"] = "@return.outer",
+              -- ["]t"] = "@return.outer",
             },
             goto_next_end = {
               ["]F"] = "@function.outer",
@@ -84,7 +84,7 @@ return {
               ["]?"] = "@comment.outer",
               ["]R"] = "@conditional.outer",
               ["]O"] = "@loop.outer",
-              ["]T"] = "@return.outer",
+              -- ["]T"] = "@return.outer",
             },
             goto_previous_start = {
               ["[f"] = "@function.outer",
@@ -96,7 +96,7 @@ return {
               ["[/"] = "@comment.outer",
               ["[r"] = "@conditional.outer",
               ["[o"] = "@loop.outer",
-              ["[t"] = "@return.outer",
+              -- ["[t"] = "@return.outer",
             },
             goto_previous_end = {
               ["[F"] = "@function.outer",
@@ -107,7 +107,7 @@ return {
               ["[?"] = "@comment.outer",
               ["[R"] = "@conditional.outer",
               ["[O"] = "@loop.outer",
-              ["[T"] = "@return.outer",
+              -- ["[T"] = "@return.outer",
             },
           },
         },
