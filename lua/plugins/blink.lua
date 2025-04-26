@@ -1,6 +1,6 @@
 return {
   "saghen/blink.cmp",
-  event = 'InsertEnter',
+  event = "InsertEnter",
   version = "1.*",
   dependencies = {
     -- Snippet Engine
@@ -21,9 +21,9 @@ return {
         --    See the README about individual language/framework/plugin snippets:
         --    https://github.com/rafamadriz/friendly-snippets
         {
-          'rafamadriz/friendly-snippets',
+          "rafamadriz/friendly-snippets",
           config = function()
-            require('luasnip.loaders.from_vscode').lazy_load()
+            require("luasnip.loaders.from_vscode").lazy_load()
           end,
         },
       },
@@ -74,6 +74,26 @@ return {
     --
     -- See the fuzzy documentation for more information
     fuzzy = { implementation = "lua" },
+
+    -- By default, blink.cmp enabled cmdline completions (cmdline.enabled = true),
+    -- By default, the completion menu will not be shown automatically.
+    -- You may set cmdline.completion.menu.auto_show = true to have it appear automatically.
+    cmdline = {
+      keymap = {
+        -- recommended, as the default keymap will only show and select the next item
+        ["<Tab>"] = { "show", "accept" },
+      },
+      completion = {
+        menu = {
+          -- You may want to only show the menu only when writing commands, and not when searching or using other input menus.
+          auto_show = function(ctx)
+            return vim.fn.getcmdtype() == ":"
+            -- enable for inputs as well, with:
+            -- or vim.fn.getcmdtype() == '@'
+          end,
+        },
+      },
+    },
   },
   opts_extend = { "sources.default" },
 }
