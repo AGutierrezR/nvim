@@ -45,4 +45,14 @@ return {
     statuscolumn = { enabled = false },
     words = { enabled = false },
   },
+  keys = {
+    -- Undo
+    {
+      "<leader>u",
+      function()
+        Snacks.picker.undo()
+      end,
+      desc = "Undo Histor",
+    },
+  },
 }
