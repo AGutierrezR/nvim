@@ -28,16 +28,16 @@ return {
 						vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
 					end
 
-					map("gd", require("fzf-lua").lsp_definitions, "Goto Definition")
-					map("gI", require("fzf-lua").lsp_implementations, "Goto Implementation")
-					map("gr", require("fzf-lua").lsp_references, "Goto References")
-					map("gD", require("fzf-lua").lsp_typedefs, "Goto Type Definition")
+					map("gd", require("snacks").picker.lsp_definitions, "Goto Definition")
+					map("gI", require("snacks").picker.lsp_implementations, "Goto Implementation")
+					map("gr", require("snacks").picker.lsp_references, "Goto References")
+					map("gD", require("snacks").picker.lsp_type_definitions, "Goto Type Definition")
 					map("K", vim.lsp.buf.hover, "")
 					map("<leader>ca", require("fzf-lua").lsp_code_actions, "Code Action")
 					map("<leader>cs", require("fzf-lua").lsp_document_symbols, "Goto Document Symbols")
 					map("<leader>cS", require("fzf-lua").lsp_live_workspace_symbols, "GoTo Workspace Symbols")
 					map("<leader>cr", vim.lsp.buf.rename, "Rename Symbol")
-					map("<leader>cd", require("fzf-lua").diagnostics_document, "Document Diagnostics")
+					map("<leader>cd", require("snacks").picker.diagnostics_buffer, "Document Diagnostics")
 
 					vim.keymap.set("n", "<leader>cl", function()
 						vim.diagnostic.open_float(0, { scope = "line" })

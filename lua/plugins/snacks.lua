@@ -67,11 +67,13 @@ return {
             ["K"] = { "preview_scroll_up", mode = { "i", "n" } },
             ["H"] = { "preview_scroll_left", mode = { "i", "n" } },
             ["L"] = { "preview_scroll_right", mode = { "i", "n" } },
+            ["<c-n>"] = { "history_forward", mode = { "i", "n" } },
+            ["<c-p>"] = { "history_back", mode = { "i", "n" } },
           },
         },
       },
       formatters = {
-        file = { filename_first = true },
+        file = { filename_first = true, truncate = 999 },
       },
     },
     notifier = { enabled = false },
@@ -175,7 +177,9 @@ return {
     {
       "<leader>sm",
       function()
-        Snacks.picker.marks()
+        Snacks.picker.marks({
+          global = false
+        })
       end,
       desc = "Marks",
     },
