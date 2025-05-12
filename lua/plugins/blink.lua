@@ -101,16 +101,19 @@ return {
           --     end, items)
           --   end,
           -- },
-          -- path = {
-          --   name = "Path",
-          --   module = "blink.cmp.sources.path",
-          --   score_offset = 25,
-          --   -- fallbacks = { 'buffer' },
-          --   opts = {
-          --     trailing_slash = false,
-          --     label_trailing_slash = true,
-          --   },
-          -- },
+          path = {
+            name = "Path",
+            module = "blink.cmp.sources.path",
+            score_offset = 25,
+            -- fallbacks = { 'buffer' },
+            opts = {
+              trailing_slash = false,
+              label_trailing_slash = true,
+            },
+            enabled = function()
+              return vim.bo.filetype ~= "copilot-chat"
+            end,
+          },
           buffer = {
             name = "Buffer",
             module = "blink.cmp.sources.buffer",
