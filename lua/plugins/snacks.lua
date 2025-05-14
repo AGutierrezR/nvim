@@ -91,13 +91,33 @@ return {
       end,
       desc = "Grep",
     },
-
     {
-      "<leader>b",
+      "<leader>fb",
       function()
         Snacks.picker.buffers()
       end,
       desc = "Buffers",
+    },
+    {
+      "<leader>bb",
+      function()
+        Snacks.picker.buffers()
+      end,
+      desc = "Buffers List",
+    },
+    {
+      "<leader>bd",
+      function()
+        Snacks.bufdelete()
+      end,
+      desc = "Delete Buffer",
+    },
+    {
+      "<leader>bo",
+      function()
+        Snacks.bufdelete.other()
+      end,
+      desc = "Delete Other Buffers",
     },
     {
       "<leader>ff",
@@ -125,6 +145,13 @@ return {
     },
     {
       "<leader>sc",
+      function()
+        Snacks.picker.command_history()
+      end,
+      desc = "Command History",
+    },
+    {
+      "<leader>:",
       function()
         Snacks.picker.command_history()
       end,
@@ -226,7 +253,7 @@ return {
       function()
         Snacks.picker.undo()
       end,
-      desc = "Undo Histor",
+      desc = "Undo History",
     },
   },
 }

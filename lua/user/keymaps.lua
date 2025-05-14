@@ -9,7 +9,6 @@ keymap("n", "<C-u>", "<C-u>zz")
 -- remove Q keymap
 keymap("n", "Q", "<nop>")
 
-keymap("n", "<leader>q", ":bw<CR>", { desc = "Wipeout buffer", silent = true })
 keymap("n", "<leader>w", ":w<CR>", { desc = "Save buffer", silent = true })
 
 -- clear search highlighting
