@@ -247,6 +247,15 @@ return {
       desc = "Search History",
     },
 
+    -- Yanky
+    {
+      "<leader>o",
+      function()
+        Snacks.picker.yanky()
+      end,
+      desc = "Yanky Ring History",
+    },
+
     -- Undo
     {
       "<leader>u",
