@@ -10,6 +10,7 @@ keymap("n", "<C-u>", "<C-u>zz")
 keymap("n", "Q", "<nop>")
 
 keymap("n", "<leader>w", ":w<CR>", { desc = "Save buffer", silent = true })
+keymap("n", "<leader>qq", "<cmd>qa<CR>", { desc = "Quit All", silent = true })
 
 -- clear search highlighting
 keymap("n", "<Esc>", ":nohlsearch<cr>", { silent = true, desc = "Clear search highlighting" })
