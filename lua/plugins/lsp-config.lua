@@ -3,7 +3,7 @@ return {
 	{
 		-- Main LSP Configuration
 		"neovim/nvim-lspconfig",
-    event = "VeryLazy",
+    event = "LazyFile",
 		dependencies = {
 			-- Automatically install LSPs and related tools to stdpath for Neovim
 			{ "williamboman/mason.nvim", config = true }, -- NOTE: Must be loaded before dependants
@@ -12,9 +12,6 @@ return {
 
       -- Useful status updates for LSP.
       { 'j-hui/fidget.nvim', opts = {} },
-
-      -- Allows extra capabilities provided by blink.cmp
-      'saghen/blink.cmp',
 		},
 		config = function()
 			--  This function gets run when an LSP attaches to a particular buffer.
@@ -35,6 +32,7 @@ return {
 					map("K", vim.lsp.buf.hover, "")
 					map("<leader>ca", require("fzf-lua").lsp_code_actions, "Code Action")
 					map("<leader>cs", require("fzf-lua").lsp_document_symbols, "Goto Document Symbols")
+					map("<leader>ss", require("fzf-lua").lsp_document_symbols, "Goto Document Symbols")
 					map("<leader>cS", require("fzf-lua").lsp_live_workspace_symbols, "GoTo Workspace Symbols")
 					map("<leader>cr", vim.lsp.buf.rename, "Rename Symbol")
 					map("<leader>cd", require("snacks").picker.diagnostics_buffer, "Document Diagnostics")

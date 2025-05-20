@@ -1,7 +1,7 @@
 return {
   {
     "nvim-treesitter/nvim-treesitter",
-    event = "VeryLazy",
+    event = { "LazyFile", "VeryLazy" },
     config = function()
       require("nvim-treesitter.configs").setup({
         ensure_installed = {

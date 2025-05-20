@@ -1,7 +1,7 @@
 -- Pounce is a motion plugin similar to EasyMotion, Sneak, Hop, and Lightspeed. It's based on incremental fuzzy search
 return {
   "rlane/pounce.nvim",
-  event = { "BufReadPre", "BufNewFile" },
+  event = "LazyFile",
   config = function()
     require("pounce").setup()
 

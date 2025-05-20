@@ -1,6 +1,7 @@
 return {
   {
     "saghen/blink.compat",
+    event = "InsertEnter",
     -- use the latest release, via version = '*', if you also use the latest release for blink.cmp
     version = "*",
     -- lazy.nvim will automatically load the plugin when it's required by blink.cmp

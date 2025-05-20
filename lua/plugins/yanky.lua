@@ -1,6 +1,6 @@
 return {
   "gbprod/yanky.nvim",
-  event = { "BufReadPre", "BufNewFile" },
+  event = "LazyFile",
   opts = {
     ring = {
       update_register_on_cycle = true, -- Update the default register on cycle
