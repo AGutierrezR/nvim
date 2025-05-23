@@ -1,3 +1,16 @@
+local filetypes = {
+  { text = "markdown" },
+  { text = "javascript" },
+  { text = "html" },
+  { text = "css" },
+  { text = "typescript" },
+  { text = "go" },
+  { text = "json" },
+  { text = "lua" },
+  { text = "typescriptreact" },
+  { text = "javascriptreact" },
+}
+
 return {
   "folke/snacks.nvim",
   priority = 1000,
@@ -205,7 +218,7 @@ return {
       "<leader>sm",
       function()
         Snacks.picker.marks({
-          global = false
+          global = false,
         })
       end,
       desc = "Marks",
@@ -263,6 +276,22 @@ return {
         Snacks.picker.undo()
       end,
       desc = "Undo History",
+    },
+
+    -- Scratchs
+    {
+      "<leader>.",
+      function()
+        require("utils.snacks.scratch").new_scratch(filetypes)
+      end,
+      desc = "Toggle Scratch Buffer",
+    },
+    {
+      "<leader>S",
+      function()
+        require("utils.snacks.scratch").select_scratch()
+      end,
+      desc = "Select Scratch Buffer",
     },
   },
 }
