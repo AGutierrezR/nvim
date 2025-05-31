@@ -133,6 +133,13 @@ return {
       desc = "Delete Other Buffers",
     },
     {
+      "<leader>b/",
+      function()
+        Snacks.picker.grep_buffers()
+      end,
+      desc = "Grep Buffers",
+    },
+    {
       "<leader>ff",
       function()
         Snacks.picker.files()
@@ -150,11 +157,18 @@ return {
 
     -- Search
     {
-      "<leader>sb",
+      "<leader>sl",
       function()
         Snacks.picker.lines()
       end,
       desc = "Buffer lines",
+    },
+    {
+      "<leader>sb",
+      function()
+        Snacks.picker.grep_buffers()
+      end,
+      desc = "Grep Buffers",
     },
     {
       "<leader>sc",
