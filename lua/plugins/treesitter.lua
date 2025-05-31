@@ -116,6 +116,14 @@ return {
 
       local ts_repeat_move = require("nvim-treesitter.textobjects.repeatable_move")
 
+      -- Create a repeatable pair of functions for diagnostics
+      local goto_next_diagnostic, goto_prev_diagnostic =
+        ts_repeat_move.make_repeatable_move_pair(vim.diagnostic.goto_next, vim.diagnostic.goto_prev)
+
+      -- Set keymaps for diagnostics
+      vim.keymap.set("n", "]d", goto_next_diagnostic, { desc = "Next diagnostic (repeatable)" })
+      vim.keymap.set("n", "[d", goto_prev_diagnostic, { desc = "Prev diagnostic (repeatable)" })
+
       -- Repeat movement with ; and ,
       -- ensure ; goes forward and , goes backward regardless of the last direction
       vim.keymap.set({ "n", "x", "o" }, ";", ts_repeat_move.repeat_last_move_next)
@@ -126,7 +134,7 @@ return {
       vim.keymap.set({ "n", "x", "o" }, "F", ts_repeat_move.builtin_F_expr, { expr = true })
       vim.keymap.set({ "n", "x", "o" }, "t", ts_repeat_move.builtin_t_expr, { expr = true })
       vim.keymap.set({ "n", "x", "o" }, "T", ts_repeat_move.builtin_T_expr, { expr = true })
-    end
+    end,
   },
   { "nvim-treesitter/nvim-treesitter-textobjects", event = "VeryLazy" },
   {
@@ -134,9 +142,9 @@ return {
     event = "VeryLazy",
     config = function()
       -- vim.keymap.set('x', 'u', ':<c-u>lua require"treesitter-unit".select()<CR>')
-      vim.keymap.set('x', 'u', ':<c-u>lua require"treesitter-unit".select(true)<CR>')
+      vim.keymap.set("x", "u", ':<c-u>lua require"treesitter-unit".select(true)<CR>')
       -- vim.keymap.set('o', 'u', ':<c-u>lua require"treesitter-unit".select()<CR>')
-      vim.keymap.set('o', 'u', ':<c-u>lua require"treesitter-unit".select(true)<CR>')
-    end
-  }
+      vim.keymap.set("o", "u", ':<c-u>lua require"treesitter-unit".select(true)<CR>')
+    end,
+  },
 }
