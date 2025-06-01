@@ -47,7 +47,9 @@ return {
         { section = "startup" },
       },
     },
-    explorer = { enabled = false },
+    explorer = {
+      enabled = true,
+    },
     indent = { enabled = false },
     input = { enabled = false },
     picker = {
@@ -67,6 +69,20 @@ return {
             },
             { win = "preview", title = "{preview}", border = "rounded", width = 0.6 },
           },
+        },
+      },
+
+      sources = {
+        explorer = {
+          auto_close = true,
+          win = {
+            list = {
+              keys = {
+                ["-"] = "explorer_up",
+              },
+            },
+          },
+          layout = { layout = { position = "right" } },
         },
       },
       win = {
@@ -152,6 +168,13 @@ return {
         Snacks.picker.recent()
       end,
       desc = "Recent",
+    },
+    {
+      "<leader>fe",
+      function()
+        Snacks.picker.explorer()
+      end,
+      desc = "Explorer",
     },
     -- { "<leader>fb", function() Snacks.picker.buffers() end, desc = "Buffers" },
 
