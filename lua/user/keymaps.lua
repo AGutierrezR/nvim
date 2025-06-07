@@ -16,8 +16,8 @@ keymap("n", "<leader>qq", "<cmd>qa<CR>", { desc = "Quit All", silent = true })
 keymap("n", "<Esc>", ":nohlsearch<cr>", { silent = true, desc = "Clear search highlighting" })
 
 -- search in file what is selected in visual mode
-keymap("v", "*", '"6y/\\V<C-r>6<CR>N', { desc = "Search forward in file what is selected in visual mode" })
-keymap("v", "#", '"6y?\\V<C-r>6<CR>N', { desc = "Search backward in file what is selected in visual mode" })
+-- keymap("v", "*", '"6y/\\V<C-r>6<CR>N', { desc = "Search forward in file what is selected in visual mode" })
+-- keymap("v", "#", '"6y?\\V<C-r>6<CR>N', { desc = "Search backward in file what is selected in visual mode" })
 
 -- Better join lines
 keymap("n", "J", "mzJ`z")
