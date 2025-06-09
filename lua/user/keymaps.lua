@@ -11,6 +11,8 @@ keymap("n", "Q", "<nop>")
 
 keymap("n", "<leader>w", ":w<CR>", { desc = "Save buffer", silent = true })
 keymap("n", "<leader>qq", "<cmd>qa<CR>", { desc = "Quit All", silent = true })
+keymap("n", "<leader>bD", "<cmd>:bd<CR>", { desc = "Delete Buffer and Window", silent = true })
+keymap("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New File", silent = true })
 
 -- clear search highlighting
 keymap("n", "<Esc>", ":nohlsearch<cr>", { silent = true, desc = "Clear search highlighting" })
