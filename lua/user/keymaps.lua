@@ -6,6 +6,10 @@ keymap("i", "jk", "<Esc>", { desc = "Exit insert mode with jk" })
 keymap("n", "<C-d>", "<C-d>zz")
 keymap("n", "<C-u>", "<C-u>zz")
 
+-- windows
+keymap("n", "<C-w>.", ":vertical resize +20<cr>")
+keymap("n", "<C-w>,", ":vertical resize -20<cr>")
+
 -- remove Q keymap
 keymap("n", "Q", "<nop>")
 
