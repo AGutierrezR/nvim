@@ -24,7 +24,7 @@ return {
         },
 
         incremental_selection = {
-          enable = true,
+          enable = false,
           keymaps = {
             node_incremental = "<Enter>",
             node_decremental = "<Tab>",
