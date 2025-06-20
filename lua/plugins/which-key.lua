@@ -13,6 +13,7 @@ return {
 			{ "<leader>s", group = "+Search" },
 			{ "<leader>f", group = "+Files" },
 			{ "<leader>b", group = "+Buffers" },
+			{ "<leader>x", group = "+diagnostics/quickfix" },
 			{ "<leader>q", group = "+quit/session" },
 		},
 		win = {

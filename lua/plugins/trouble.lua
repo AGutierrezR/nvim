@@ -13,6 +13,7 @@ return {
       "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
       desc = "Buffer Diagnostics (Trouble)",
     },
+    { "<leader>xt", "<cmd>Trouble todo toggle<cr>", desc = "Todo (Trouble)" },
     -- {
     --   "<leader>cs"
     --   "<cmd>Trouble symbols toggle focus=false<cr>",
@@ -29,7 +30,7 @@ return {
       desc = "Location List (Trouble)",
     },
     {
-     "<leader>xQ",
+      "<leader>xQ",
       "<cmd>Trouble qflist toggle<cr>",
       desc = "Quickfix List (Trouble)",
     },
