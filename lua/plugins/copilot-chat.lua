@@ -22,7 +22,7 @@ local prompts = {
 
 return {
   "CopilotC-Nvim/CopilotChat.nvim",
-  enabled = true,
+  enabled = false,
   branch = "main",
   cmd = "CopilotChat",
   build = "make tiktoken",
