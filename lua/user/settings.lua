@@ -53,7 +53,14 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 vim.opt.spelllang = "en_us"
 vim.opt.spell = true
 
-vim.opt.splitright = true
+--split windows
+vim.opt.splitright = true --split vertical window to the right
+vim.opt.splitbelow = true --split horizontal window to the bottom
+
+vim.opt.colorcolumn = "80"
+
+-- Enable editorconfig support
+vim.g.editorconfig = true
 
 -- Disable copilot for some files
 vim.g.copilot_filetypes = {
