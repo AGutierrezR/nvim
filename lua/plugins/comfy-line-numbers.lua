@@ -16,7 +16,13 @@ return {
       down_key = 'j',
 
       -- Line numbers will be completely hidden for the following file/buffer types
-      hidden_file_types = { 'undotree' },
+      hidden_file_types = {
+        'undotree',
+        'snacks_dashboard',
+        'snacks_picker_list',
+        'snacks_picker_input',
+        'snacks_picker_preview'
+      },
       hidden_buffer_types = { 'terminal' },
     })
   end,
