@@ -21,7 +21,8 @@ return {
         'snacks_dashboard',
         'snacks_picker_list',
         'snacks_picker_input',
-        'snacks_picker_preview'
+        'snacks_picker_preview',
+        'typr'
       },
       hidden_buffer_types = { 'terminal' },
     })
