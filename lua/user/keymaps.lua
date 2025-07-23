@@ -47,8 +47,8 @@ keymap("x", "K", ":move '<-2<CR>gv-gv", { desc = "Move line down in x mode" })
 -- delete single character without copying into register
 keymap("n", "x", '"_x')
 
--- delete the whole file content
-keymap("n", "die", [[<Cmd>:%d<CR>]])
+-- -- delete the whole file content
+-- keymap("n", "die", [[<Cmd>:%d<CR>]])
 
 -- Switch to last accessed buffer
 keymap("n", "ga", "<cmd>b#<CR>", { desc = "Switch to last accessed buffer" })
