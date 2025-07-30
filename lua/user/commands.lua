@@ -82,3 +82,26 @@ vim.api.nvim_create_user_command("CopyFileNameToClipboard", function()
   print(string.format("File name copied to clipboard: %s", file_name))
 end, {})
 
+function OpenMiniFiles(path)
+  local MiniFiles = require("mini.files")
+
+  -- Usa el path actual si no se pasa ninguno
+  if not path or path == "" then
+    path = vim.fn.expand("%:p")
+  end
+
+  -- Si es un archivo, usa su directorio
+  local stat = vim.loop.fs_stat(path)
+  if stat and stat.type == "file" then
+    path = vim.fn.fnamemodify(path, ":h")
+  end
+
+  MiniFiles.open(path)
+end
+
+vim.api.nvim_create_user_command("MiniFilesOpen", function(opts)
+  OpenMiniFiles(opts.args)
+end, {
+  nargs = "?", -- Optional argument for path
+  complete = "file" -- 👈 This allows tab completion for file and directory names
+})
