@@ -17,6 +17,7 @@ return {
           "scss",
           "yaml",
           "toml",
+          "go",
         },
 
         highlight = {
