@@ -60,3 +60,38 @@ keymap("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
 -- Quickfix (Unimpaird style)
 keymap("n", "[q", "<cmd>cprev<CR>", { desc = "Go to prev quickfix item" })
 keymap("n", "]q", "<cmd>cnext<CR>", { desc = "Go to next quickfix item" })
+
+keymap("n", "<leader>xq", function()
+  local qf_list = vim.fn.getqflist()
+  for _, win in ipairs(vim.fn.getwininfo()) do
+    if win.quickfix == 1 then
+      vim.cmd("cclose")
+      return
+    end
+  end
+  if #qf_list > 0 then
+    vim.cmd("copen")
+  else
+    print("Quickfix list is empty")
+  end
+end, { desc = "Toggle Quickfix list" })
+
+-- Add current location to QF list
+keymap("n", "<leader>xa", function()
+  vim.fn.setqflist({
+    {
+      filename = vim.fn.expand("%:p"),
+      lnum = vim.fn.line("."),
+      col = vim.fn.col("."),
+      text = vim.fn.getline("."),
+    },
+  }, "a")
+  print("Current position added to QF list.")
+end, { desc = "Add current location to QF list" })
+
+-- Clean QF list
+keymap("n", "<leader>xc", function()
+  vim.fn.setqflist({}, "r")
+
+  print("Quickfix list cleared.")
+end, { desc = "Clean QF list" })

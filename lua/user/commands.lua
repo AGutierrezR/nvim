@@ -15,10 +15,10 @@ vim.api.nvim_create_user_command("FilePath", function()
   print(file_path)
 end, {})
 
--- Util function for YankToClipboard and MoveYankToRegister 
+-- Util function for YankToClipboard and MoveYankToRegister
 local function move_yank_to_register(target_register)
   -- Validate the target register
-  if target_register == "" or not target_register:match("^[a-zA-Z0-9\"%+%-*]$") then
+  if target_register == "" or not target_register:match('^[a-zA-Z0-9"%+%-*]$') then
     print("Invalid register. Operation canceled.")
     return
   end
@@ -103,5 +103,30 @@ vim.api.nvim_create_user_command("MiniFilesOpen", function(opts)
   OpenMiniFiles(opts.args)
 end, {
   nargs = "?", -- Optional argument for path
-  complete = "file" -- 👈 This allows tab completion for file and directory names
+  complete = "file", -- 👈 This allows tab completion for file and directory names
 })
+
+-- Add current position to quickfix list
+vim.api.nvim_create_user_command("QFAddPosition", function()
+  vim.fn.setqflist({
+    {
+      filename = vim.fn.expand("%:p"),
+      lnum = vim.fn.line("."),
+      col = vim.fn.col("."),
+      text = vim.fn.getline("."),
+    },
+  }, "a")
+
+  -- Notify the user that the position has been added
+  print("Current position added to quickfix list.")
+end, {})
+
+
+vim.api.nvim_create_user_command("QFNew", function()
+  vim.fn.setqflist({}, 'r')
+
+  -- Notify the user that the quickfix list has been cleared
+  print("Quickfix list cleared.")
+end, {})
+
+
