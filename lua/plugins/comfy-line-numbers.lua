@@ -24,7 +24,7 @@ return {
         'snacks_picker_preview',
         'typr'
       },
-      hidden_buffer_types = { 'terminal' },
+      hidden_buffer_types = { 'terminal', 'prompt', 'nofile' },
     })
   end,
 }
