@@ -3,7 +3,7 @@ require("user.settings")
 require("user.keymaps")
 require("user.commands")
 
-
 -- Lazy settings
-require("config.lazy")
-require("config.lsp")
+require("core.lsp")
+require("config.autocmds")
+require("core.lazy")
