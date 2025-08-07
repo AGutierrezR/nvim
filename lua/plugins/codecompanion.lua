@@ -7,7 +7,10 @@ return {
     "nvim-lua/plenary.nvim",
     "nvim-treesitter/nvim-treesitter",
   },
-  event = "VeryLazy",
+  cmd = {
+    "CodeCompanionActions",
+    "CodeCompanionChat",
+  },
   opts = {
     display = {
       action_palette = {
@@ -39,11 +42,9 @@ return {
     },
     prompt_library = prompts.PROMPT_LIBRARY,
   },
-  config = function(_, opts)
-    require("codecompanion").setup(opts)
-
-    vim.keymap.set({ "n", "v" }, "<leader>ap", "<cmd>CodeCompanionActions<cr>", { noremap = true, silent = true })
-    vim.keymap.set({ "n", "v" }, "<leader>aa", "<cmd>CodeCompanionChat Toggle<cr>", { noremap = true, silent = true })
-    -- vim.keymap.set("v", "ga", "<cmd>CodeCompanionChat Add<cr>", { noremap = true, silent = true })
-  end,
+  keys = {
+    { "<leader>ap", "<cmd>CodeCompanionActions<cr>", desc = "CodeCompanion: Actions", mode = { "n", "v" } },
+    { "<leader>aa", "<cmd>CodeCompanionChat Toggle<cr>", desc = "CodeCompanion: Chat", mode = { "n", "v" } },
+    -- { "ga", "<cmd>CodeCompanionChat Add<cr>", desc = "CodeCompanion: Add to Chat" },
+  },
 }
