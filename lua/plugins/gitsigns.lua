@@ -1,7 +1,7 @@
 -- Add git related signs to the gutter, as well as utilities to managing changes
 return {
   'lewis6991/gitsigns.nvim',
-  event = { 'BufReadPre', 'BufNewFile' },
+  event = "LazyFile",
   opts = {
     signs = {
       add = { text = '+' },

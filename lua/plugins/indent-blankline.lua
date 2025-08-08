@@ -1,7 +1,7 @@
 -- Rainbow-ize your indents in Neovim today!
 return {
   'lukas-reineke/indent-blankline.nvim',
-  event = { 'BufReadPre', 'BufNewFile' },
+  event = "LazyFile",
   dependencies = {
     'TheGLander/indent-rainbowline.nvim'
   },

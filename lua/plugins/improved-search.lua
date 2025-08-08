@@ -1,6 +1,7 @@
 return {
   {
     "backdround/improved-search.nvim",
+    event = "VeryLazy",
     enabled = true,
     config = function()
       local search = require("improved-search")

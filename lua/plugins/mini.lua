@@ -2,7 +2,6 @@ return {
   {
     -- Navigate and manipulate file system
     "echasnovski/mini.files",
-    event = "VeryLazy",
     version = false,
     opts = {
       -- Module mappings created only inside explorer.
@@ -22,16 +21,28 @@ return {
         permanent_delete = false,
       },
     },
-    config = function(_, opts)
-      require("mini.files").setup(opts)
-
-      vim.keymap.set("n", "-", function()
-        local buf_name = vim.api.nvim_buf_get_name(0)
-        local path = vim.fn.filereadable(buf_name) == 1 and buf_name or vim.fn.getcwd()
-        MiniFiles.open(path)
-        MiniFiles.reveal_cwd()
-      end, { desc = "Open Mini Files" })
-    end,
+    keys = {
+      {
+        "-",
+        function()
+          local buf_name = vim.api.nvim_buf_get_name(0)
+          local path = vim.fn.filereadable(buf_name) == 1 and buf_name or vim.fn.getcwd()
+          require("mini.files").open(path)
+          require("mini.files").reveal_cwd()
+        end,
+        desc = "Open Mini Files",
+      },
+    },
+    -- config = function(_, opts)
+    --   require("mini.files").setup(opts)
+    --
+    --   vim.keymap.set("n", "-", function()
+    --     local buf_name = vim.api.nvim_buf_get_name(0)
+    --     local path = vim.fn.filereadable(buf_name) == 1 and buf_name or vim.fn.getcwd()
+    --     MiniFiles.open(path)
+    --     MiniFiles.reveal_cwd()
+    --   end, { desc = "Open Mini Files" })
+    -- end,
   },
   {
     -- Neovim Lua plugin to extend and create `a`/`i` textobjects
@@ -76,12 +87,12 @@ return {
             a = { "@class.outer" },
             i = { "@class.inner" },
           }),
-          e = { -- Single words in different cases (camelCase, snake_case, etc.)           
+          e = { -- Single words in different cases (camelCase, snake_case, etc.)
             {
               "%u[%l%d]+%f[^%l%d]",
               "%f[%S][%l%d]+%f[^%l%d]",
               "%f[%P][%l%d]+%f[^%l%d]",
-              "^[%l%d]+%f[^%l%d]"
+              "^[%l%d]+%f[^%l%d]",
             },
             "^().*()$",
           },
@@ -129,8 +140,10 @@ return {
       require("mini.pairs").setup()
 
       -- Disable pairs for `typr` filetype
-      local f = function (args) vim.b[args.buf].minipairs_disable = true end
-      vim.api.nvim_create_autocmd('Filetype', { pattern = 'typr', callback = f })
+      local f = function(args)
+        vim.b[args.buf].minipairs_disable = true
+      end
+      vim.api.nvim_create_autocmd("Filetype", { pattern = "typr", callback = f })
     end,
   },
   {

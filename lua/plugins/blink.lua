@@ -1,15 +1,5 @@
 return {
   {
-    "saghen/blink.compat",
-    event = "InsertEnter",
-    -- use the latest release, via version = '*', if you also use the latest release for blink.cmp
-    version = "*",
-    -- lazy.nvim will automatically load the plugin when it's required by blink.cmp
-    lazy = true,
-    -- make sure to set opts so that lazy.nvim calls blink.compat's setup
-    opts = {},
-  },
-  {
     "saghen/blink.cmp",
     event = "InsertEnter",
     version = "1.*",
@@ -40,7 +30,6 @@ return {
         },
         opts = {},
       },
-      "folke/lazydev.nvim",
     },
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
@@ -191,5 +180,17 @@ return {
       },
     },
     opts_extend = { "sources.default" },
+  },
+  -- Faster LuaLS setup for Neovim (it configures LuaLS for Neovim config editing)
+  {
+    "folke/lazydev.nvim",
+    ft = "lua", -- only load on lua files
+    opts = {
+      library = {
+        -- See the configuration section for more details
+        -- Load luvit types when the `vim.uv` word is found
+        { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+      },
+    },
   },
 }

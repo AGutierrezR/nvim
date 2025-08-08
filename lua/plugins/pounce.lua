@@ -2,10 +2,15 @@
 return {
   "rlane/pounce.nvim",
   event = "LazyFile",
-  config = function()
-    require("pounce").setup()
-
-    vim.keymap.set({ "n", "x", "o" }, "s", vim.cmd.Pounce, { desc = "Pounce" })
-    vim.keymap.set({ "n", "x", "o" }, "<leader>sp", vim.cmd.PounceRepeat, { desc = "Pounce Repeat" })
-  end,
+  opts = {},
+  keys = {
+    { "s", "<cmd>Pounce<CR>", mode = { "n", "x", "o" }, desc = "Pounce" },
+    { "<leader>sp", "<cmd>PounceRepeat<CR>", mode = { "n", "x", "o" }, desc = "Pounce Repeat" },
+  },
+  -- config = function()
+  --   require("pounce").setup()
+  --
+  --   vim.keymap.set({ "n", "x", "o" }, "s", vim.cmd.Pounce, { desc = "Pounce" })
+  --   vim.keymap.set({ "n", "x", "o" }, "<leader>sp", vim.cmd.PounceRepeat, { desc = "Pounce Repeat" })
+  -- end,
 }
