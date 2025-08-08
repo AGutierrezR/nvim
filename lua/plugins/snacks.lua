@@ -330,5 +330,14 @@ return {
       end,
       desc = "Select Scratch Buffer",
     },
+
+    -- Spelling
+    {
+      "z=",
+      function()
+        Snacks.picker.spelling()
+      end,
+      desc = "Spelling suggestions",
+    },
   },
 }

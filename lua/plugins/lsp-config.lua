@@ -1,3 +1,5 @@
+--
+local snacks = require("config.snacks.picker")
 -- Main LSP Configuration
 return {
   {
@@ -30,10 +32,16 @@ return {
           map("gr", require("snacks").picker.lsp_references, "Goto References")
           map("gD", require("snacks").picker.lsp_type_definitions, "Goto Type Definition")
           map("K", vim.lsp.buf.hover, "")
-          map("<leader>ca", require("fzf-lua").lsp_code_actions, "Code Action")
-          map("<leader>cs", require("fzf-lua").lsp_document_symbols, "Goto Document Symbols")
-          map("<leader>ss", require("fzf-lua").lsp_document_symbols, "Goto Document Symbols")
-          map("<leader>cS", require("fzf-lua").lsp_live_workspace_symbols, "GoTo Workspace Symbols")
+          map("<leader>ca", require("tiny-code-action").code_action, "Code Action")
+          map("<leader>cs", function()
+            require("snacks").picker.lsp_symbols(require("config.snacks.picker").lsp_pickers_filter)
+          end, "Goto Document Symbols")
+          map("<leader>ss", function()
+            require("snacks").picker.lsp_symbols(require("config.snacks.picker").lsp_pickers_filter)
+          end, "Goto Document Symbols")
+          map("<leader>cS", function()
+            require("snacks").picker.lsp_workspace_symbols(require("config.snacks.picker").lsp_pickers_filter)
+          end, "GoTo Workspace Symbols")
           map("<leader>cr", vim.lsp.buf.rename, "Rename Symbol")
           map("<leader>cd", require("snacks").picker.diagnostics_buffer, "Document Diagnostics")
 
