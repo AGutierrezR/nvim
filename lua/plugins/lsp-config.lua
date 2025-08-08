@@ -139,8 +139,7 @@ return {
         },
         jsonls = {},
         cssls = {},
-        emmet_ls = {},
-        custom_elements_ls = {},
+        emmet_language_server = {},
         html = {
           init_options = {
             configurationSection = { "html", "css", "javascript" },
@@ -151,6 +150,7 @@ return {
             provideFormatter = true,
           },
         },
+        custom_elements_ls = {},
         gopls = {},
       }
 
