@@ -1,6 +1,16 @@
 return {
   "ibhagwan/fzf-lua",
-  event = "VeryLazy",
+  -- event = "VeryLazy",
+  cmd = "FzfLua",
+  keys = {
+    -- Git related keymaps
+    { "<leader>gb", "<cmd>FzfLua git_branches<cr>", desc = "Branches" },
+    { "<leader>gc", "<cmd>FzfLua git_bcommits<cr>", desc = "Browse File Commits" },
+    { "<leader>gC", "<cmd>FzfLua git_commits<cr>", desc = "Browse Commits" },
+    { "<leader>gs", "<cmd>FzfLua git_status<cr>", desc = "Git Status" },
+    { "<leader>gf", "<cmd>FzfLua git_files<cr>", desc = "Git Files" },
+    { "<leader>gS", "<cmd>FzfLua git_stash<cr>", desc = "Git Stash" },
+  },
   -- optional for icon support
   --   dependencies = { "nvim-tree/nvim-web-devicons" },
   config = function()
@@ -79,14 +89,14 @@ return {
     -- vim.keymap.set("n", "<leader>m", require("fzf-lua").marks, { desc = "Marks" })
 
     -- Git related keymaps
-    vim.keymap.set("n", "<leader>gb", require("fzf-lua").git_branches, { desc = "Branches" })
-    vim.keymap.set("n", "<leader>gc", require("fzf-lua").git_bcommits, { desc = "Browse File Commits" })
-    vim.keymap.set("n", "<leader>gC", require("fzf-lua").git_commits, { desc = "Browse Commits" })
-    vim.keymap.set("n", "<leader>gs", require("fzf-lua").git_status, { desc = "Git Status" })
-    vim.keymap.set("n", "<leader>gf", require("fzf-lua").git_files, { desc = "Git Files" })
-    vim.keymap.set("n", "<leader>gS", require("fzf-lua").git_stash, { desc = "Git Stash" })
+    -- vim.keymap.set("n", "<leader>gb", require("fzf-lua").git_branches, { desc = "Branches" })
+    -- vim.keymap.set("n", "<leader>gc", require("fzf-lua").git_bcommits, { desc = "Browse File Commits" })
+    -- vim.keymap.set("n", "<leader>gC", require("fzf-lua").git_commits, { desc = "Browse Commits" })
+    -- vim.keymap.set("n", "<leader>gs", require("fzf-lua").git_status, { desc = "Git Status" })
+    -- vim.keymap.set("n", "<leader>gf", require("fzf-lua").git_files, { desc = "Git Files" })
+    -- vim.keymap.set("n", "<leader>gS", require("fzf-lua").git_stash, { desc = "Git Stash" })
 
     -- Vim features
-    vim.keymap.set("n", "z=", require("fzf-lua").spell_suggest, { desc = "Spelling suggestions" })
+    -- vim.keymap.set("n", "z=", require("fzf-lua").spell_suggest, { desc = "Spelling suggestions" })
   end,
 }
