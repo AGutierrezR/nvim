@@ -11,7 +11,7 @@ return {
 			{ "]`", desc = "Next mark" },
 			{ "<leader>c", group = "+Code" },
 			{ "<leader>s", group = "+Search" },
-			{ "<leader>f", group = "+Files" },
+			{ "<leader>f", group = "+Files/Find" },
 			{ "<leader>b", group = "+Buffers" },
 			{ "<leader>x", group = "+diagnostics/quickfix" },
 			{ "<leader>q", group = "+quit/session" },
