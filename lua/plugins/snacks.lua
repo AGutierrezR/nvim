@@ -27,8 +27,12 @@ return {
           { icon = " ", key = "f", desc = "Find File", action = ":lua Snacks.dashboard.pick('files')" },
           { icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
           { icon = " ", key = "/", desc = "Find Text", action = ":lua Snacks.dashboard.pick('live_grep')" },
-          { icon = " ", key = "r", desc = "Recent Files", action = ":lua Snacks.dashboard.pick('oldfiles')" },
-          { icon = "󰐃 ", key = "b", desc = "Bookmarks", action = ":Arrow open" },
+          {
+            icon = " ",
+            key = "r",
+            desc = "Recent Files",
+            action = ":lua Snacks.picker.recent({ filter = { cwd = true } })",
+          },
           {
             icon = " ",
             key = "c",
@@ -42,8 +46,8 @@ return {
       },
       sections = {
         { section = "header" },
-        { section = "keys", gap = 1, padding = 2 },
-        { icon = " ", title = "Recent Files", cwd = true, section = "recent_files", indent = 2, padding = 2 },
+        { section = "keys", gap = 1, padding = 1 },
+        { icon = " ", title = "Recent Files", cwd = true, section = "recent_files", indent = 0, padding = 2 },
         { section = "startup" },
       },
     },
@@ -165,7 +169,7 @@ return {
     {
       "<leader>fr",
       function()
-        Snacks.picker.recent()
+        Snacks.picker.recent({ filter = { cwd = true } })
       end,
       desc = "Recent",
     },
