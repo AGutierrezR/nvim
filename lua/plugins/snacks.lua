@@ -180,6 +180,13 @@ return {
       end,
       desc = "Explorer",
     },
+    {
+      "<leader>fc",
+      function()
+        Snacks.picker.files({ cwd = vim.fn.stdpath("config") })
+      end,
+      desc = "Explorer",
+    },
     -- { "<leader>fb", function() Snacks.picker.buffers() end, desc = "Buffers" },
 
     -- Search
