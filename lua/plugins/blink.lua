@@ -1,3 +1,8 @@
+-- Configuration base on https://github.com/linkarzu/dotfiles-latest/blob/24923656b83aafa9490e966106cb22d0443e1561/neovim/neobean/lua/plugins/blink-cmp.lua
+
+-- NOTE: Specify the trigger character(s) used for luasnip
+local trigger_text = ";"
+
 return {
   {
     "saghen/blink.cmp",
@@ -73,41 +78,31 @@ return {
         },
 
         providers = {
-          -- lsp = {
-          --   name = "LSP",
-          --   module = "blink.cmp.sources.lsp",
-          --   fallbacks = { "lazydev" },
-          --   score_offset = 150, -- the higher the number, the higher the priority
-          --   -- Filter text items from the LSP provider, since we have the buffer provider for that
-          --   transform_items = function(_, items)
-          --     for _, item in ipairs(items) do
-          --       if item.kind == require("blink.cmp.types").CompletionItemKind.Snippet then
-          --         item.score_offset = item.score_offset - 3
-          --       end
-          --     end
-          --
-          --     return vim.tbl_filter(function(item)
-          --       return item.kind ~= require("blink.cmp.types").CompletionItemKind.Text
-          --     end, items)
-          --   end,
-          -- },
+          lsp = {
+            name = "LSP",
+            module = "blink.cmp.sources.lsp",
+            score_offset = 150, -- the higher the number, the higher the priority
+            -- Filter text items from the LSP provider, since we have the buffer provider for that
+          },
           path = {
             name = "Path",
             module = "blink.cmp.sources.path",
             score_offset = 25,
-            -- fallbacks = { 'buffer' },
+            fallbacks = { "snippets", "buffer" },
             opts = {
               trailing_slash = false,
               label_trailing_slash = true,
+              show_hidden_files_by_default = true,
             },
-            enabled = function()
-              return vim.bo.filetype ~= "copilot-chat"
-            end,
+            -- enabled = function()
+            --   -- Disable path completions in the copilot-chat filetype
+            --   return vim.bo.filetype ~= "copilot-chat"
+            -- end,
           },
           buffer = {
             name = "Buffer",
             module = "blink.cmp.sources.buffer",
-            min_keyword_length = 3,
+            min_keyword_length = 2,
             score_offset = 15, -- the higher the number, the higher the priority
           },
           snippets = {
@@ -115,39 +110,38 @@ return {
             module = "blink.cmp.sources.snippets",
             min_keyword_length = 2,
             score_offset = 60, -- the higher the number, the higher the priority
-            -- -- Only show snippets if I type the trigger_text characters, so
-            -- -- to expand the "bash" snippet, if the trigger_text is ";" I have to
-            -- should_show_items = function()
-            --   local col = vim.api.nvim_win_get_cursor(0)[2]
-            --   local before_cursor = vim.api.nvim_get_current_line():sub(1, col)
-            --   -- NOTE: remember that `trigger_text` is modified at the top of the file
-            --   return before_cursor:match(trigger_text .. '%w*$') ~= nil
-            -- end,
-            -- -- After accepting the completion, delete the trigger_text characters
-            -- -- from the final inserted text
-            -- transform_items = function(_, items)
-            --   local col = vim.api.nvim_win_get_cursor(0)[2]
-            --   local before_cursor = vim.api.nvim_get_current_line():sub(1, col)
-            --   local trigger_pos = before_cursor:find(trigger_text .. '[^' .. trigger_text .. ']*$')
-            --   if trigger_pos then
-            --     for _, item in ipairs(items) do
-            --       item.textEdit = {
-            --         newText = item.insertText or item.label,
-            --         range = {
-            --           start = { line = vim.fn.line '.' - 1, character = trigger_pos - 1 },
-            --           ['end'] = { line = vim.fn.line '.' - 1, character = col },
-            --         },
-            --       }
-            --     end
-            --   end
-            --   -- NOTE: After the transformation, I have to reload the luasnip source
-            --   -- Otherwise really crazy shit happens and I spent way too much time
-            --   -- figurig this out
-            --   vim.schedule(function()
-            --     require('blink.cmp').reload 'snippets'
-            --   end)
-            --   return items
-            -- end,
+            -- Only show snippets if I type the trigger_text characters, so
+            -- to expand the "cl" snippet, if the trigger_text is ";" I have to
+            should_show_items = function()
+              local col = vim.api.nvim_win_get_cursor(0)[2]
+              local before_cursor = vim.api.nvim_get_current_line():sub(1, col)
+              -- NOTE: remember that `trigger_text` is modified at the top of the file
+              return before_cursor:match(trigger_text .. "%w*$") ~= nil
+            end,
+            -- After accepting the completion, delete the trigger_text characters
+            -- from the final inserted text
+            transform_items = function(_, items)
+              local line = vim.api.nvim_get_current_line()
+              local col = vim.api.nvim_win_get_cursor(0)[2]
+              local before_cursor = line:sub(1, col)
+              local start_pos, end_pos = before_cursor:find(trigger_text .. "[^" .. trigger_text .. "]*$")
+              if start_pos then
+                for _, item in ipairs(items) do
+                  if not item.trigger_text_modified then
+                    ---@diagnostic disable-next-line: inject-field
+                    item.trigger_text_modified = true
+                    item.textEdit = {
+                      newText = item.insertText or item.label,
+                      range = {
+                        start = { line = vim.fn.line(".") - 1, character = start_pos - 1 },
+                        ["end"] = { line = vim.fn.line(".") - 1, character = end_pos },
+                      },
+                    }
+                  end
+                end
+              end
+              return items
+            end,
           },
         },
       },
