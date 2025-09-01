@@ -29,7 +29,10 @@ return {
           {
             "rafamadriz/friendly-snippets",
             config = function()
-              require("luasnip.loaders.from_vscode").lazy_load()
+              -- Load snippets from the `friendly-snippets` package and from my custom snippets
+              require("luasnip.loaders.from_vscode").lazy_load({ 
+                paths = { vim.fn.expand("~/.config/nvim/snippets") } 
+              })
             end,
           },
         },
