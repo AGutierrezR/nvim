@@ -1,6 +1,6 @@
 {
   "wrapper css layout": {
-    "prefix": "l-wrapper",
+    "prefix": "lyt-wrapper",
     "body": [
       "/**",
       " * WRAPPER",
@@ -20,7 +20,7 @@
     "description": "wrapper css layout"
   },
   "cluster css layout": {
-    "prefix": "l-cluster",
+    "prefix": "lyt-cluster",
     "body": [
       "/*",
       "CLUSTER",
@@ -50,7 +50,7 @@
     "description": "cluster css layout"
   },
   "sidebar css layout": {
-    "prefix": "l-sidebar",
+    "prefix": "lyt-sidebar",
     "body": [
       "/* ",
       "SIDEBAR",
@@ -106,7 +106,7 @@
     "description": "sidebar css layout"
   },
   "switcher css layout": {
-    "prefix": "l-switcher",
+    "prefix": "lyt-switcher",
     "body": [
       "/*",
       "SWITCHER",
@@ -146,7 +146,7 @@
     "description": "switcher css layout"
   },
   "repel css layout": {
-    "prefix": "l-repel",
+    "prefix": "lyt-repel",
     "body": [
       "/*",
       "REPEL",
@@ -175,7 +175,7 @@
     "description": "repel css layout"
   },
   "region css layout": {
-    "prefix": "l-region",
+    "prefix": "lyt-region",
     "body": [
       "/* ",
       "REGION UTILITY",
@@ -188,7 +188,7 @@
     "description": "region css layout"
   },
   "auto-grid css layout": {
-    "prefix": "l-auto-grid",
+    "prefix": "lyt-auto-grid",
     "body": [
       "/* AUTO GRID",
       "Related Every Layout: https://every-layout.dev/layouts/grid/",
@@ -226,7 +226,7 @@
     "description": "auto-grid css layout"
   },
   "reel css layout": {
-    "prefix": "l-reel",
+    "prefix": "lyt-reel",
     "body": [
       "/* ",
       " REEL",
@@ -272,7 +272,7 @@
     "description": "reel css layout"
   },
   "flow css layout": {
-    "prefix": "l-flow",
+    "prefix": "lyt-flow",
     "body": [
       "/* ",
       "FLOW UTILITY",
@@ -286,7 +286,7 @@
     "description": "flow css layout"
   },
   "center css layout": {
-    "prefix": "l-center",
+    "prefix": "lyt-center",
     "body": [
       "/* Centers content with a maximum width and horizontal padding */",
       ".center {",
@@ -300,7 +300,7 @@
     "description": "center css layout"
   },
   "center intrinsic css layout": {
-    "prefix": "l-center-intrinsic",
+    "prefix": "lyt-center-intrinsic",
     "body": [
       "/* Same as .center but also uses flexbox to center child elements horizontally */",
       ".center-intrinsic {",
@@ -317,7 +317,7 @@
     "description": "center intrinsic css layout"
   },
   "stack css layout": {
-    "prefix": "l-stack",
+    "prefix": "lyt-stack",
     "body": [
       ".stack {",
       "  /* ↓ The flex context */",
@@ -339,7 +339,7 @@
     "description": "stack css layout"
   },
   "stack nested css layout": {
-    "prefix": "l-stack-nested",
+    "prefix": "lyt-stack-nested",
     "body": [
       "[class^='stack'] {",
       "  /* ↓ The flex context */",
@@ -364,7 +364,7 @@
     "description": "stack nested css layout"
   },
   "stack exception css layout": {
-    "prefix": "l-stack-exception",
+    "prefix": "lyt-stack-exception",
     "body": [
       ".stack-exception,",
       ".stack-exception + * {",
@@ -374,7 +374,7 @@
     "description": "stack exception css layout"
   },
   "stack split css layout": {
-    "prefix": "l-stack-split",
+    "prefix": "lyt-stack-split",
     "body": [
       "/* This will split the stack at the 2nd child */",
       ".stack > :nth-child(2) {",
@@ -384,7 +384,7 @@
     "description": "stack split css layout"
   },
   "cover css layout": {
-    "prefix": "l-cover",
+    "prefix": "lyt-cover",
     "body": [
       ".cover {",
       "  display: flex;",
