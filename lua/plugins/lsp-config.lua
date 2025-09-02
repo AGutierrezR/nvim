@@ -146,6 +146,7 @@ return {
         },
         jsonls = {},
         cssls = {},
+        cssmodules_ls = {},
         emmet_language_server = {},
         html = {
           init_options = {
