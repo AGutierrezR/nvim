@@ -30,9 +30,10 @@ return {
             "rafamadriz/friendly-snippets",
             config = function()
               -- Load snippets from the `friendly-snippets` package and from my custom snippets
-              require("luasnip.loaders.from_vscode").lazy_load({ 
-                paths = { vim.fn.expand("~/.config/nvim/snippets") } 
-              })
+              -- require("luasnip.loaders.from_vscode").lazy_load({
+              --   paths = { vim.fn.expand("~/.config/nvim/snippets") },
+              -- })
+              require("luasnip.loaders.from_vscode").lazy_load()
             end,
           },
         },
@@ -67,6 +68,16 @@ return {
         -- By default, you may press `<c-space>` to show the documentation.
         -- Optionally, set `auto_show = true` to show the documentation after a delay.
         documentation = { auto_show = true, auto_show_delay_ms = 500 },
+        menu = {
+          draw = {
+            columns = {
+              { "kind_icon" },
+              { "label", "label_description", gap = 1 },
+              { "kind" },
+              -- { "source_name" },
+            },
+          },
+        },
       },
       signature = { enabled = true },
 
@@ -81,38 +92,39 @@ return {
         },
 
         providers = {
-          lsp = {
-            name = "LSP",
-            module = "blink.cmp.sources.lsp",
-            score_offset = 150, -- the higher the number, the higher the priority
-            -- Filter text items from the LSP provider, since we have the buffer provider for that
-          },
-          path = {
-            name = "Path",
-            module = "blink.cmp.sources.path",
-            score_offset = 25,
-            fallbacks = { "snippets", "buffer" },
-            opts = {
-              trailing_slash = false,
-              label_trailing_slash = true,
-              show_hidden_files_by_default = true,
-            },
-            -- enabled = function()
-            --   -- Disable path completions in the copilot-chat filetype
-            --   return vim.bo.filetype ~= "copilot-chat"
-            -- end,
-          },
-          buffer = {
-            name = "Buffer",
-            module = "blink.cmp.sources.buffer",
-            min_keyword_length = 2,
-            score_offset = 15, -- the higher the number, the higher the priority
-          },
+          -- lsp = {
+          --   name = "LSP",
+          --   module = "blink.cmp.sources.lsp",
+          --   score_offset = 0, -- the higher the number, the higher the priority
+          --   -- Filter text items from the LSP provider, since we have the buffer provider for that
+          --   min_keyword_length = 2,
+          -- },
+          -- path = {
+          --   name = "Path",
+          --   module = "blink.cmp.sources.path",
+          --   score_offset = 25,
+          --   fallbacks = { "snippets", "buffer" },
+          --   opts = {
+          --     trailing_slash = false,
+          --     label_trailing_slash = true,
+          --     show_hidden_files_by_default = true,
+          --   },
+          --   -- enabled = function()
+          --   --   -- Disable path completions in the copilot-chat filetype
+          --   --   return vim.bo.filetype ~= "copilot-chat"
+          --   -- end,
+          -- },
+          -- buffer = {
+          --   name = "Buffer",
+          --   module = "blink.cmp.sources.buffer",
+          --   min_keyword_length = 2,
+          --   score_offset = 15, -- the higher the number, the higher the priority
+          -- },
           snippets = {
             name = "Snippets",
             module = "blink.cmp.sources.snippets",
             min_keyword_length = 2,
-            score_offset = 60, -- the higher the number, the higher the priority
+            score_offset = -1, -- the higher the number, the higher the priority
             -- Only show snippets if I type the trigger_text characters, so
             -- to expand the "cl" snippet, if the trigger_text is ";" I have to
             should_show_items = function()
