@@ -9,6 +9,7 @@ return {
 			{ "<leader>g", group = "+Git" },
 			{ "[`", desc = "Prev mark" },
 			{ "]`", desc = "Next mark" },
+			{ "<leader>a", group = "+AI" },
 			{ "<leader>c", group = "+Code" },
 			{ "<leader>s", group = "+Search" },
 			{ "<leader>f", group = "+Files/Find" },
