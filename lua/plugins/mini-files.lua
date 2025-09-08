@@ -19,6 +19,11 @@ return {
       -- ~/.local/share/neobean/mini.files/trash
       permanent_delete = false,
     },
+    content = {
+      filter = function(entry)
+        return entry.fs_type ~= "file" or entry.name ~= ".DS_Store"
+      end,
+    },
   },
   keys = {
     {
