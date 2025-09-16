@@ -286,6 +286,13 @@ return {
       desc = "Resume",
     },
     {
+      "<leader><Space>",
+      function()
+        Snacks.picker.resume()
+      end,
+      desc = "Resume",
+    },
+    {
       "<leader>sw",
       function()
         Snacks.picker.grep_word()
