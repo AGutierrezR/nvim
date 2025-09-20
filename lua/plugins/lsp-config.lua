@@ -1,5 +1,6 @@
 --
-local snacks = require("config.snacks.picker")
+local snacks_lsp_pickers_filter = require("config.snacks.picker").lsp_pickers_filter
+ 
 -- Main LSP Configuration
 return {
   {
@@ -34,13 +35,13 @@ return {
           map("K", vim.lsp.buf.hover, "")
           map("<leader>ca", require("tiny-code-action").code_action, "Code Action")
           map("<leader>cs", function()
-            require("snacks").picker.lsp_symbols(require("config.snacks.picker").lsp_pickers_filter)
+            require("snacks").picker.lsp_symbols(snacks_lsp_pickers_filter)
           end, "Goto Document Symbols")
           map("<leader>ss", function()
-            require("snacks").picker.lsp_symbols(require("config.snacks.picker").lsp_pickers_filter)
+            require("snacks").picker.lsp_symbols(snacks_lsp_pickers_filter)
           end, "Goto Document Symbols")
           map("<leader>cS", function()
-            require("snacks").picker.lsp_workspace_symbols(require("config.snacks.picker").lsp_pickers_filter)
+            require("snacks").picker.lsp_workspace_symbols(snacks_lsp_pickers_filter)
           end, "GoTo Workspace Symbols")
           map("<leader>cr", vim.lsp.buf.rename, "Rename Symbol")
           map("<leader>cd", require("snacks").picker.diagnostics_buffer, "Document Diagnostics")
