@@ -45,6 +45,12 @@ return {
           end, "GoTo Workspace Symbols")
           map("<leader>cr", vim.lsp.buf.rename, "Rename Symbol")
           map("<leader>cd", require("snacks").picker.diagnostics_buffer, "Document Diagnostics")
+          map("<leader>cm", function ()
+            vim.cmd("Mason")
+          end, "Mason")
+          map("<leader>cl", function ()
+            vim.cmd("LspInfo")
+          end, "Mason")
 
           vim.keymap.set("n", "<leader>cl", function()
             vim.diagnostic.open_float(0, { scope = "line" })
