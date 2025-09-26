@@ -30,6 +30,15 @@ keymap("n", "J", "mzJ`z")
 
 -- yank to system clipboard
 keymap({ "n", "v" }, "<leader>y", '"+y', { desc = "Copy to system clipboard" })
+keymap({ "n" }, "yc", function()
+  local target_register = "+"
+  -- Get the content and type of the yank register
+  local yank_content = vim.fn.getreg("0")
+  local yank_type = vim.fn.getregtype("0")
+  -- Move the content to the specified register
+  vim.fn.setreg(target_register, yank_content, yank_type)
+  print(string.format("Text moved to register '%s'.", target_register))
+end, { desc = "Paste register 0 to system clipboard" })
 
 -- paste from the system clipboard
 keymap({ "n", "v" }, "<leader>p", '"+p', { desc = "Paste from system clipboard" })
