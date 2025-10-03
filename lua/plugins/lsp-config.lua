@@ -135,23 +135,43 @@ return {
             },
           },
         },
-        ts_ls = {
-          init_options = {
-            plugins = {
-              {
-                name = "ts-lit-plugin",
-                location = "/Users/asgi/Library/Application Support/fnm/node-versions/v18.0.0/installation/lib/node_modules/ts-lit-plugin",
-                languages = { "javascript", "typescript" },
-              },
-              {
-                name = "typescript-styled-plugin",
-                location = "/Users/asgi/Library/Application Support/fnm/node-versions/v18.0.0/installation/lib/node_modules/typescript-styled-plugin",
-                languages = { "javascript", "typescript" },
+        vtsls = {
+          settings = {
+            vtsls = {
+              tsserver = {
+                globalPlugins = {
+                  {
+                    name = "ts-lit-plugin",
+                    location = "/Users/asgi/Library/Application Support/fnm/node-versions/v18.0.0/installation/lib/node_modules/ts-lit-plugin",
+                    languages = { "javascript", "typescript" },
+                  },
+                  {
+                    name = "typescript-styled-plugin",
+                    location = "/Users/asgi/Library/Application Support/fnm/node-versions/v18.0.0/installation/lib/node_modules/typescript-styled-plugin",
+                    languages = { "javascript", "typescript" },
+                  },
+                },
               },
             },
           },
-          -- root_dir = function() return vim.loop.cwd() end
         },
+        -- ts_ls = {
+        --   init_options = {
+        --     plugins = {
+        --       {
+        --         name = "ts-lit-plugin",
+        --         location = "/Users/asgi/Library/Application Support/fnm/node-versions/v18.0.0/installation/lib/node_modules/ts-lit-plugin",
+        --         languages = { "javascript", "typescript" },
+        --       },
+        --       {
+        --         name = "typescript-styled-plugin",
+        --         location = "/Users/asgi/Library/Application Support/fnm/node-versions/v18.0.0/installation/lib/node_modules/typescript-styled-plugin",
+        --         languages = { "javascript", "typescript" },
+        --       },
+        --     },
+        --   },
+        --   -- root_dir = function() return vim.loop.cwd() end
+        -- },
         jsonls = {},
         cssls = {},
         cssmodules_ls = {},
