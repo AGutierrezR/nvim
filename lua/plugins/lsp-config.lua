@@ -1,6 +1,6 @@
 --
 local snacks_lsp_pickers_filter = require("config.snacks.picker").lsp_pickers_filter
- 
+
 -- Main LSP Configuration
 return {
   {
@@ -28,29 +28,40 @@ return {
             vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
           end
 
-          map("gd", require("snacks").picker.lsp_definitions, "Goto Definition")
-          map("gI", require("snacks").picker.lsp_implementations, "Goto Implementation")
           map("gr", require("snacks").picker.lsp_references, "Goto References")
-          map("gD", require("snacks").picker.lsp_type_definitions, "Goto Type Definition")
+          map("gd", require("snacks").picker.lsp_definitions, "Goto Definition")
+          map("gD", require("snacks").picker.lsp_declarations, "Goto Declaration")
+          map("gy", require("snacks").picker.lsp_type_definitions, "Goto Type Definition")
+          map("gI", require("snacks").picker.lsp_implementations, "Goto Implementation")
+          map("cd", vim.lsp.buf.rename, "Rename Symbol")
+          map("gs", require('snacks').picker.lsp_symbols, "Goto Document Symbols")
+          map("gS", require('snacks').picker.lsp_workspace_symbols, "Goto Workspace Symbols")
           map("K", vim.lsp.buf.hover, "")
-          map("<leader>ca", require("tiny-code-action").code_action, "Code Action")
-          map("<leader>cs", function()
-            require("snacks").picker.lsp_symbols(snacks_lsp_pickers_filter)
-          end, "Goto Document Symbols")
+          map("g.", require("tiny-code-action").code_action, "Code Action")
+
+          -- map("gd", require("snacks").picker.lsp_definitions, "Goto Definition")
+          -- map("gI", require("snacks").picker.lsp_implementations, "Goto Implementation")
+          -- map("gr", require("snacks").picker.lsp_references, "Goto References")
+          -- map("gD", require("snacks").picker.lsp_type_definitions, "Goto Type Definition")
+          -- map("K", vim.lsp.buf.hover, "")
+          -- map("<leader>ca", require("tiny-code-action").code_action, "Code Action")
+          -- map("<leader>cs", function()
+          --   require("snacks").picker.lsp_symbols(snacks_lsp_pickers_filter)
+          -- end, "Goto Document Symbols")
           map("<leader>ss", function()
             require("snacks").picker.lsp_symbols(snacks_lsp_pickers_filter)
           end, "Goto Document Symbols")
-          map("<leader>cS", function()
-            require("snacks").picker.lsp_workspace_symbols(snacks_lsp_pickers_filter)
-          end, "GoTo Workspace Symbols")
-          map("<leader>cr", vim.lsp.buf.rename, "Rename Symbol")
+          -- map("<leader>cS", function()
+          --   require("snacks").picker.lsp_workspace_symbols(snacks_lsp_pickers_filter)
+          -- end, "GoTo Workspace Symbols")
+          -- map("<leader>cr", vim.lsp.buf.rename, "Rename Symbol")
           map("<leader>cd", require("snacks").picker.diagnostics_buffer, "Document Diagnostics")
           map("<leader>cm", function ()
             vim.cmd("Mason")
           end, "Mason")
-          map("<leader>cl", function ()
-            vim.cmd("LspInfo")
-          end, "Mason")
+          -- map("<leader>cl", function ()
+          --   vim.cmd("LspInfo")
+          -- end, "Mason")
 
           vim.keymap.set("n", "<leader>cl", function()
             vim.diagnostic.open_float(0, { scope = "line" })
@@ -186,7 +197,7 @@ return {
             provideFormatter = true,
           },
         },
-        custom_elements_ls = {},
+        -- custom_elements_ls = {},
         marksman = {}, -- Markdown LSP
         -- gopls = {},
       }
