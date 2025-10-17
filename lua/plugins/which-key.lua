@@ -10,6 +10,7 @@ return {
       { "[`", desc = "Prev mark" },
       { "]`", desc = "Next mark" },
       { "<leader>a", group = "+AI" },
+      { "<leader>fy", group = "+yank filepath" },
       { "<leader>c", group = "+Code" },
       { "<leader>s", group = "+Search" },
       { "<leader>f", group = "+Files/Find" },
