@@ -6,6 +6,9 @@ keymap("i", "jk", "<Esc>", { desc = "Exit insert mode with jk" })
 keymap("n", "<C-d>", "<C-d>zz")
 keymap("n", "<C-u>", "<C-u>zz")
 
+-- Select last pasted text
+keymap("n", "gp", "`[v`]", { desc = "Select last pasted text" })
+
 -- windows
 keymap("n", "<C-w>.", ":vertical resize +20<cr>")
 keymap("n", "<C-w>,", ":vertical resize -20<cr>")
@@ -16,7 +19,23 @@ keymap("n", "Q", "<nop>")
 keymap("n", "<leader>w", ":w<CR>", { desc = "Save buffer", silent = true })
 keymap("n", "<leader>qq", "<cmd>qa<CR>", { desc = "Quit All", silent = true })
 keymap("n", "<leader>bD", "<cmd>:bd<CR>", { desc = "Delete Buffer and Window", silent = true })
+
+-- file related keymaps
 keymap("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New File", silent = true })
+keymap("n", "<leader>fyp", function()
+  local file = vim.fn.expand("%:.") -- Relative path
+  local line = vim.fn.line(".") -- Current line
+  local col = vim.fn.col(".") -- Current column
+  local path_with_pos = string.format("%s:%d:%d", file, line, col)
+
+  -- Copy to clipboard
+  vim.fn.setreg("+", path_with_pos)
+  vim.notify("filepath: " .. path_with_pos .. " has been copied to clipboard", vim.log.levels.INFO)
+end, { desc = "Copy relative filepath with line and column", silent = true })
+
+keymap("n", "<leader>fya", ":let @+ = expand('%:p')<cr>", { desc = "Copy absolute filepath", silent = true })
+keymap("n", "<leader>fyr", ":let @+ = expand('%:.')<cr>", { desc = "Copy relative filepath", silent = true })
+keymap("n", "<leader>fyn", ":let @+ = expand('%:t')<cr>", { desc = "Copy filename", silent = true })
 
 -- clear search highlighting
 keymap("n", "<Esc>", ":nohlsearch<cr>", { silent = true, desc = "Clear search highlighting" })
