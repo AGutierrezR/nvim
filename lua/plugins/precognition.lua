@@ -1,8 +1,8 @@
 return {
-    "tris203/precognition.nvim",
-    --event = "VeryLazy",
-    opts = {
-    -- startVisible = true,
+  "tris203/precognition.nvim",
+  --event = "VeryLazy",
+  opts = {
+    startVisible = false,
     -- showBlankVirtLine = true,
     -- highlightColor = { link = "Comment" },
     -- hints = {
@@ -26,5 +26,14 @@ return {
     -- disabled_fts = {
     --     "startify",
     -- },
+  },
+  keys = {
+    {
+      "<leade>xp",
+      function()
+        require("precognition").peek()
+      end,
+      desc = "Toggle Peek",
     },
+  },
 }
