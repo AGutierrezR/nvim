@@ -6,8 +6,8 @@ local opts = { noremap = true, silent = true }
 -- Close terminal
 keymap("t", "<esc><esc>", "<c-\\><c-n>")
 
-keymap("n", "<C-d>", "<C-d>zz")
-keymap("n", "<C-u>", "<C-u>zz")
+keymap("n", "<C-d>", "<C-d>zz", { desc = "Scroll half page down and center cursor" })
+keymap("n", "<C-u>", "<C-u>zz", { desc = "Scroll half page up and center cursor" })
 
 -- Select last pasted text
 keymap("n", "gp", "`[v`]", { desc = "Select last pasted text" })
@@ -21,7 +21,6 @@ keymap("n", "Q", "<nop>")
 
 keymap("n", "<leader>w", ":w<CR>", { desc = "Save buffer", silent = true })
 keymap("n", "<leader>qq", "<cmd>qa<CR>", { desc = "Quit All", silent = true })
-keymap("n", "<leader>bD", "<cmd>:bd<CR>", { desc = "Delete Buffer and Window", silent = true })
 
 -- file related keymaps
 keymap("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New File", silent = true })
@@ -81,10 +80,14 @@ keymap("n", "x", '"_x')
 -- -- delete the whole file content
 -- keymap("n", "die", [[<Cmd>:%d<CR>]])
 
+-- Buffer navigation
 -- Switch to last accessed buffer
 keymap("n", "ga", "<cmd>b#<CR>", { desc = "Switch to last accessed buffer" })
+keymap("n", "<leader>bD", "<cmd>:bd<CR>", { desc = "Delete Buffer and Window", silent = true })
+keymap("n", "<leader>bn", "<cmd>:bnext<CR>", { desc = "Next buffer" })
+keymap("n", "<leader>bp", "<cmd>:bprevious<CR>", { desc = "Prev buffer" })
 
-keymap("n", "<C-k>", "k")
+-- keymap("n", "<C-k>", "k")
 
 keymap("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
 
