@@ -317,7 +317,7 @@ return {
 
     -- Yanky
     {
-      "<leader>o",
+      "<leader>sy",
       function()
         Snacks.picker.yanky()
       end,
