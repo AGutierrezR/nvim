@@ -65,7 +65,7 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 vim.opt.spelllang = "en_us"
 vim.opt.spell = true
 
---split windows
+-- Split windows behavior
 vim.opt.splitright = true --split vertical window to the right
 vim.opt.splitbelow = true --split horizontal window to the bottom
 
