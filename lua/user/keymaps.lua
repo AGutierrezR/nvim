@@ -3,6 +3,9 @@ local opts = { noremap = true, silent = true }
 
 -- keymap("i", "jk", "<Esc>", { desc = "Exit insert mode with jk" })
 
+-- Close terminal
+keymap("t", "<esc><esc>", "<c-\\><c-n>")
+
 keymap("n", "<C-d>", "<C-d>zz")
 keymap("n", "<C-u>", "<C-u>zz")
 
@@ -88,6 +91,11 @@ keymap("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
 -- Quickfix (Unimpaird style)
 keymap("n", "[q", "<cmd>cprev<CR>", { desc = "Go to prev quickfix item" })
 keymap("n", "]q", "<cmd>cnext<CR>", { desc = "Go to next quickfix item" })
+
+-- Search within visual selection
+-- Use <C-\\><C-n> to exit visual mode properly and not <Esc> which can have issues in some terminals
+keymap("x", "/", "<C-\\><C-n>`</\\%V", { desc = "Search forward within visual selection" })
+keymap("x", "?", "<C-\\><C-n>`>?\\%V", { desc = "Search backward within visual selection" })
 
 keymap("n", "<leader>xq", function()
   local qf_list = vim.fn.getqflist()
