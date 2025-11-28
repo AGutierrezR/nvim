@@ -19,7 +19,7 @@ keymap("n", "<C-w>,", ":vertical resize -20<cr>")
 -- remove Q keymap
 keymap("n", "Q", "<nop>")
 
-keymap("n", "<leader>w", ":w<CR>", { desc = "Save buffer", silent = true })
+keymap("n", "<leader>fw", ":w<CR>", { desc = "Save buffer", silent = true })
 keymap("n", "<leader>qq", "<cmd>qa<CR>", { desc = "Quit All", silent = true })
 
 -- file related keymaps
@@ -83,6 +83,7 @@ keymap("n", "x", '"_x')
 -- Buffer navigation
 -- Switch to last accessed buffer
 keymap("n", "ga", "<cmd>b#<CR>", { desc = "Switch to last accessed buffer" })
+keymap("n", "<leader>bw", ":w<CR>", { desc = "Save buffer", silent = true })
 keymap("n", "<leader>bD", "<cmd>:bd<CR>", { desc = "Delete Buffer and Window", silent = true })
 keymap("n", "<leader>bn", "<cmd>:bnext<CR>", { desc = "Next buffer" })
 keymap("n", "<leader>bp", "<cmd>:bprevious<CR>", { desc = "Prev buffer" })
