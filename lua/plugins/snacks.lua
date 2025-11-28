@@ -146,6 +146,13 @@ return {
       desc = "Delete Buffer",
     },
     {
+      "<leader>bk",
+      function()
+        Snacks.bufdelete()
+      end,
+      desc = "Delete Buffer",
+    },
+    {
       "<leader>bo",
       function()
         Snacks.bufdelete.other()
@@ -326,7 +333,7 @@ return {
 
     -- Undo
     {
-      "<leader>u",
+      "<leader>su",
       function()
         Snacks.picker.undo()
       end,

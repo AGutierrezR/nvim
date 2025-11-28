@@ -36,6 +36,16 @@ return {
       end,
       desc = "Open Mini Files",
     },
+    {
+      "<leader>f-",
+      function()
+        local buf_name = vim.api.nvim_buf_get_name(0)
+        local path = vim.fn.filereadable(buf_name) == 1 and buf_name or vim.fn.getcwd()
+        require("mini.files").open(path)
+        require("mini.files").reveal_cwd()
+      end,
+      desc = "Open Mini Files",
+    },
   },
   -- config = function(_, opts)
   --   require("mini.files").setup(opts)
