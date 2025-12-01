@@ -10,6 +10,8 @@ return {
         "vim",
         "javascript",
         "typescript",
+        "tsx",
+        "svelte",
         "json",
         "jsonc",
         "html",

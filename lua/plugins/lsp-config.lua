@@ -183,6 +183,7 @@ return {
         --   },
         --   -- root_dir = function() return vim.loop.cwd() end
         -- },
+        svelte = {},
         jsonls = {},
         cssls = {},
         cssmodules_ls = {},
