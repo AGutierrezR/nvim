@@ -199,7 +199,7 @@ return {
         },
         -- custom_elements_ls = {},
         marksman = {}, -- Markdown LSP
-        -- gopls = {},
+        gopls = {},
       }
 
       -- Ensure the servers and tools above are installed
