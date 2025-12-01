@@ -77,4 +77,20 @@ vim.g.editorconfig = true
 -- Disable copilot for some files
 vim.g.copilot_filetypes = {
   typr = false,
+  vimwiki = false,
 }
+
+-- Treating mediawiki files as vimwiki
+vim.filetype.add({
+  extension = {
+    mediawiki = "vimwiki",
+  },
+})
+
+-- Changing filetype
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "vimwiki",
+  callback = function()
+    vim.bo.filetype = "markdown"
+  end,
+})
