@@ -364,5 +364,48 @@ return {
       end,
       desc = "Spelling suggestions",
     },
+
+    {
+      "<leader>gb",
+      function()
+        Snacks.picker.git_branches()
+      end,
+      desc = "Branches",
+    },
+    {
+      "<leader>gc",
+      function()
+        Snacks.picker.git_log_file()
+      end,
+      desc = "Browse File Commits",
+    },
+    {
+      "<leader>gC",
+      function()
+        Snacks.picker.git_log()
+      end,
+      desc = "Browse Commits",
+    },
+    {
+      "<leader>gs",
+      function()
+        Snacks.picker.git_status()
+      end,
+      desc = "Branches",
+    },
+    {
+      "<leader>gf",
+      function()
+        Snacks.picker.git_files()
+      end,
+      desc = "Git Files",
+    },
+    {
+      "<leader>gS",
+      function()
+        Snacks.picker.git_stash()
+      end,
+      desc = "Git Stash",
+    }
   },
 }
