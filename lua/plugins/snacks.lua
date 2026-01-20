@@ -380,6 +380,13 @@ return {
       desc = "Browse File Commits",
     },
     {
+      "<leader>gl",
+      function()
+        Snacks.picker.git_log_line()
+      end,
+      desc = "Git Log line",
+    },
+    {
       "<leader>gC",
       function()
         Snacks.picker.git_log()
