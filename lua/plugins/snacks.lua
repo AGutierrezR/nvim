@@ -102,9 +102,31 @@ return {
             -- ["L"] = { "preview_scroll_right", mode = { "i", "n" } },
             ["<c-n>"] = { "history_forward", mode = { "i", "n" } },
             ["<c-p>"] = { "history_back", mode = { "i", "n" } },
+            -- ["<a-s>"] = { "flash", mode = { "n", "i" } },
+            -- ["s"] = { "flash" },
           },
         },
       },
+      -- actions = {
+      --   flash = function(picker)
+      --     require("flash").jump({
+      --       pattern = "^",
+      --       label = { after = { 0, 0 } },
+      --       search = {
+      --         mode = "search",
+      --         exclude = {
+      --           function(win)
+      --             return vim.bo[vim.api.nvim_win_get_buf(win)].filetype ~= "snacks_picker_list"
+      --           end,
+      --         },
+      --       },
+      --       action = function(match)
+      --         local idx = picker.list:row2idx(match.pos[1])
+      --         picker.list:_move(idx, true, true)
+      --       end,
+      --     })
+      --   end,
+      -- },
       formatters = {
         file = { filename_first = true, truncate = 999 },
       },
@@ -341,20 +363,20 @@ return {
     },
 
     -- Scratchs
-    {
-      "<leader>.",
-      function()
-        require("config.snacks.scratch").new_scratch(filetypes)
-      end,
-      desc = "Toggle Scratch Buffer",
-    },
-    {
-      "<leader>S",
-      function()
-        require("config.snacks.scratch").select_scratch()
-      end,
-      desc = "Select Scratch Buffer",
-    },
+    -- {
+    --   "<leader>.",
+    --   function()
+    --     require("config.snacks.scratch").new_scratch(filetypes)
+    --   end,
+    --   desc = "Toggle Scratch Buffer",
+    -- },
+    -- {
+    --   "<leader>S",
+    --   function()
+    --     require("config.snacks.scratch").select_scratch()
+    --   end,
+    --   desc = "Select Scratch Buffer",
+    -- },
 
     -- Spelling
     {
@@ -413,6 +435,6 @@ return {
         Snacks.picker.git_stash()
       end,
       desc = "Git Stash",
-    }
+    },
   },
 }
