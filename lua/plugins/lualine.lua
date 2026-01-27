@@ -18,15 +18,6 @@ local mode_map = {
 	["MORE"] = "M",
 }
 
-local function show_macro_recording()
-	local recording_register = vim.fn.reg_recording()
-	if recording_register == "" then
-		return ""
-	else
-		return "󰑋 " .. recording_register
-	end
-end
-
 local function place()
 	local linePre = "L:"
 	local line = "%l/%L"
@@ -73,9 +64,18 @@ return {
 				-- 	separator = { left = "", right = "" },
 				-- },
 			},
-			lualine_x = { "encoding", "filetype" },
-			lualine_y = { nil },
-			lualine_z = { { place, padding = { left = 1, right = 1 } } },
+      lualine_x = {
+        "encoding", "filetype" },
+			lualine_y = {
+        {
+          'tabs',
+          show_modified_status = false,
+          cond = function()
+            return #vim.fn.gettabinfo() > 1
+          end,
+        },
+      },
+      lualine_z = { { place, padding = { left = 1, right = 1 } }, },
 		},
 	},
 	config = function(_, opts)
