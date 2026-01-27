@@ -8,6 +8,9 @@ vim.g.netrw_altv = 1 -- change from left splitting to right splitting
 -- This shows the current file path in the window title
 vim.o.winbar = "%m %t - %{luaeval('vim.fn.expand(\"%:~:.\")')}"
 
+-- Hide tabline 
+vim.o.showtabline = 0
+
 -- Line number related settings
 vim.opt.nu = true
 vim.opt.relativenumber = true
