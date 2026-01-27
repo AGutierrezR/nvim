@@ -88,6 +88,16 @@ keymap("n", "<leader>bD", "<cmd>:bd<CR>", { desc = "Delete Buffer and Window", s
 keymap("n", "<leader>bn", "<cmd>:bnext<CR>", { desc = "Next buffer" })
 keymap("n", "<leader>bp", "<cmd>:bprevious<CR>", { desc = "Prev buffer" })
 
+-- Tabs
+keymap("n", "<C-t>", ":tabnew<cr>", { desc = "New tab" }) -- remove ctags keymap
+keymap("n", "<leader><tab><tab>", "<cmd>tabnew<cr>", { desc = "New Tab" })
+keymap("n", "<leader><tab>l", "<cmd>tablast<cr>", { desc = "Last Tab" })
+keymap("n", "<leader><tab>o", "<cmd>tabonly<cr>", { desc = "Close Other Tabs" })
+keymap("n", "<leader><tab>f", "<cmd>tabfirst<cr>", { desc = "First Tab" })
+keymap("n", "<leader><tab>]", "<cmd>tabnext<cr>", { desc = "Next Tab" })
+keymap("n", "<leader><tab>d", "<cmd>tabclose<cr>", { desc = "Close Tab" })
+keymap("n", "<leader><tab>[", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
+
 -- keymap("n", "<C-k>", "k")
 
 keymap("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
