@@ -1,7 +1,12 @@
+-- local keys = {
+--   { "gza", op = "add", desc = "Add Surrounding", mode = { "n", "x" } },
+--   { "gzd", op = "delete", desc = "Delete Surrounding", mode = { "n" } },
+--   { "gzf", op = "find", desc = "Find Right Surrounding", mode = { "n" } },
+--   { "gzr", op = "replace", desc = "Replace Surrounding", mode = { "n" } },
+-- }
+
 return {
-  -- Neovim Lua plugin with fast and feature-rich surround actions
   "echasnovski/mini.surround",
-  event = { "BufReadPost", "BufNewFile" },
   opts = {
     mappings = {
       add = "gza", -- Add surrounding in Normal and Visual modes
@@ -13,10 +18,15 @@ return {
       update_n_lines = "", -- Update `n_lines`
     },
   },
-  keys = {
-    { "gz", "", desc = "+Surround" },
-  },
-  config = function(_, opts)
-    require("mini.surround").setup(opts)
-  end,
+  keys = { "gz" }
+  -- keys = function ()
+  --   local keys_spec = {}
+  --
+  --   -- Build key mappings specification
+  --   for _, key in ipairs(keys) do
+  --     table.insert(keys_spec, { key[1], desc = key.desc, mode = key.mode })
+  --   end
+  --
+  --   return keys_spec
+  -- end,
 }

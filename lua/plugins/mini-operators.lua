@@ -1,47 +1,48 @@
 return {
   -- Text edit operators
   "echasnovski/mini.operators",
-  event = { "BufReadPost", "BufNewFile" },
   version = false,
-  config = function()
-    -- Each entry configures one operator.
-    require("mini.operators").setup({
-      -- Evaluate text and replace with output
-      evaluate = {
-        prefix = "",
-      },
+  keys = {
+    { "cx", desc = "Exchange text" },
+    { "cm", desc = "Multiply text" },
+    { "cr", desc = "Replace text with register" },
+    { "cs", desc = "Sort text" },
+  },
+  opts = {
+    evaluate = {
+      prefix = "",
+    },
 
-      -- Exchange text regions
-      exchange = {
-        prefix = "cx",
+    -- Exchange text regions
+    exchange = {
+      prefix = "cx",
 
-        -- Whether to reindent new text to match previous indent
-        reindent_linewise = true,
-      },
+      -- Whether to reindent new text to match previous indent
+      reindent_linewise = true,
+    },
 
-      -- Multiply (duplicate) text
-      multiply = {
-        prefix = "cm",
+    -- Multiply (duplicate) text
+    multiply = {
+      prefix = "cm",
 
-        -- Function which can modify text before multiplying
-        func = nil,
-      },
+      -- Function which can modify text before multiplying
+      func = nil,
+    },
 
-      -- Replace text with register
-      replace = {
-        prefix = "cr",
+    -- Replace text with register
+    replace = {
+      prefix = "cr",
 
-        -- Whether to reindent new text to match previous indent
-        reindent_linewise = true,
-      },
+      -- Whether to reindent new text to match previous indent
+      reindent_linewise = true,
+    },
 
-      -- Sort text
-      sort = {
-        prefix = "cs",
+    -- Sort text
+    sort = {
+      prefix = "cs",
 
-        -- Function which does the sort
-        func = nil,
-      },
-    })
-  end,
+      -- Function which does the sort
+      func = nil,
+    },
+  },
 }
