@@ -52,14 +52,18 @@ return {
   {
     "jakewvincent/mkdnflow.nvim",
     enabled = true,
-    config = function()
-      require("mkdnflow").setup({
-        -- Config goes here; leave blank for defaults
-
-        vim.keymap.set("n", "<leader>ww", open_wiki, { desc = "Open wiki" }),
-        vim.keymap.set("n", "<leader>w<leader>w", open_today_journal, { desc = "Open today diary" }),
-      })
-    end,
+    keys = {
+      { "<leader>ww", function () open_wiki() end, mode = "n" },
+      { "<leader>w<leader>w", function () open_today_journal() end, mode = "n" },
+    },
+    -- config = function()
+    --   require("mkdnflow").setup({
+    --     -- Config goes here; leave blank for defaults
+    --
+    --     vim.keymap.set("n", "<leader>ww", open_wiki, { desc = "Open wiki" }),
+    --     vim.keymap.set("n", "<leader>w<leader>w", open_today_journal, { desc = "Open today diary" }),
+    --   })
+    -- end,
   },
   {
     "vimwiki/vimwiki",

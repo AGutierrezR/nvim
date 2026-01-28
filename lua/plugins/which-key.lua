@@ -17,6 +17,7 @@ return {
       { "<leader>b", group = "+Buffers" },
       { "<leader>x", group = "+diagnostics/quickfix" },
       { "<leader>q", group = "+quit/session" },
+      { "gz", group = "+Surround" },
     },
     win = {
       height = {
