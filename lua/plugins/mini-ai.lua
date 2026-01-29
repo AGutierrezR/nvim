@@ -41,7 +41,7 @@ return {
           a = { "@class.outer" },
           i = { "@class.inner" },
         }),
-        D = { "%f[%d]%d+" }, -- digits
+        d = { "%f[%d]%d+" }, -- digits
         e = { -- Single words in different cases (camelCase, snake_case, etc.)
           {
             "%u[%l%d]+%f[^%l%d]",
