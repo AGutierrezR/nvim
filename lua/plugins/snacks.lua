@@ -209,8 +209,31 @@ return {
       function()
         Snacks.picker.files({ cwd = vim.fn.stdpath("config") })
       end,
-      desc = "Explorer",
+      desc = "Config Files",
     },
+    {
+      "<leader>fz",
+      function()
+        Snacks.picker.zoxide()
+      end,
+      desc = "Zoxide",
+    },
+    {
+      "<leader>fp",
+      function()
+        Snacks.picker.projects({
+          win = {
+            input = {
+              keys = {
+                ["<CR>"] = { { "tcd", "picker_files" }, mode = { "n", "i" } },
+              }
+            }
+          }
+        })
+      end,
+      desc = "Projects",
+    },
+
     -- { "<leader>fb", function() Snacks.picker.buffers() end, desc = "Buffers" },
 
     -- Search
