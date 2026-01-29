@@ -66,7 +66,30 @@ return {
 			},
       lualine_x = {
         "encoding", "filetype" },
-			lualine_y = {
+			lualine_y = {},
+      lualine_z = { { place, padding = { left = 1, right = 1 } }, },
+		},
+    winbar = {
+      lualine_a = {
+        {
+          "filename",
+        },
+        {
+          'filename',
+          show_modified_status = false,
+          path = 1,
+          symbols = {
+            modified = '',      -- Text to show when the file is modified.
+            readonly = '',      -- Text to show when the file is non-modifiable or readonly.
+            unnamed = '', -- Text to show for unnamed buffers.
+            newfile = '',     -- Text to show for newly created file before first write
+          },
+          cond = function()
+            return vim.fn.bufname() ~= ''
+          end,
+        },
+      },
+      lualine_z = {
         {
           'tabs',
           show_modified_status = false,
@@ -74,9 +97,38 @@ return {
             return #vim.fn.gettabinfo() > 1
           end,
         },
+      }
+    },
+    inactive_winbar = {
+      lualine_a = {
+        {
+          "filename",
+        },
+        {
+          'filename',
+          show_modified_status = false,
+          path = 1,
+          symbols = {
+            modified = '',      -- Text to show when the file is modified.
+            readonly = '',      -- Text to show when the file is non-modifiable or readonly.
+            unnamed = '', -- Text to show for unnamed buffers.
+            newfile = '',     -- Text to show for newly created file before first write
+          },
+          cond = function()
+            return vim.fn.bufname() ~= ''
+          end,
+        },
       },
-      lualine_z = { { place, padding = { left = 1, right = 1 } }, },
-		},
+      lualine_z = {
+        {
+          'tabs',
+          show_modified_status = false,
+          cond = function()
+            return #vim.fn.gettabinfo() > 1
+          end,
+        },
+      }
+    },
 	},
 	config = function(_, opts)
 		require("lualine").setup(opts)

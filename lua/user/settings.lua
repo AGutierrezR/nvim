@@ -6,7 +6,7 @@ vim.g.netrw_banner = 0 -- gets rid of the banner for netrw
 vim.g.netrw_altv = 1 -- change from left splitting to right splitting
 
 -- This shows the current file path in the window title
-vim.o.winbar = "%m %t - %{luaeval('vim.fn.expand(\"%:~:.\")')}"
+-- vim.o.winbar = "%m %t - %{luaeval('vim.fn.expand(\"%:~:.\")')}"
 
 -- Hide tabline 
 vim.o.showtabline = 0
