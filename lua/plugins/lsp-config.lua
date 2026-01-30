@@ -1,7 +1,6 @@
 --
 local snacks_lsp_pickers_filter = require("config.snacks.picker").lsp_pickers_filter
 
--- Main LSP Configuration
 return {
   {
     -- Main LSP Configuration
@@ -28,23 +27,25 @@ return {
             vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
           end
 
-          map("gd", require("snacks").picker.lsp_definitions, "Goto Definition")
-          map("grD", require("snacks").picker.lsp_declarations, "Goto Declaration")
-          map("gri", require("snacks").picker.lsp_implementations, "Goto Implementation")
+          local snacks_picker = require("snacks").picker
+
+          map("gd", snacks_picker.lsp_definitions, "Goto Definition")
+          map("grD", snacks_picker.lsp_declarations, "Goto Declaration")
+          map("gri", snacks_picker.lsp_implementations, "Goto Implementation")
           map("cd", vim.lsp.buf.rename, "Rename Symbol")
           map("grn", vim.lsp.buf.rename, "Rename Symbol")
-          map("grr", require("snacks").picker.lsp_references, "Goto References")
-          map("grt", require("snacks").picker.lsp_type_definitions, "Goto Type Definition")
-          map("gs", require('snacks').picker.lsp_symbols, "Goto Document Symbols")
-          map("gS", require('snacks').picker.lsp_workspace_symbols, "Goto Workspace Symbols")
+          map("grr", snacks_picker.lsp_references, "Goto References")
+          map("grt", snacks_picker.lsp_type_definitions, "Goto Type Definition")
+          map("gs", snacks_picker.lsp_symbols, "Goto Document Symbols")
+          map("gS", snacks_picker.lsp_workspace_symbols, "Goto Workspace Symbols")
           map("K", vim.lsp.buf.hover, "")
           map("g.", require("tiny-code-action").code_action, "Code Action")
           map("gra", require("tiny-code-action").code_action, "Code Action")
 
           map("<leader>ss", function()
-            require("snacks").picker.lsp_symbols(snacks_lsp_pickers_filter)
+            snacks_picker.lsp_symbols(snacks_lsp_pickers_filter)
           end, "Goto Document Symbols")
-          map("<leader>cd", require("snacks").picker.diagnostics_buffer, "Document Diagnostics")
+          map("<leader>cd", snacks_picker.diagnostics_buffer, "Document Diagnostics")
           map("<leader>cm", function ()
             vim.cmd("Mason")
           end, "Mason")
