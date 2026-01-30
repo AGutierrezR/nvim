@@ -10,7 +10,7 @@ keymap("n", "<C-d>", "<C-d>zz", { desc = "Scroll half page down and center curso
 keymap("n", "<C-u>", "<C-u>zz", { desc = "Scroll half page up and center cursor" })
 
 -- Select last pasted text
-keymap("n", "gp", "`[v`]", { desc = "Select last pasted text" })
+keymap("n", "gV", "`[v`]", { desc = "Select last pasted text" })
 
 -- windows
 keymap("n", "<C-w>.", ":vertical resize +20<cr>")
@@ -19,7 +19,29 @@ keymap("n", "<C-w>,", ":vertical resize -20<cr>")
 -- remove Q keymap
 keymap("n", "Q", "<nop>")
 
-keymap("n", "<leader>fw", ":w<CR>", { desc = "Save buffer", silent = true })
+-- Helper function to insert empty lines
+_G.put_empty_line = function(put_above)
+  if type(put_above) == "boolean" then
+    vim.o.operatorfunc = "v:lua.put_empty_line"
+    vim.g._put_empty_line_above = put_above
+    return "g@l"
+  end
+
+  local target = vim.fn.line(".") - (vim.g._put_empty_line_above and 1 or 0)
+  vim.fn.append( target, vim.fn["repeat"]({ "" }, vim.v.count1))
+end
+
+-- NOTE: if you don't want to support dot-repeat, use this snippet:
+-- ```
+-- keymap('n', 'gO', "<Cmd>call append(line('.') - 1, repeat([''], v:count1))<CR>")
+-- keymap('n', 'go', "<Cmd>call append(line('.'),     repeat([''], v:count1))<CR>")
+-- ```
+keymap( "n", "gO", "v:lua.put_empty_line(v:true)", { expr = true, desc = "Put empty line above" })
+keymap( "n", "go", "v:lua.put_empty_line(v:false)", { expr = true, desc = "Put empty line below" })
+
+
+keymap("n", "<C-S>", "<Cmd>silent! update | redraw<CR>", { desc = "Save" })
+keymap({ "i", "x" }, "<C-S>", "<Esc><Cmd>silent! update | redraw<CR>", { desc = "Save and go to Normal mode" })
 keymap("n", "<leader>qq", "<cmd>qa<CR>", { desc = "Quit All", silent = true })
 
 -- file related keymaps
@@ -51,6 +73,7 @@ keymap("n", "J", "mzJ`z")
 
 -- yank to system clipboard
 keymap({ "n", "v" }, "<leader>y", '"+y', { desc = "Copy to system clipboard" })
+keymap({ "n", "v" }, "gy", '"+y', { desc = "Copy to system clipboard" })
 keymap({ "n" }, "yc", function()
   local target_register = "+"
   -- Get the content and type of the yank register
@@ -60,9 +83,12 @@ keymap({ "n" }, "yc", function()
   vim.fn.setreg(target_register, yank_content, yank_type)
   print(string.format("Text moved to register '%s'.", target_register))
 end, { desc = "Paste register 0 to system clipboard" })
+-- copy to to system clipboard (till end of line)
+keymap({ "n" }, 'gY', '"+y$', { desc = 'Yank to clipboard EOL' })
 
 -- paste from the system clipboard
 keymap({ "n", "v" }, "<leader>p", '"+p', { desc = "Paste from system clipboard" })
+keymap({ "n", "v" }, "gp", '"+p', { desc = "Paste from system clipboard" })
 
 -- better indent handling
 keymap("v", "<", "<gv")
@@ -108,8 +134,7 @@ keymap("n", "]q", "<cmd>cnext<CR>", { desc = "Go to next quickfix item" })
 
 -- Search within visual selection
 -- Use <C-\\><C-n> to exit visual mode properly and not <Esc> which can have issues in some terminals
-keymap("x", "/", "<C-\\><C-n>`</\\%V", { desc = "Search forward within visual selection" })
-keymap("x", "?", "<C-\\><C-n>`>?\\%V", { desc = "Search backward within visual selection" })
+keymap("x", "g/", "<C-\\><C-n>`</\\%V", { silent = false, desc = "Search inside visual selection" })
 
 keymap("n", "<leader>xq", function()
   local qf_list = vim.fn.getqflist()
