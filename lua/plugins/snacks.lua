@@ -1,16 +1,3 @@
-local filetypes = {
-  { text = "markdown" },
-  { text = "javascript" },
-  { text = "html" },
-  { text = "css" },
-  { text = "typescript" },
-  { text = "go" },
-  { text = "json" },
-  { text = "lua" },
-  { text = "typescriptreact" },
-  { text = "javascriptreact" },
-}
-
 return {
   "folke/snacks.nvim",
   priority = 1000,
@@ -222,10 +209,12 @@ return {
       "<leader>fp",
       function()
         Snacks.picker.projects({
+          confirm = { "tcd", "picker_files" },
           win = {
             input = {
               keys = {
-                ["<CR>"] = { { "tcd", "picker_files" }, mode = { "n", "i" } },
+                -- ["<CR>"] = { { "tcd", "picker_files" }, mode = { "n", "i" } },
+                ["<c-l>"] = { "load_session" , mode = { "n", "i" } },
               }
             }
           }
@@ -380,21 +369,6 @@ return {
       desc = "Undo History",
     },
 
-    -- Scratchs
-    -- {
-    --   "<leader>.",
-    --   function()
-    --     require("config.snacks.scratch").new_scratch(filetypes)
-    --   end,
-    --   desc = "Toggle Scratch Buffer",
-    -- },
-    -- {
-    --   "<leader>S",
-    --   function()
-    --     require("config.snacks.scratch").select_scratch()
-    --   end,
-    --   desc = "Select Scratch Buffer",
-    -- },
 
     -- Spelling
     {
