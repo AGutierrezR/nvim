@@ -46,7 +46,7 @@ return {
             snacks_picker.lsp_symbols(snacks_lsp_pickers_filter)
           end, "Goto Document Symbols")
           map("<leader>cd", snacks_picker.diagnostics_buffer, "Document Diagnostics")
-          map("<leader>cm", function ()
+          map("<leader>cm", function()
             vim.cmd("Mason")
           end, "Mason")
 
@@ -95,26 +95,28 @@ return {
         end,
       })
 
-      -- Diagnostics configuration
-      -- LSP Prevents inline buffer annotations
-      vim.diagnostic.open_float()
-      vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+      -- ════════════════════════════════════════════════════════════════════
+      -- Diagnostic Configuration
+      -- ════════════════════════════════════════════════════════════════════
+      vim.diagnostic.config({
         virtual_text = false,
-        signs = true,
         underline = true,
-        update_on_insert = false,
+        update_in_insert = false,
+        severity_sort = true,
+        float = { border = "rounded", source = true, header = "", prefix = "" },
+        signs = {
+          text = {
+            [vim.diagnostic.severity.ERROR] = "󰅚 ",
+            [vim.diagnostic.severity.WARN] = "󰀪 ",
+            [vim.diagnostic.severity.INFO] = "󰋽 ",
+            [vim.diagnostic.severity.HINT] = "󰌶 ",
+          },
+          numhl = {
+            [vim.diagnostic.severity.ERROR] = "ErrorMsg",
+            [vim.diagnostic.severity.WARN] = "WarningMsg",
+          },
+        },
       })
-
-      local signs = {
-        Error = "󰅚 ",
-        Warn = "󰳦 ",
-        Hint = "󱡄 ",
-        Info = " ",
-      }
-      for type, icon in pairs(signs) do
-        local hl = "DiagnosticSign" .. type
-        vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = nil })
-      end
 
       -- LSP servers and clients are able to communicate to each other what features they support.
       --  By default, Neovim doesn't support everything that is in the LSP specification.
