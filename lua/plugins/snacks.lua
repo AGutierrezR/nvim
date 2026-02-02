@@ -75,6 +75,12 @@ return {
           },
           layout = { layout = { position = "right" } },
         },
+        files = {
+          hidden = true,
+        },
+        grep = {
+          hidden = true,
+        }
       },
       win = {
         input = {
