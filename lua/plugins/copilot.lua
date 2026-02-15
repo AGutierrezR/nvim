@@ -22,6 +22,6 @@ return {
       help = true,
       yaml = true,
     },
-    copilot_node_command = vim.env.HOME .. "/.local/state/fnm_multishells/53454_1750406890102/bin/node", -- Node.js version must be > 20
+    copilot_node_command = vim.env.HOME .. "/Library/Caches/fnm_multishells/976_1768269005343/bin/node", -- Node.js version must be > 20
   },
 }
