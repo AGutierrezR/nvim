@@ -62,7 +62,6 @@ return {
           },
         },
       },
-
       sources = {
         explorer = {
           auto_close = true,
@@ -80,7 +79,7 @@ return {
         },
         grep = {
           hidden = true,
-        }
+        },
       },
       win = {
         input = {
@@ -90,31 +89,23 @@ return {
             -- ["<Esc>"] = { "close", mode = { "n", "i" } },
             ["<c-n>"] = { "history_forward", mode = { "i", "n" } },
             ["<c-p>"] = { "history_back", mode = { "i", "n" } },
-            -- ["<a-s>"] = { "flash", mode = { "n", "i" } },
-            -- ["s"] = { "flash" },
+            ["<m-s>"] = { "search_file_path", mode = { "n", "i" } },
           },
         },
       },
-      -- actions = {
-      --   flash = function(picker)
-      --     require("flash").jump({
-      --       pattern = "^",
-      --       label = { after = { 0, 0 } },
-      --       search = {
-      --         mode = "search",
-      --         exclude = {
-      --           function(win)
-      --             return vim.bo[vim.api.nvim_win_get_buf(win)].filetype ~= "snacks_picker_list"
-      --           end,
-      --         },
-      --       },
-      --       action = function(match)
-      --         local idx = picker.list:row2idx(match.pos[1])
-      --         picker.list:_move(idx, true, true)
-      --       end,
-      --     })
-      --   end,
-      -- },
+      actions = {
+        -- inspired by https://github.com/TheBlob42/nvim-config/blob/bd2e99a8157a69f297814a5015f979ca76f653c4/lua/plugins/snacks.lua
+        search_file_path = function(picker)
+          local path = picker:current()._path
+          if path then
+            picker:close()
+            Snacks.picker.grep({
+              title = 'Search in "' .. vim.fn.fnamemodify(path, ":p:h:t") .. '"',
+              dirs = { vim.fn.fnamemodify(path, ":p:h") },
+            })
+          end
+        end,
+      },
       formatters = {
         file = { filename_first = true, truncate = 999 },
       },
@@ -220,13 +211,23 @@ return {
             input = {
               keys = {
                 -- ["<CR>"] = { { "tcd", "picker_files" }, mode = { "n", "i" } },
-                ["<c-l>"] = { "load_session" , mode = { "n", "i" } },
-              }
-            }
-          }
+                ["<c-l>"] = { "load_session", mode = { "n", "i" } },
+              },
+            },
+          },
         })
       end,
       desc = "Projects",
+    },
+    {
+      "<leader>f.",
+      function()
+        Snacks.picker.files({
+          cwd = vim.fn.expand("%:p:h"),
+          layout = "vertical",
+        })
+      end,
+      desc = "Find files in current file's directory",
     },
 
     -- { "<leader>fb", function() Snacks.picker.buffers() end, desc = "Buffers" },
@@ -374,7 +375,6 @@ return {
       end,
       desc = "Undo History",
     },
-
 
     -- Spelling
     {
