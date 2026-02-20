@@ -10,6 +10,7 @@ return {
   cmd = {
     "CodeCompanionActions",
     "CodeCompanionChat",
+    "CodeCompanion",
   },
   opts = {
     display = {
@@ -45,6 +46,7 @@ return {
     prompt_library = prompts.PROMPT_LIBRARY,
   },
   keys = {
+    { "<leader>ai", "<cmd>CodeCompanion<cr>", desc = "CodeCompanion: Inline", mode = { "n", "v" } },
     { "<leader>ap", "<cmd>CodeCompanionActions<cr>", desc = "CodeCompanion: Actions", mode = { "n", "v" } },
     { "<leader>aa", "<cmd>CodeCompanionChat Toggle<cr>", desc = "CodeCompanion: Chat", mode = { "n", "v" } },
     -- { "ga", "<cmd>CodeCompanionChat Add<cr>", desc = "CodeCompanion: Add to Chat" },
