@@ -8,7 +8,7 @@ return {
   keys = function()
     local keys = {
       {
-        "<leader>h",
+        "<leader>fg",
         function()
           require("grapple").toggle()
         end,
