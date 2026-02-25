@@ -13,6 +13,17 @@ return {
       desc = "Format file or range (in visual mode)",
       mode = { "n", "v" },
     },
+    {
+      "<leader>cf",
+      function()
+        require("conform").format({
+          lsp_fallback = true,
+          async = false,
+        })
+      end,
+      desc = "Format",
+      mode = { "n", "v" },
+    },
   },
   opts = function()
     local opts = {
