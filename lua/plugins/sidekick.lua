@@ -8,7 +8,7 @@ return {
     cli = {
       prompts = {
         commit = "Please propose a commit message for staged files",
-        refactor = "Please propose a refactor for the attached file {file}",
+        refactor = "Please propose a refactor for the attached snippet {this}",
         haunt_all = function()
           return haunt_sk.get_locations()
         end,
@@ -26,35 +26,41 @@ return {
         },
       },
     },
+    nes = {
+      enabled = false,
+      debounce = 100,
+    },
   },
   keys = {
+    {
+      "<tab>",
+      function()
+        -- if there is a next edit, jump to it, otherwise apply it if any
+        if not require("sidekick").nes_jump_or_apply() then
+          print("No more edit suggestions")
+          return "<Tab>" -- fallback to normal tab
+        end
+      end,
+      expr = true,
+      desc = "Goto/Apply Next Edit Suggestion",
+    },
+    {
+      "<leader>oo",
+      function()
+        require("sidekick.cli").toggle({ name = "opencode", focus = true })
+      end,
+      desc = "Sidekick Opencode",
+    },
+    -- No need for this one, just use Opencode directly
     -- {
-    --   "<tab>",
+    --   "<leader>os",
     --   function()
-    --     -- if there is a next edit, jump to it, otherwise apply it if any
-    --     if not require("sidekick").nes_jump_or_apply() then
-    --       return "<Tab>" -- fallback to normal tab
-    --     end
+    --     require("sidekick.cli").select({ filter = { installed = true } })
     --   end,
-    --   expr = true,
-    --   desc = "Goto/Apply Next Edit Suggestion",
+    --   -- Or to select only installed tools:
+    --   -- require("sidekick.cli").select({ filter = { installed = true } })
+    --   desc = "Select CLI",
     -- },
-    {
-      "<leader>oa",
-      function()
-        require("sidekick.cli").toggle()
-      end,
-      desc = "Sidekick Toggle CLI",
-    },
-    {
-      "<leader>os",
-      function()
-        require("sidekick.cli").select({ filter = { installed = true } })
-      end,
-      -- Or to select only installed tools:
-      -- require("sidekick.cli").select({ filter = { installed = true } })
-      desc = "Select CLI",
-    },
     {
       "<leader>od",
       function()
@@ -69,6 +75,22 @@ return {
       end,
       mode = { "x", "n" },
       desc = "Send This",
+    },
+    -- This one is not working
+    -- {
+    --   "<leader>or",
+    --   function() require("sidekick.cli").send({ msg = "{range}" }) end,
+    --   desc = "Send Range",
+    -- },
+    {
+      "<leader>ob",
+      function() require("sidekick.cli").send({ msg = "{buffers}" }) end,
+      desc = "Send Buffers",
+    },
+    {
+      "<leader>ol",
+      function() require("sidekick.cli").send({ msg = "{line}" }) end,
+      desc = "Send Line",
     },
     {
       "<leader>of",
@@ -92,14 +114,6 @@ return {
       end,
       mode = { "n", "x" },
       desc = "Sidekick Select Prompt",
-    },
-    -- Example of a keybinding to open Claude directly
-    {
-      "<leader>oc",
-      function()
-        require("sidekick.cli").toggle({ name = "opencode", focus = true })
-      end,
-      desc = "Sidekick Toggle Opencodep",
     },
   },
 }
