@@ -180,3 +180,7 @@ keymap("n", "]q", "<cmd>cnext<CR>", { desc = "Go to next quickfix item" })
 
 -- Close terminal
 keymap("t", "<esc><esc>", "<c-\\><c-n>")
+
+-- These two keymaps go together because some terminals may register <C-/> as <C-_>
+keymap("t", "<C-/>", "<cmd>close<cr>", { desc = "Hide Terminal" })
+keymap("t", "<c-_>", "<cmd>close<cr>", { desc = "which_key_ignore" })

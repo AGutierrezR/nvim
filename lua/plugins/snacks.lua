@@ -42,6 +42,12 @@ return {
       explorer = {
         enabled = true,
       },
+      terminal = {
+        win = {
+          position = "bottom",
+          height = 0.30,
+        },
+      },
       indent = { enabled = false },
       input = { enabled = false },
       picker = {
@@ -119,13 +125,20 @@ return {
       words = { enabled = false },
     },
     keys = {
-      -- {
-      --   "<leader>/",
-      --   function()
-      --     Snacks.picker.grep()
-      --   end,
-      --   desc = "Grep",
-      -- },
+      {
+        "<C-/>",
+        function()
+          Snacks.terminal()
+        end,
+        desc = "Open Terminal",
+      },
+      {
+        "<C-_>",
+        function()
+          Snacks.terminal()
+        end,
+        desc = "which_key_ignore",
+      },
       {
         "<leader>fb",
         function()
