@@ -1,6 +1,10 @@
 local function open_today_journal()
   local today = os.date("%Y-%m-%d")
-  local path = vim.fn.expand("~/vimwiki/journals/" .. today .. ".md")
+  local dir = vim.fn.expand("~/vimwiki/journals/")
+  local path = dir .. today .. ".md"
+
+  -- Crear directorio si no existe
+  vim.fn.mkdir(dir, "p")
 
   if vim.fn.filereadable(path) == 1 then
     vim.cmd("edit " .. path)
@@ -15,7 +19,12 @@ local function open_today_journal()
 end
 
 local function open_wiki()
-  local path = vim.fn.expand("~/vimwiki/index.md")
+  local dir = vim.fn.expand("~/vimwiki/")
+  local path = dir .. "index.md"
+  
+  -- Crear directorio si no existe
+  vim.fn.mkdir(dir, "p")
+  
   vim.cmd("edit " .. path)
 end
 
