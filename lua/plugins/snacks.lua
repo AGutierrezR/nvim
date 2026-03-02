@@ -120,7 +120,13 @@ return {
       notifier = { enabled = false },
       quickfile = { enabled = true },
       scope = { enabled = false },
-      scroll = { enabled = false },
+      scroll = {
+        enabled = false,
+        animate = {
+          duration = { step = 10, total = 200 },
+          easing = "linear",
+        },
+      },
       statuscolumn = { enabled = false },
       words = { enabled = false },
     },
@@ -447,6 +453,18 @@ return {
           Snacks.picker.git_stash()
         end,
         desc = "Git Stash",
+      },
+      {
+        "<leader>us",
+        function()
+          vim.cmd("SmearCursorToggle")
+          if Snacks.scroll.enabled then
+            Snacks.scroll.disable()
+          else
+            Snacks.scroll.enable()
+          end
+        end,
+        desc = "Toggle cursor and scroll animations",
       },
     },
   },
