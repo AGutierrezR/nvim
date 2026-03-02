@@ -188,7 +188,7 @@ return {
           },
         },
         -- custom_elements_ls = {},
-        marksman = {}, -- Markdown LSP
+        markdown_oxide = {}, -- Markdown LSP
         gopls = {},
       }
 
