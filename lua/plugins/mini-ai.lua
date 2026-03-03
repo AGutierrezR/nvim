@@ -33,10 +33,10 @@ return {
       silent = true,
       custom_textobjects = {
         f = spec_treesitter({ a = "@function.outer", i = "@function.inner" }),
-        o = spec_treesitter({
-          a = { "@block.outer", "@conditional.outer", "@loop.outer" },
-          i = { "@block.inner", "@conditional.inner", "@loop.inner" },
-        }),
+        -- o = spec_treesitter({
+        --   a = { "@block.outer", "@conditional.outer", "@loop.outer" },
+        --   i = { "@block.inner", "@conditional.inner", "@loop.inner" },
+        -- }),
         c = spec_treesitter({
           a = { "@class.outer" },
           i = { "@class.inner" },
