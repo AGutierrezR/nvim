@@ -454,19 +454,20 @@ return {
         end,
         desc = "Git Stash",
       },
-      {
-        "<leader>us",
-        function()
-          vim.cmd("SmearCursorToggle")
-          if Snacks.scroll.enabled then
-            Snacks.scroll.disable()
-          else
-            Snacks.scroll.enable()
-          end
-        end,
-        desc = "Toggle cursor and scroll animations",
-      },
     },
+    init = function()
+      vim.api.nvim_create_autocmd("User", {
+        pattern = "VeryLazy",
+        callback = function()
+          -- Create some toggle mappings
+          Snacks.toggle.treesitter():map("<leader>uT")
+          Snacks.toggle.scroll():map("<leader>uS")
+          Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")
+          Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>ul")
+
+        end,
+      })
+    end,
   },
   {
     "2kabhishek/seeker.nvim",
