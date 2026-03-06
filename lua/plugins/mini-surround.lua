@@ -33,6 +33,7 @@ return {
     end,
   },
   {
+    enabled = false,
     "mattn/emmet-vim",
     ft = { "html", "css", "vue", "blade", "javascript", "typescript" },
     init = function()
