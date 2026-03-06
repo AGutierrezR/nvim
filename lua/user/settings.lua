@@ -72,6 +72,7 @@ vim.opt.spell = true
 vim.opt.splitright = true --split vertical window to the right
 vim.opt.splitbelow = true --split horizontal window to the bottom
 
+-- Set a visual column indicator at column 80 to help maintain line length
 vim.opt.colorcolumn = "80"
 
 -- Enable editorconfig support
