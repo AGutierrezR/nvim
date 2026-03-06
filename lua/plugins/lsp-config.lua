@@ -142,12 +142,12 @@ return {
                 globalPlugins = {
                   {
                     name = "ts-lit-plugin",
-                    location = "/Users/asgi/Library/Application Support/fnm/node-versions/v18.0.0/installation/lib/node_modules/ts-lit-plugin",
+                    location = "/Users/asgi/.fnm/node-versions/v18.20.8/installation/lib/node_modules/ts-lit-plugin",
                     languages = { "javascript", "typescript" },
                   },
                   {
                     name = "typescript-styled-plugin",
-                    location = "/Users/asgi/Library/Application Support/fnm/node-versions/v18.0.0/installation/lib/node_modules/typescript-styled-plugin",
+                    location = "/Users/asgi/.fnm/node-versions/v18.20.8/installation/lib/node_modules/typescript-styled-plugin",
                     languages = { "javascript", "typescript" },
                   },
                 },
@@ -190,6 +190,7 @@ return {
         -- custom_elements_ls = {},
         markdown_oxide = {}, -- Markdown LSP
         gopls = {},
+        -- copilot = { },
       }
 
       -- Ensure the servers and tools above are installed
@@ -200,26 +201,19 @@ return {
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
         "stylua", -- Used to format Lua code
-        "eslint-lsp",
+        "eslint",
         "prettier",
       })
 
       require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
-      require("mason-lspconfig").setup({
-        ensure_installed = {},
-        automatic_installation = false,
-        handlers = {
-          function(server_name)
-            local server = servers[server_name] or {}
-            -- This handles overriding only values explicitly passed
-            -- by the server configuration above. Useful when disabling
-            -- certain features of an LSP (for example, turning off formatting for ts_ls)
-            server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
-            require("lspconfig")[server_name].setup(server)
-          end,
-        },
-      })
+      -- Iterate through each LSP server configuration
+      for name, server in pairs(servers) do
+        -- Configure the LSP server with its settings
+        vim.lsp.config(name, server)
+        -- Enable the LSP server
+        vim.lsp.enable(name)
+      end
     end,
   },
 }
