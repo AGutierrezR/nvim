@@ -21,6 +21,7 @@ return {
       { "<leader>b", group = "+Buffers" },
       { "<leader>x", group = "+diagnostics/quickfix" },
       { "<leader>q", group = "+quit/session" },
+      { "<leader>h", group = "+haunt" },
       { "gz", group = "+Surround" },
     },
     win = {
