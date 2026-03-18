@@ -193,6 +193,7 @@ return {
         gopls = {},
         -- copilot = { },
         astro = {},
+        tailwindcss = {},
       }
 
       -- Ensure the servers and tools above are installed
