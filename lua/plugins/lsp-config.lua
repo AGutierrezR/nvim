@@ -7,6 +7,7 @@ return {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile", "BufWritePre" },
     dependencies = {
+      { "AstroNvim/astrolsp", opts = {} },
       -- Automatically install LSPs and related tools to stdpath for Neovim
       { "williamboman/mason.nvim", opts = {} }, -- NOTE: Must be loaded before dependants
       "williamboman/mason-lspconfig.nvim",
@@ -191,6 +192,7 @@ return {
         markdown_oxide = {}, -- Markdown LSP
         gopls = {},
         -- copilot = { },
+        astro = {},
       }
 
       -- Ensure the servers and tools above are installed
