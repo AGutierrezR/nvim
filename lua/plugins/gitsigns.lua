@@ -1,31 +1,56 @@
 -- Add git related signs to the gutter, as well as utilities to managing changes
 return {
-  'lewis6991/gitsigns.nvim',
+  "lewis6991/gitsigns.nvim",
+  -- enabled = false,
   event = "LazyFile",
   opts = {
     signs = {
-      add = { text = '+' },
-      change = { text = '~' },
-      delete = { text = '_' },
-      topdelete = { text = '‾' },
-      changedelete = { text = '~' }
+      add = { text = "+" },
+      change = { text = "~" },
+      delete = { text = "_" },
+      topdelete = { text = "‾" },
+      changedelete = { text = "~" },
     },
     current_line_blame = true,
+    on_attach = function(buffer)
+      local gs = package.loaded.gitsigns
+
+      local function map(mode, l, r, desc)
+        vim.keymap.set(mode, l, r, { buffer = buffer, desc = desc, silent = true })
+      end
+
+      map("n", "]h", function()
+        if vim.wo.diff then
+          vim.cmd.normal({ "]c", bang = true })
+        else
+          gs.nav_hunk("next")
+        end
+      end, "Next Hunk")
+      map("n", "[h", function()
+        if vim.wo.diff then
+          vim.cmd.normal({ "[c", bang = true })
+        else
+          gs.nav_hunk("prev")
+        end
+      end, "Prev Hunk")
+
+      map("n", "]H", function() gs.nav_hunk("last") end, "Last Hunk")
+      map("n", "[H", function() gs.nav_hunk("first") end, "First Hunk")
+      map({ "n", "x" }, "<leader>ghs", ":Gitsigns stage_hunk<CR>", "Stage Hunk")
+      map({ "n", "x" }, "<leader>ghr", ":Gitsigns reset_hunk<CR>", "Reset Hunk")
+      map({ "n", "x" }, "<leader>gd", ":Gitsigns reset_hunk<CR>", "Reset Hunk")
+      map("n", "<leader>gD", gs.reset_buffer, "Reset Buffer")
+
+      map("n", "<leader>ghS", gs.stage_buffer, "Stage Buffer")
+      map("n", "<leader>ghu", gs.undo_stage_hunk, "Undo Stage Hunk")
+      map("n", "<leader>ghr", gs.reset_hunk, "Reset Hunk")
+      map("n", "<leader>ghR", gs.reset_buffer, "Reset Buffer")
+      map("n", "<leader>ghp", gs.preview_hunk_inline, "Preview Hunk Inline")
+      map("n", "<leader>ghb", function() gs.blame_line({ full = true }) end, "Blame Line")
+      map("n", "<leader>ghB", function() gs.blame() end, "Blame Buffer")
+      map("n", "<leader>ghd", gs.diffthis, "Diff This")
+      map("n", "<leader>ghD", function() gs.diffthis("~") end, "Diff This ~")
+      map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "GitSigns Select Hunk")
+    end,
   },
-  config = function (_, opts)
-    require('gitsigns').setup(opts)
-
-    vim.keymap.set('n', '<leader>gp', ':Gitsigns preview_hunk<CR>', { desc = 'Preview hunk', silent = true })
-    vim.keymap.set('n', '<leader>gt', ':Gitsigns toggle_current_line_blame<CR>', { desc = 'Toggle line blame', silent = true })
-    vim.keymap.set('n', '<leader>gd', ':Gitsigns reset_hunk<CR>', { desc = 'Discard hunk', silent = true })
-    vim.keymap.set('v', '<leader>gd', ':Gitsigns reset_hunk<CR>', { desc = 'Discard hunk', silent = true })
-    vim.keymap.set('n', '<leader>gD', ':Gitsigns reset_buffer<CR>', { desc = 'Discard buffer changes', silent = true })
-    vim.keymap.set('n', '<leader>gk', ':Gitsigns prev_hunk<CR>', { desc = 'Prev hunk', silent = true })
-    vim.keymap.set('n', '<leader>gj', ':Gitsigns next_hunk<CR>', { desc = 'Next hunk', silent = true })
-
-    vim.keymap.set('n', '<leader>ga', ':Gitsigns stage_buffer<CR>', { desc = 'Stage Buffer', silent = true })
-    vim.keymap.set('n', '<leader>g+', ':Gitsigns stage_hunk<CR>', { desc = 'Stage hunk', silent = true })
-    vim.keymap.set('v', '<leader>g+', ':Gitsigns stage_hunk<CR>', { desc = 'Stage hunk', silent = true })
-    vim.keymap.set('n', '<leader>g-', ':Gitsigns undo_stage_hunk<CR>', { desc = 'Unstage hunk', silent = true })
-  end
 }
