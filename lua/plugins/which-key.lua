@@ -7,6 +7,7 @@ return {
     delay = 300,
     spec = {
       { "<leader>g", group = "+Git" },
+      { "<leader>gh", group = "hunks" },
       { "[`", desc = "Prev mark" },
       { "]`", desc = "Next mark" },
       { "<leader>a", group = "+AI" },
@@ -22,7 +23,11 @@ return {
       { "<leader>x", group = "+diagnostics/quickfix" },
       { "<leader>q", group = "+quit/session" },
       { "<leader>h", group = "+haunt" },
+      { "[", group = "prev" },
+      { "]", group = "next" },
+      { "g", group = "goto" },
       { "gz", group = "+Surround" },
+      { "z", group = "fold" },
     },
     win = {
       height = {
@@ -41,15 +46,7 @@ return {
       group = "󰹍 ",
     },
   },
-  keys = {
-    {
-      "<leader>gg",
-      function()
-        require("which-key").show({ keys = "<leader>g", loop = true })
-      end,
-      desc = "Git (Hydra Mode)",
-    },
-  },
+  keys = {},
   config = function(_, opts)
     local wk = require("which-key")
     wk.setup(opts)
