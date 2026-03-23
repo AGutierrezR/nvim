@@ -426,5 +426,48 @@
       "}"
     ],
     "description": "cover css layout"
+  },
+  "initial variables": {
+    "prefix": "base-vars",
+    "body": [
+      ":root {",
+      "  --ff-body: 'Outfit', serif;",
+      "  --ff-heading: 'Young Serif', sans-serif;",
+      "  ",
+      "  /* Colors here */",
+      "}",
+      "",
+      "html {",
+      "  --space-xxxs: 0.25rem;",
+      "  --space-xxs: 0.5rem;",
+      "  --space-xs: 0.75rem;",
+      "  --space-s: 1rem;",
+      "  --space-m: 1.5rem;",
+      "  --space-l: 2rem;",
+      "  --space-xl: 2.5rem;",
+      "  --space-xxl: 3rem;",
+      "",
+      "  --size-step-00: 0.75rem;",
+      "  --size-step-0: 0.875rem;",
+      "  --size-step-1: 1rem;",
+      "  --size-step-2: 1.125rem;",
+      "  --size-step-3: 2.25rem;",
+      "  --size-step-4: 3.5rem;",
+      "",
+      "  --leading-flat: 1;",
+      "  --leading-fine: 1.2;",
+      "  --leading-standard: 1.4;",
+      "  --leading-loose: 1.858;",
+      "",
+      "  --stroke-width: 1px;",
+      "",
+      "  --radius-xs: 8px;",
+      "  --radius-s: 16px;",
+      "  --radius-m: 24px;",
+      "  --radius-xl: 50%;",
+      "}",
+      ""
+    ],
+    "description": "initial variables"
   }
 }
