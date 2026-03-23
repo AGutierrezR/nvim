@@ -18,6 +18,7 @@ return {
         replace = "gzr", -- Replace surrounding
         update_n_lines = "", -- Update `n_lines`
       },
+      respect_selection_type = true,
     },
     keys = function()
       -- With this function and the `keys` table defined above, we can generate the key mappings specification for the plugin
