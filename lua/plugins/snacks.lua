@@ -1,3 +1,4 @@
+local actions = require("utils.snacks")
 return {
   {
     "folke/snacks.nvim",
@@ -75,12 +76,19 @@ return {
             win = {
               list = {
                 keys = {
-                  ["-"] = "explorer_up",
+                  -- ["-"] = "explorer_up",
+                  ["<leader>c"] = "copy_path",
+                  ["<leader>/"] = "search_file_path",
                 },
               },
             },
-            layout = { layout = { position = "right" } },
+            layout = "default",
+            actions = {
+              copy_path = actions.copy_action,
+              search_in_directory = actions.search_in_directory,
+            },
           },
+
           files = {
             hidden = true,
           },
@@ -464,7 +472,6 @@ return {
           Snacks.toggle.scroll():map("<leader>uS")
           Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")
           Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>ul")
-
         end,
       })
     end,
