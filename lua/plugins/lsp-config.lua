@@ -194,6 +194,14 @@ return {
         -- copilot = { },
         astro = {},
         tailwindcss = {},
+        cucumber_language_server = {
+          settings = {
+            cucumber = {
+              features = { "**/*.feature" },
+              glue = {  "**/*.steps.ts" },
+            },
+          },
+        },
       }
 
       -- Ensure the servers and tools above are installed
