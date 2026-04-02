@@ -27,13 +27,13 @@ keymap("n", "<C-w>.", ":vertical resize +20<cr>")
 keymap("n", "<C-w>,", ":vertical resize -20<cr>")
 
 -- ════════════════════════════════════════════════════════════════════════════
--- Line Movement (Visual Mode)
+-- Line Movement (Visual Mode) / USING MINI.move instead
 -- ════════════════════════════════════════════════════════════════════════════
 
-keymap("v", "J", ":m .+1<CR>==", { desc = "Move line down in v mode" })
-keymap("v", "K", ":m .-2<CR>==", { desc = "Move line down in v mode" })
-keymap("x", "J", ":move '>+1<CR>gv-gv", { desc = "Move line down in x mode" })
-keymap("x", "K", ":move '<-2<CR>gv-gv", { desc = "Move line down in x mode" })
+-- keymap("v", "J", ":m .+1<CR>==", { desc = "Move line down in v mode" })
+-- keymap("v", "K", ":m .-2<CR>==", { desc = "Move line down in v mode" })
+-- keymap("x", "J", ":move '>+1<CR>gv-gv", { desc = "Move line down in x mode" })
+-- keymap("x", "K", ":move '<-2<CR>gv-gv", { desc = "Move line down in x mode" })
 
 -- ════════════════════════════════════════════════════════════════════════════
 -- Better Navigation
