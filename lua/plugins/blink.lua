@@ -103,35 +103,8 @@ return {
         },
 
         providers = {
-          -- lsp = {
-          --   name = "LSP",
-          --   module = "blink.cmp.sources.lsp",
-          --   score_offset = 0, -- the higher the number, the higher the priority
-          --   -- Filter text items from the LSP provider, since we have the buffer provider for that
-          --   min_keyword_length = 2,
-          -- },
-          -- path = {
-          --   name = "Path",
-          --   module = "blink.cmp.sources.path",
-          --   score_offset = 25,
-          --   fallbacks = { "snippets", "buffer" },
-          --   opts = {
-          --     trailing_slash = false,
-          --     label_trailing_slash = true,
-          --     show_hidden_files_by_default = true,
-          --   },
-          --   -- enabled = function()
-          --   --   -- Disable path completions in the copilot-chat filetype
-          --   --   return vim.bo.filetype ~= "copilot-chat"
-          --   -- end,
-          -- },
-          -- buffer = {
-          --   name = "Buffer",
-          --   module = "blink.cmp.sources.buffer",
-          --   min_keyword_length = 2,
-          --   score_offset = 15, -- the higher the number, the higher the priority
-          -- },
-          snippets = {
+          snippets = 
+          {
             name = "Snippets",
             module = "blink.cmp.sources.snippets",
             min_keyword_length = 2,
@@ -214,3 +187,4 @@ return {
     },
   },
 }
+
