@@ -13,6 +13,6 @@ end
 local rtp = vim.opt.rtp
 rtp:prepend(lazypath)
 
-require("config.lazy-events").setup()
+require("core.lazy-events").setup()
 
 require("lazy").setup("plugins")

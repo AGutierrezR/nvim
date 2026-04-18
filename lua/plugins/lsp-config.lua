@@ -1,5 +1,5 @@
 --
-local snacks_lsp_pickers_filter = require("config.snacks.picker").lsp_pickers_filter
+local snacks_lsp_pickers_filter = require("utils.snacks").lsp_pickers_filter
 
 return {
   {
