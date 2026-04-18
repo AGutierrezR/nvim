@@ -5,12 +5,21 @@ return {
   {
     -- Main LSP Configuration
     "neovim/nvim-lspconfig",
-    event = { "BufReadPre", "BufNewFile", "BufWritePre" },
+    event = { "BufReadPre", "BufNewFile" },
     dependencies = {
       { "AstroNvim/astrolsp", opts = {} },
       -- Automatically install LSPs and related tools to stdpath for Neovim
-      { "williamboman/mason.nvim", opts = {} }, -- NOTE: Must be loaded before dependants
-      "williamboman/mason-lspconfig.nvim",
+      -- Mason must be loaded before its dependents so we need to set it up here.
+      -- NOTE: `opts = {}` is the same as calling `require('mason').setup({})`
+      {
+        "mason-org/mason.nvim",
+        ---@module 'mason.settings'
+        ---@type MasonSettings
+        ---@diagnostic disable-next-line: missing-fields
+        opts = {},
+      },
+      -- Maps LSP server names between nvim-lspconfig and Mason package names.
+      "mason-org/mason-lspconfig.nvim",
       "WhoIsSethDaniel/mason-tool-installer.nvim",
 
       -- Useful status updates for LSP.
@@ -67,7 +76,7 @@ return {
           --
           -- When you move your cursor, the highlights will be cleared (the second autocommand).
           local client = vim.lsp.get_client_by_id(event.data.client_id)
-          if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
+          if client and client:supports_method("textDocument/documentHighlight", event.buf) then
             local highlight_augroup = vim.api.nvim_create_augroup("kickstart-lsp-highlight", { clear = false })
             vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
               buffer = event.buf,
@@ -94,7 +103,7 @@ return {
           -- code, if the language server you are using supports them
           --
           -- This may be unwanted, since they displace some of your code
-          if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
+          if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
             map("<leader>ct", function()
               vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }))
             end, "[T]oggle Inlay Hints")
@@ -102,36 +111,10 @@ return {
         end,
       })
 
-      -- ════════════════════════════════════════════════════════════════════
-      -- Diagnostic Configuration
-      -- ════════════════════════════════════════════════════════════════════
-      vim.diagnostic.config({
-        virtual_text = false,
-        underline = true,
-        update_in_insert = false,
-        severity_sort = true,
-        float = { border = "rounded", source = true, header = "", prefix = "" },
-        signs = {
-          text = {
-            [vim.diagnostic.severity.ERROR] = "󰅚 ",
-            [vim.diagnostic.severity.WARN] = "󰀪 ",
-            [vim.diagnostic.severity.INFO] = "󰋽 ",
-            [vim.diagnostic.severity.HINT] = "󰌶 ",
-          },
-          numhl = {
-            [vim.diagnostic.severity.ERROR] = "ErrorMsg",
-            [vim.diagnostic.severity.WARN] = "WarningMsg",
-          },
-        },
-      })
-
-      -- LSP servers and clients are able to communicate to each other what features they support.
-      --  By default, Neovim doesn't support everything that is in the LSP specification.
-      --  When you add blink.cmp, luasnip, etc. Neovim now has *more* capabilities.
-      --  So, we create new capabilities with blink.cmp, and then broadcast that to the servers.
-      local original_capabilities = vim.lsp.protocol.make_client_capabilities()
-      local capabilities = require("blink.cmp").get_lsp_capabilities(original_capabilities)
-
+      -- Enable the following language servers
+      --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
+      --  See `:help lsp-config` for information about keys and how to configure
+      ---@type table<string, vim.lsp.Config>
       local servers = {
         lua_ls = {
           settings = {
@@ -162,23 +145,6 @@ return {
             },
           },
         },
-        -- ts_ls = {
-        --   init_options = {
-        --     plugins = {
-        --       {
-        --         name = "ts-lit-plugin",
-        --         location = "/Users/asgi/Library/Application Support/fnm/node-versions/v18.0.0/installation/lib/node_modules/ts-lit-plugin",
-        --         languages = { "javascript", "typescript" },
-        --       },
-        --       {
-        --         name = "typescript-styled-plugin",
-        --         location = "/Users/asgi/Library/Application Support/fnm/node-versions/v18.0.0/installation/lib/node_modules/typescript-styled-plugin",
-        --         languages = { "javascript", "typescript" },
-        --       },
-        --     },
-        --   },
-        --   -- root_dir = function() return vim.loop.cwd() end
-        -- },
         svelte = {},
         jsonls = {},
         cssls = {},
@@ -194,28 +160,28 @@ return {
             provideFormatter = true,
           },
         },
-        -- custom_elements_ls = {},
         markdown_oxide = {}, -- Markdown LSP
         gopls = {},
-        -- copilot = { },
         astro = {},
         tailwindcss = {},
         cucumber_language_server = {
           settings = {
             cucumber = {
               features = { "**/*.feature" },
-              glue = {  "**/*.steps.ts" },
+              glue = { "**/*.steps.ts" },
             },
           },
         },
       }
 
-      -- Ensure the servers and tools above are installed
-      require("mason").setup()
-
-      -- You can add other tools here that you want Mason to install
-      -- for you, so that they are available from within Neovim.
-      local ensure_installed = vim.tbl_keys(servers or {})
+			-- Ensure the servers and tools above are installed
+			--
+			-- To check the current status of installed tools and/or manually install
+			-- other tools, you can run
+			--    :Mason
+			--
+			-- You can press `g?` for help in this menu.
+			local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
         "stylua", -- Used to format Lua code
         "eslint",
@@ -224,11 +190,8 @@ return {
 
       require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
-      -- Iterate through each LSP server configuration
       for name, server in pairs(servers) do
-        -- Configure the LSP server with its settings
         vim.lsp.config(name, server)
-        -- Enable the LSP server
         vim.lsp.enable(name)
       end
     end,
