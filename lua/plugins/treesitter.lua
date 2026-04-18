@@ -1,157 +1,134 @@
 return {
-  {
-    "nvim-treesitter/nvim-treesitter",
-    event = { "LazyFile", "VeryLazy" },
-    cmd = { "TSUpdate", "TSInstall", "TSLog", "TSUninstall" },
-    opts = {
-      ensure_installed = {
-        "bash",
-        "lua",
-        "vim",
-        "javascript",
-        "typescript",
-        "tsx",
-        "svelte",
-        "json",
-        "jsonc",
-        "html",
-        "markdown",
-        "markdown_inline",
-        "css",
-        "scss",
-        "yaml",
-        "toml",
-        "go",
-      },
+	{ -- Highlight, edit, and navigate code
+		"nvim-treesitter/nvim-treesitter",
+		lazy = false,
+		build = ":TSUpdate",
+		branch = "main",
+		-- [[ Configure Treesitter ]] See `:help nvim-treesitter-intro`
+		config = function()
+			-- ensure basic parser are installed
+			local parsers = {
+				"bash",
+				"lua",
+				"vim",
+				"javascript",
+				"typescript",
+				"tsx",
+				"svelte",
+				"json",
+				"html",
+				"markdown",
+				"markdown_inline",
+				"css",
+				"scss",
+				"yaml",
+				"toml",
+				"go",
+			}
+			require("nvim-treesitter").install(parsers)
 
-      highlight = { enable = true, },
-      incremental_selection = {
-        enable = false,
-        keymaps = {
-          node_incremental = "<Enter>",
-          node_decremental = "<Tab>",
-          scope_incremental = false,
-        },
-      },
+			---@param buf integer
+			---@param language string
+			local function treesitter_try_attach(buf, language)
+				-- check if parser exists and load it
+				if not vim.treesitter.language.add(language) then
+					return
+				end
+				-- enables syntax highlighting and other treesitter features
+				vim.treesitter.start(buf, language)
 
-      textobjects = {
-        select = {
-          enable = true,
-          lookahead = true,
-          include_surrounding_whitespace = false,
-          keymaps = {
-            -- ["af"] = "@function.outer", -- Use mini.ai instead
-            -- ["if"] = "@function.inner", -- Use mini.ai instead
-            -- ["ac"] = "@class.outer",	-- Use mini.ai instead
-            -- ["ic"] = "@class.inner",	-- Use mini.ai instead
-            -- ["is"] = "@assignment.inner",
-            -- ["as"] = "@assignment.outer",
-            -- ["ig"] = "@block.inner", -- Use mini.ai instead
-            -- ["ag"] = "@block.outer", -- Use mini.ai instead
-            -- ["ia"] = "@parameter.inner", -- Use mini.ai instead
-            -- ["aa"] = "@parameter.outer", -- Use mini.ai instead
-            -- ["ik"] = "@call.inner",
-            -- ["ak"] = "@call.outer",
-            -- ["i/"] = "@comment.inner", -- Not working in Javascript
-            -- ["a/"] = "@comment.outer",
-            -- ["ir"] = "@conditional.inner", -- Use mini.ai instead
-            -- ["ar"] = "@conditional.outer", -- Use mini.ai instead
-            -- ["io"] = "@loop.inner", -- Use mini.ai instead
-            -- ["ao"] = "@loop.outer", -- Use mini.ai instead
-            -- ["it"] = "@return.inner", -- Not working in Javascript
-            -- ["at"] = "@return.outer", -- Not working in Javascript
-          },
-        },
-        move = {
-          enable = true,
-          set_jumps = true,
-          goto_next_start = {
-            ["]f"] = "@function.outer",
-            -- ["]="] = "@assignment.outer",
-            ["]c"] = "@class.outer",
-            -- ["]g"] = "@block.outer",
-            ["]a"] = "@parameter.outer",
-            -- ["]k"] = "@call.outer",
-            -- ["]/"] = "@comment.outer",
-            -- ["]r"] = "@conditional.outer",
-            -- ["]o"] = "@loop.outer",
-            -- ["]t"] = "@return.outer",
-          },
-          goto_next_end = {
-            ["]F"] = "@function.outer",
-            ["]C"] = "@class.outer",
-            -- ["]G"] = "@block.outer",
-            ["]A"] = "@parameter.outer",
-            -- ["]K"] = "@call.outer",
-            -- ["]?"] = "@comment.outer",
-            -- ["]R"] = "@conditional.outer",
-            -- ["]O"] = "@loop.outer",
-            -- ["]T"] = "@return.outer",
-          },
-          goto_previous_start = {
-            ["[f"] = "@function.outer",
-            -- ["[="] = "@assignment.outer",
-            ["[c"] = "@class.outer",
-            -- ["[g"] = "@block.outer",
-            ["[a"] = "@parameter.outer",
-            -- ["[k"] = "@call.outer",
-            -- ["[/"] = "@comment.outer",
-            -- ["[r"] = "@conditional.outer",
-            -- ["[o"] = "@loop.outer",
-            -- ["[t"] = "@return.outer",
-          },
-          goto_previous_end = {
-            ["[F"] = "@function.outer",
-            ["[C"] = "@class.outer",
-            -- ["[G"] = "@block.outer",
-            ["[A"] = "@parameter.outer",
-            -- ["[K"] = "@call.outer",
-            -- ["[?"] = "@comment.outer",
-            -- ["[R"] = "@conditional.outer",
-            -- ["[O"] = "@loop.outer",
-          },
-        },
-      },
-    },
-    config = function(_, opts)
-      local TS = require("nvim-treesitter.configs")
+				-- enables treesitter based folds
+				-- for more info on folds see `:help folds`
+				-- vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+				-- vim.wo.foldmethod = 'expr'
 
-      -- setup treesitter
-      TS.setup(opts)
+				-- check if treesitter indentation is available for this language, and if so enable it
+				-- in case there is no indent query, the indentexpr will fallback to the vim's built in one
+				local has_indent_query = vim.treesitter.query.get(language, "indents") ~= nil
 
-      -- Configuration to treat JSONC files as JSON
-      vim.treesitter.language.register("json", "jsonc")
+				-- enables treesitter based indentation
+				if has_indent_query then
+					vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+				end
+			end
 
-      local ts_repeat_move = require("nvim-treesitter.textobjects.repeatable_move")
+			local available_parsers = require("nvim-treesitter").get_available()
+			vim.api.nvim_create_autocmd("FileType", {
+				callback = function(args)
+					local buf, filetype = args.buf, args.match
 
-      -- Create a repeatable pair of functions for diagnostics
-      local goto_next_diagnostic, goto_prev_diagnostic =
-        ts_repeat_move.make_repeatable_move_pair(vim.diagnostic.goto_next, vim.diagnostic.goto_prev)
+					local language = vim.treesitter.language.get_lang(filetype)
+					if not language then
+						return
+					end
 
-      -- Set keymaps for diagnostics
-      vim.keymap.set("n", "]d", goto_next_diagnostic, { desc = "Next diagnostic (repeatable)" })
-      vim.keymap.set("n", "[d", goto_prev_diagnostic, { desc = "Prev diagnostic (repeatable)" })
+					local installed_parsers = require("nvim-treesitter").get_installed("parsers")
 
-      -- Repeat movement with ; and ,
-      -- ensure ; goes forward and , goes backward regardless of the last direction
-      -- vim.keymap.set({ "n", "x", "o" }, ";", ts_repeat_move.repeat_last_move_next)
-      -- vim.keymap.set({ "n", "x", "o" }, ",", ts_repeat_move.repeat_last_move_previous)
+					if vim.tbl_contains(installed_parsers, language) then
+						-- enable the parser if it is installed
+						treesitter_try_attach(buf, language)
+					elseif vim.tbl_contains(available_parsers, language) then
+						-- if a parser is available in `nvim-treesitter` auto install it, and enable it after the installation is done
+						require("nvim-treesitter").install(language):await(function()
+							treesitter_try_attach(buf, language)
+						end)
+					else
+						-- try to enable treesitter features in case the parser exists but is not available from `nvim-treesitter`
+						treesitter_try_attach(buf, language)
+					end
+				end,
+			})
+		end,
+	},
+	-- Syntax aware text-objects, select, move, swap, and peek support
+	-- https://github.com/nvim-treesitter/nvim-treesitter-textobjects/tree/main
+	{
+		"nvim-treesitter/nvim-treesitter-textobjects",
+		branch = "main",
+		event = { "BufReadPre", "BufNewFile" },
+		config = function()
+			require("nvim-treesitter-textobjects").setup({
+				move = {
+					set_jumps = true,
+				},
+			})
+			local move = require("nvim-treesitter-textobjects.move")
 
-      -- Make builtin f, F, t, T also repeatable with ; and ,
-      vim.keymap.set({ "n", "x", "o" }, "f", ts_repeat_move.builtin_f_expr, { expr = true })
-      vim.keymap.set({ "n", "x", "o" }, "F", ts_repeat_move.builtin_F_expr, { expr = true })
-      vim.keymap.set({ "n", "x", "o" }, "t", ts_repeat_move.builtin_t_expr, { expr = true })
-      vim.keymap.set({ "n", "x", "o" }, "T", ts_repeat_move.builtin_T_expr, { expr = true })
-    end,
-  },
-  { "nvim-treesitter/nvim-treesitter-textobjects", event = "VeryLazy" },
+			local modes = { "n", "x", "o" }
+
+			local goto_maps = {
+				f = { key = "@function.outer", desc = "function" },
+				c = { key = "@class.outer", desc = "class" },
+				a = { key = "@parameter.outer", desc = "parameter" },
+			}
+
+			for prefix, info in pairs(goto_maps) do
+				local key_lower = prefix:lower()
+				local key_upper = prefix:upper()
+
+				vim.keymap.set(modes, "]" .. key_lower, function()
+					move.goto_next_start(info.key, "textobjects")
+				end, { desc = "Next " .. info.desc .. " start" })
+				vim.keymap.set(modes, "[" .. key_lower, function()
+					move.goto_previous_start(info.key, "textobjects")
+				end, { desc = "Prev " .. info.desc .. " start" })
+				vim.keymap.set(modes, "]" .. key_upper, function()
+					move.goto_next_end(info.key, "textobjects")
+				end, { desc = "Next " .. info.desc .. " end" })
+				vim.keymap.set(modes, "[" .. key_upper, function()
+					move.goto_previous_end(info.key, "textobjects")
+				end, { desc = "Prev " .. info.desc .. " end" })
+			end
+		end,
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter",
+		},
+	},
   {
     "David-Kunz/treesitter-unit",
     event = "VeryLazy",
     config = function()
-      -- vim.keymap.set('x', 'u', ':<c-u>lua require"treesitter-unit".select()<CR>')
       vim.keymap.set("x", "u", ':<c-u>lua require"treesitter-unit".select(true)<CR>')
-      -- vim.keymap.set('o', 'u', ':<c-u>lua require"treesitter-unit".select()<CR>')
       vim.keymap.set("o", "u", ':<c-u>lua require"treesitter-unit".select(true)<CR>')
     end,
   },
