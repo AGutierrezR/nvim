@@ -33,22 +33,4 @@ return {
       return keys_spec
     end,
   },
-  {
-    enabled = false,
-    "mattn/emmet-vim",
-    ft = { "html", "css", "vue", "blade", "javascript", "typescript" },
-    init = function()
-      vim.g.user_emmet_settings = { variables = { lang = "ja" } }
-      vim.g.user_emmet_leader_key = "<C-E>" --change to <C-e> to avoid conflict with completion
-      vim.g.user_emmet_mode = "a" -- enable Emmet in all modes (default is only in normal and visual)
-      vim.g.user_emmet_install_global = 0
-      vim.keymap.set("i", "<C-L>", "<C-E>,", { remap = true })
-      vim.keymap.set("v", "<C-L>", "<C-E>,", { remap = true })
-    end,
-    config = function()
-      if vim.fn.exists(":EmmetInstall") == 2 then
-        vim.cmd("EmmetInstall")
-      end
-    end,
-  },
 }

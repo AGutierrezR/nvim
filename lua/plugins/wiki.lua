@@ -125,22 +125,4 @@ return {
       vim.keymap.set("n", "<leader>w<leader>w", open_today_journal, { desc = "Open today diary" })
     end,
   },
-  {
-    "vimwiki/vimwiki",
-    enabled = false,
-    event = "BufEnter *.md",
-    keys = { "<leader>ww" },
-    init = function()
-      -- Set up vimwiki options
-      vim.g.vimwiki_list = {
-        {
-          path = "~/vimwiki/", -- Set your wiki path here
-          syntax = "markdown", -- You can change it to 'default' if you prefer Vimwiki syntax
-          ext = "md", -- Markdown file extension
-        },
-      }
-      -- Additional vimwiki options
-      vim.g.vimwiki_global_ext = 0
-    end,
-  },
 }
