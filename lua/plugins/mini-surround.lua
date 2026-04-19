@@ -1,8 +1,8 @@
 local keys = {
-  { "gza", op = "add", desc = "Add Surrounding", mode = { "n", "x" } },
-  { "gzd", op = "delete", desc = "Delete Surrounding", mode = { "n" } },
-  { "gzf", op = "find", desc = "Find Right Surrounding", mode = { "n" } },
-  { "gzr", op = "replace", desc = "Replace Surrounding", mode = { "n" } },
+  { "sa", op = "add", desc = "Add Surrounding", mode = { "n", "x" } },
+  { "sd", op = "delete", desc = "Delete Surrounding", mode = { "n" } },
+  { "sf", op = "find", desc = "Find Right Surrounding", mode = { "n" } },
+  { "sr", op = "replace", desc = "Replace Surrounding", mode = { "n" } },
 }
 
 return {
@@ -10,12 +10,12 @@ return {
     "echasnovski/mini.surround",
     opts = {
       mappings = {
-        add = "gza", -- Add surrounding in Normal and Visual modes
-        delete = "gzd", -- Delete surrounding
-        find = "gzf", -- Find surrounding (to the right)
+        add = "sa", -- Add surrounding in Normal and Visual modes
+        delete = "sd", -- Delete surrounding
+        find = "sf", -- Find surrounding (to the right)
         find_left = "", -- Find surrounding (to the left)
         highlight = "", -- Highlight surrounding
-        replace = "gzr", -- Replace surrounding
+        replace = "sr", -- Replace surrounding
         update_n_lines = "", -- Update `n_lines`
       },
       respect_selection_type = true,
