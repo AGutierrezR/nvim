@@ -8,7 +8,7 @@ vim.g.netrw_altv = 1 -- change from left splitting to right splitting
 -- This shows the current file path in the window title
 -- vim.o.winbar = "%m %t - %{luaeval('vim.fn.expand(\"%:~:.\")')}"
 
--- Hide tabline 
+-- Hide tabline
 vim.o.showtabline = 0
 
 -- Line number related settings
@@ -88,5 +88,22 @@ vim.diagnostic.config({
       [vim.diagnostic.severity.ERROR] = "ErrorMsg",
       [vim.diagnostic.severity.WARN] = "WarningMsg",
     },
+  },
+})
+
+-- ════════════════════════════════════════════════════════════════════
+-- Filetype Detection
+-- ════════════════════════════════════════════════════════════════════
+vim.filetype.add({
+  extension = {
+    env = "dotenv", -- Treat .env extension as dotenv filetype
+  },
+  filename = {
+    [".env"] = "dotenv", -- Treat .env file as dotenv filetype
+    ["env"] = "dotenv", -- Treat env file as dotenv filetype
+  },
+  pattern = {
+    ["[jt]sconfig.*.json"] = "jsonc", -- Treat tsconfig/jsconfig files as JSONC (allows comments)
+    ["%.env%.[%w_.-]+"] = "dotenv", -- Treat .env.* files as dotenv filetype
   },
 })
