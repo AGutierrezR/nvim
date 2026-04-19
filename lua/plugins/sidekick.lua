@@ -49,6 +49,7 @@ return {
       function()
         require("sidekick.cli").toggle({ name = "opencode", focus = true })
       end,
+      mode = { "x", "n" },
       desc = "Sidekick Opencode",
     },
     -- No need for this one, just use Opencode directly
