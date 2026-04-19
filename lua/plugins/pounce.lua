@@ -5,8 +5,8 @@ return {
     event = "LazyFile",
     opts = {},
     keys = {
-      { "s", "<cmd>Pounce<CR>", mode = { "n", "x", "o" }, desc = "Pounce" },
-      { "<leader>;", "<cmd>PounceRepeat<CR>", mode = { "n", "x", "o" }, desc = "Pounce Repeat" },
+      { "zk", "<cmd>Pounce<CR>", mode = { "n", "x", "o" }, desc = "Pounce" },
+      { "z;", "<cmd>PounceRepeat<CR>", mode = { "n", "x", "o" }, desc = "Pounce Repeat" },
     },
   },
 }
