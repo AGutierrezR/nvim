@@ -168,7 +168,7 @@ return {
           settings = {
             cucumber = {
               features = { "**/*.feature" },
-              glue = { "**/*.steps.ts" },
+              glue = { "**/*.steps.ts", "**/*.steps.js" },
             },
           },
         },
