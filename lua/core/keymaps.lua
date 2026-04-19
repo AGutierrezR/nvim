@@ -4,9 +4,17 @@ local keymap = vim.keymap.set
 -- Essential Operations
 -- ════════════════════════════════════════════════════════════════════════════
 
+-- Insert mode mappings
+keymap("i", "<C-z>", "<C-o>u")         -- Undo last change
+keymap("i", "<C-d>", '<C-o>"_dw')      -- Delete word in front
+keymap("i", "<C-a>", "<C-o>^")         -- Beginninof a line
+keymap("i", "<C-e>", "<C-o>$")         -- End of a line
+keymap("i", "<A-f>", "<Esc>wa")        -- Move forward one word
+keymap("i", "<A-b>", "<Esc>bi")        -- Move backward one word
+keymap({ "i", "x" }, "<C-S>", "<Esc><Cmd>silent! update | redraw<CR>", { desc = "Save and go to Normal mode" })
+
 -- Save file
 keymap("n", "<C-S>", "<Cmd>silent! update | redraw<CR>", { desc = "Save" })
-keymap({ "i", "x" }, "<C-S>", "<Esc><Cmd>silent! update | redraw<CR>", { desc = "Save and go to Normal mode" })
 
 -- Quit
 keymap("n", "<leader>qq", "<cmd>q<cr>", { desc = "Quit" })
