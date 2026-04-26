@@ -87,7 +87,7 @@ keymap(
 keymap("x", "g/", "<C-\\><C-n>`</\\%V", { silent = false, desc = "Search inside visual selection" })
 
 -- Yank to system clipboard
-keymap({ "n", "v" }, "<leader>y", '"+y', { desc = "Copy to system clipboard" })
+-- keymap({ "n", "v" }, "<leader>y", '"+y', { desc = "Copy to system clipboard" })
 keymap({ "n", "v" }, "gy", '"+y', { desc = "Copy to system clipboard" })
 
 -- Move yank register 0 to system clipboard
@@ -105,7 +105,7 @@ end, { desc = "Paste register 0 to system clipboard" })
 keymap({ "n" }, "gY", '"+y$', { desc = "Yank to clipboard EOL" })
 
 -- paste from the system clipboard
-keymap({ "n", "v" }, "<leader>p", '"+p', { desc = "Paste from system clipboard" })
+-- keymap({ "n", "v" }, "<leader>p", '"+p', { desc = "Paste from system clipboard" })
 keymap({ "n", "v" }, "gp", '"+p', { desc = "Paste from system clipboard" })
 
 -- Helper function to insert empty lines
