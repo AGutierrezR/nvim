@@ -1,0 +1,295 @@
+{
+  "Console log all": {
+    "prefix": [
+      "clj"
+    ],
+    "body": [
+      "console.log(JSON.stringify($0, null, 2))"
+    ],
+    "description": "Console log whole object"
+  },
+  "Function": {
+    "prefix": "fun",
+    "body": [
+      "function ${1:functionName}(${2:params}) {",
+      "\t$0",
+      "}"
+    ]
+  },
+  "Arrow Function": {
+    "prefix": "af",
+    "body": "const ${1:functionName} = (${2:params}) => {$0}"
+  },
+  "Arrow Function Implicit Return": {
+    "prefix": "afi",
+    "body": "const ${1:functionName} = (${2:params}) => $0"
+  },
+  "Async Function": {
+    "prefix": "asf",
+    "body": [
+      "async function ${1:functionName}(${2:params}) {",
+      "\t$0",
+      "}"
+    ]
+  },
+  "Async Arrow Function": {
+    "prefix": "aaf",
+    "body": "const ${1:functionName} = async (${2:params}) => {$0}"
+  },
+  "Anonymous Function": {
+    "prefix": "fn",
+    "body": [
+      "function(${1:params}) {",
+      "\t$0",
+      "}"
+    ]
+  },
+  "If Else Statement": {
+    "prefix": "ife",
+    "body": [
+      "if (${1:condition}) {",
+      "\t$0",
+      "} else {",
+      "\t",
+      "}"
+    ]
+  },
+  "Ternary Operator": {
+    "prefix": "ter",
+    "body": "${1:condition} ? ${2:true} : ${3:false}"
+  },
+  "Promise": {
+    "prefix": "promise",
+    "body": [
+      "new Promise((resolve, reject) => {",
+      "\t$0",
+      "})"
+    ]
+  },
+  "Promise Then": {
+    "prefix": "thenc",
+    "body": [
+      "${1:promise}",
+      "\t.then((${2:result}) => {$0})",
+      "\t.catch((${3:error}) => {console.error(${3:error});});"
+    ]
+  },
+  "Class Extends": {
+    "prefix": "clx",
+    "body": [
+      "class ${1:ClassName} extends ${2:ParentClass} {",
+      "\tconstructor(${3:params}) {",
+      "\t\tsuper(${3:params});",
+      "\t\t$0",
+      "\t}",
+      "}"
+    ]
+  },
+  "Static Method": {
+    "prefix": "sm",
+    "body": [
+      "static ${1:methodName}(${2:params}) {",
+      "\t$0",
+      "}"
+    ]
+  },
+  "Import": {
+    "prefix": "imp",
+    "body": "import ${1:module} from '${2:path}';"
+  },
+  "Import Named": {
+    "prefix": "imn",
+    "body": "import { ${1:name} } from '${2:path}';"
+  },
+  "Import As": {
+    "prefix": "ima",
+    "body": "import * as ${1:alias} from '${2:path}';"
+  },
+  "Import Dynamic": {
+    "prefix": "imd",
+    "body": "const ${1:module} = await import('${2:path}');"
+  },
+  "Export Default": {
+    "prefix": "exp",
+    "body": "export default ${1:name};"
+  },
+  "Export Named": {
+    "prefix": "exn",
+    "body": "export { ${1:name} };"
+  },
+  "Export All": {
+    "prefix": "exa",
+    "body": "export * from '${1:path}';"
+  },
+  "Export Function": {
+    "prefix": "exf",
+    "body": [
+      "export function ${1:functionName}(${2:params}) {",
+      "\t$0",
+      "}"
+    ]
+  },
+  "Export Const": {
+    "prefix": "exc",
+    "body": "export const ${1:name} = ${2:value};"
+  },
+  "Fetch": {
+    "prefix": "fetch",
+    "body": [
+      "fetch('${1:url}')",
+      "\t.then(response => response.json())",
+      "\t.then(data => {$0})",
+      "\t.catch(error => console.error(error));"
+    ]
+  },
+  "Fetch Async": {
+    "prefix": "feta",
+    "body": [
+      "const response = await fetch('${1:url}');",
+      "const data = await response.json();",
+      "$0"
+    ]
+  },
+  "Fetch POST": {
+    "prefix": "fetp",
+    "body": [
+      "fetch('${1:url}', {",
+      "\tmethod: 'POST',",
+      "\theaders: {",
+      "\t\t'Content-Type': 'application/json'",
+      "\t},",
+      "\tbody: JSON.stringify(${2:data})",
+      "})",
+      "\t.then(response => response.json())",
+      "\t.then(data => {$0})",
+      "\t.catch(error => console.error(error));"
+    ]
+  },
+  "JSON Parse": {
+    "prefix": "jsp",
+    "body": "JSON.parse(${1:jsonString})"
+  },
+  "JSON Stringify": {
+    "prefix": "jss",
+    "body": "JSON.stringify(${1:object})"
+  },
+  "JSON Stringify Pretty": {
+    "prefix": "jssp",
+    "body": "JSON.stringify(${1:object}, null, 2)"
+  },
+  "LocalStorage Set": {
+    "prefix": "lss",
+    "body": "localStorage.setItem('${1:key}', ${2:value});"
+  },
+  "LocalStorage Get": {
+    "prefix": "lsg",
+    "body": "localStorage.getItem('${1:key}')"
+  },
+  "LocalStorage Remove": {
+    "prefix": "lsr",
+    "body": "localStorage.removeItem('${1:key}');"
+  },
+  "LocalStorage Clear": {
+    "prefix": "lsc",
+    "body": "localStorage.clear();"
+  },
+  "SessionStorage Set": {
+    "prefix": "sss",
+    "body": "sessionStorage.setItem('${1:key}', ${2:value});"
+  },
+  "SessionStorage Get": {
+    "prefix": "ssg",
+    "body": "sessionStorage.getItem('${1:key}')"
+  },
+  "Document GetElementsByClassName": {
+    "prefix": "gcl",
+    "body": "Array.from(${1:document}.getElementsByClassName('${2:className}'))"
+  },
+  "Document GetElementsByTagName": {
+    "prefix": "gt",
+    "body": "Array.from(${1:document}.getElementsByTagName('${2:tagName}')"
+  },
+  "DOMContentLoaded": {
+    "prefix": "domr",
+    "body": [
+      "document.addEventListener('DOMContentLoaded', () => {",
+      "\t$0",
+      "});"
+    ]
+  },
+  "Window Load": {
+    "prefix": "wl",
+    "body": [
+      "window.addEventListener('load', () => {",
+      "\t$0",
+      "});"
+    ]
+  },
+  "RequestAnimationFrame": {
+    "prefix": "raf",
+    "body": [
+      "requestAnimationFrame(() => {",
+      "\t$0",
+      "});"
+    ]
+  },
+  "Generator Function": {
+    "prefix": "gen",
+    "body": [
+      "function* ${1:generatorName}(${2:params}) {",
+      "\tyield $0;",
+      "}"
+    ]
+  },
+  "Async Generator": {
+    "prefix": "agen",
+    "body": [
+      "async function* ${1:generatorName}(${2:params}) {",
+      "\tyield $0;",
+      "}"
+    ]
+  },
+  "Proxy": {
+    "prefix": "proxy",
+    "body": [
+      "new Proxy(${1:target}, {",
+      "\tget(target, prop) {",
+      "\t\t$0",
+      "\t}",
+      "})"
+    ]
+  },
+  "Throw Error": {
+    "prefix": "ther",
+    "body": "throw new Error('${1:message}');"
+  },
+  "Custom Error": {
+    "prefix": "cerr",
+    "body": [
+      "class ${1:CustomError} extends Error {",
+      "\tconstructor(message) {",
+      "\t\tsuper(message);",
+      "\t\tthis.name = '${1:CustomError}';",
+      "\t}",
+      "}"
+    ]
+  },
+  "Comment Block": {
+    "prefix": "cmt",
+    "body": [
+      "/**",
+      " * ${1:description}",
+      " */"
+    ]
+  },
+  "JSDoc Function": {
+    "prefix": "jsdoc",
+    "body": [
+      "/**",
+      " * ${1:description}",
+      " * @param {${2:type}} ${3:paramName} - ${4:description}",
+      " * @returns {${5:type}} ${6:description}",
+      " */"
+    ]
+  }
+}
