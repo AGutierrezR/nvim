@@ -103,14 +103,13 @@ return {
         },
 
         providers = {
-          snippets = 
-          {
-            name = "Snippets",
+          snippets = {
+            name = "snippets",
             module = "blink.cmp.sources.snippets",
             min_keyword_length = 2,
-            score_offset = -1, -- the higher the number, the higher the priority
+            score_offset = 85, -- the higher the number, the higher the priority
             -- Only show snippets if I type the trigger_text characters, so
-            -- to expand the "cl" snippet, if the trigger_text is ";" I have to
+            -- to expand the "bash" snippet, if the trigger_text is ";" I have to
             should_show_items = function()
               local col = vim.api.nvim_win_get_cursor(0)[2]
               local before_cursor = vim.api.nvim_get_current_line():sub(1, col)
@@ -119,6 +118,13 @@ return {
             end,
             -- After accepting the completion, delete the trigger_text characters
             -- from the final inserted text
+            -- Modified transform_items function based on suggestion by `synic` so
+            -- that the luasnip source is not reloaded after each transformation
+            -- https://github.com/linkarzu/dotfiles-latest/discussions/7#discussion-7849902
+            -- NOTE: I also tried to add the ";" prefix to all of the snippets loaded from
+            -- friendly-snippets in the luasnip.lua file, but I was unable to do
+            -- so, so I still have to use the transform_items here
+            -- This removes the ";" only for the friendly-snippets snippets
             transform_items = function(_, items)
               local line = vim.api.nvim_get_current_line()
               local col = vim.api.nvim_win_get_cursor(0)[2]
@@ -187,4 +193,3 @@ return {
     },
   },
 }
-
