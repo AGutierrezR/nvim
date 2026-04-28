@@ -122,6 +122,9 @@ return {
               completion = {
                 callSnippet = "Replace",
               },
+              codeLens = {
+                enable = false,
+              },
             },
           },
         },
