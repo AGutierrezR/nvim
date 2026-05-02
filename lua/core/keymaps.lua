@@ -16,6 +16,9 @@ keymap({ "i", "x" }, "<C-S>", "<Esc><Cmd>silent! update | redraw<CR>", { desc = 
 -- Save file
 keymap("n", "<C-S>", "<Cmd>silent! update | redraw<CR>", { desc = "Save" })
 
+-- restart
+keymap("n", "<leader>re", "<cmd>restart<cr>", { desc = "Restart Neovim" })
+
 -- Quit
 keymap("n", "<leader>qq", "<cmd>q<cr>", { desc = "Quit" })
 keymap("n", "<leader>qQ", "<cmd>qa<cr>", { desc = "Quit All" })
