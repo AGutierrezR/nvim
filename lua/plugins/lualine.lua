@@ -1,4 +1,5 @@
 local mode_map = {
+
   ["NORMAL"] = "N",
   ["O-PENDING"] = "N?",
   ["INSERT"] = "I",
@@ -133,7 +134,10 @@ return {
     options = {
       -- theme = "auto",
       -- globalstatus = vim.o.laststatus == 3,
+      section_separators = "",
+      component_separators = "",
       disabled_filetypes = { statusline = { "dashboard", "alpha", "ministarter", "snacks_dashboard" } },
+      always_show_tabline = false,
     },
     sections = {
       lualine_a = {
@@ -165,25 +169,22 @@ return {
       lualine_y = {},
       lualine_z = { { place, padding = { left = 1, right = 1 } } },
     },
-    winbar = {
-      lualine_z = {
+    tabline = {
+      lualine_a = {
         {
           "tabs",
-          show_modified_status = false,
-          cond = function()
-            return #vim.fn.gettabinfo() > 1
+          mode = 1,
+          use_mode_colors = true,
+          path = 0,
+          symbols = { modified = "+" },
+          fmt = function(name, context)
+            -- add icon to left of active filename (per tab)
+            local devicons = require("nvim-web-devicons")
+            local icon, _ = devicons.get_icon(name, nil, { default = true })
+            return icon .. ' ' .. name 
           end,
-        },
-      },
-    },
-    inactive_winbar = {
-      lualine_z = {
-        {
-          "tabs",
-          show_modified_status = false,
-          cond = function()
-            return #vim.fn.gettabinfo() > 1
-          end,
+          -- allow stretching full with of screen (tabline)
+          max_length = vim.o.columns - 1
         },
       },
     },
