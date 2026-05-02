@@ -5,7 +5,7 @@ return {
   keys = {
     {
       mode = "n",
-      "<leader>ft",
+      "<leader>st",
       function()
         Snacks.picker.todo_comments()
       end,

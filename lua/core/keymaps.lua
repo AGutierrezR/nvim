@@ -186,6 +186,9 @@ keymap("n", "]q", "<cmd>cnext<CR>", { desc = "Go to next quickfix item" })
 -- Terminal
 -- ════════════════════════════════════════════════════════════════════════════
 
+-- Open terminal (like buffer)
+keymap("n", "<leader>zt", "<cmd>terminal<cr>", { desc = "Open terminal" })
+
 -- Close terminal
 keymap("t", "<esc><esc>", "<c-\\><c-n>")
 
