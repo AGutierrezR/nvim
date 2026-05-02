@@ -71,6 +71,7 @@ return {
           },
         },
         sources = {
+          snippets = require("utils.snacks").snippets,
           explorer = {
             auto_close = true,
             win = {
