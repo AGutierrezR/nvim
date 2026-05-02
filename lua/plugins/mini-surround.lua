@@ -33,4 +33,10 @@ return {
       return keys_spec
     end,
   },
+  {
+    "olrtg/nvim-emmet",
+    config = function()
+      vim.keymap.set({ "n", "v" }, "sae", require("nvim-emmet").wrap_with_abbreviation)
+    end,
+  },
 }
