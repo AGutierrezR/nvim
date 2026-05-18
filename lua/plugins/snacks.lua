@@ -473,6 +473,16 @@ return {
           Snacks.toggle.scroll():map("<leader>uS")
           Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")
           Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>ul")
+
+          Snacks.toggle({
+            name = "Document Color",
+            get = function()
+              return vim.lsp.document_color.is_enabled()
+            end,
+            set = function(state)
+              vim.lsp.document_color.enable(state)
+            end,
+          }):map("<leader>uD")
         end,
       })
     end,
