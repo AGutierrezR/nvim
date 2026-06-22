@@ -103,6 +103,12 @@ return {
         },
 
         providers = {
+          lsp = {
+            -- markdown_oxide wiki-link completion: include [ ] / # space in keyword
+            markdown_oxide = {
+              keyword_pattern = [[[\[\]\k\| \/\#]\+]],
+            },
+          },
           snippets = {
             name = "snippets",
             module = "blink.cmp.sources.snippets",
