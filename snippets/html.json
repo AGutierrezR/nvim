@@ -1,0 +1,22 @@
+{
+  "SVG Use tag": {
+    "prefix": "svg-use",
+    "body": [
+      "<svg class=\"${1:svgClass}\">",
+      "  <use href=\"#:${2:svgId}\" />",
+      "</svg>"
+    ],
+    "description": "SVG Use tag"
+  },
+  "Picture-source": {
+    "prefix": "picture",
+    "body": [
+      "<picture class=\"product-item__image\">",
+      "  <source srcset=\"${2:tableImgUrl}\" media=\"(min-width: ${3:tableMinWidth})\" />",
+      "  <source srcset=\"${4:desktopImgUrl}\"media=\"(min-width: ${5:desktopMinWidth})\" />",
+      "  <img alt=\"\" src=\"${1:mobileImgUrl}\" />",
+      "</picture>"
+    ],
+    "description": "Picture-source"
+  }
+}
