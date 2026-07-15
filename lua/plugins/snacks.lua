@@ -14,6 +14,7 @@ return {
         preset = {
           keys = {
             { icon = " ", key = "f", desc = "Find File", action = ":Seeker files" },
+            { icon = " ", key = "e", desc = "Explore Files", action = ":lua Snacks.picker.explorer()" },
             { icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
             { icon = " ", key = "/", desc = "Find Text", action = ":Seeker grep" },
             {
