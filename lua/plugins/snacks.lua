@@ -13,10 +13,10 @@ return {
       dashboard = {
         preset = {
           keys = {
-            { icon = " ", key = "f", desc = "Find File", action = ":Seeker files" },
+            { icon = " ", key = "f", desc = "Find File", action = "lua Snacks.picker.files()" },
             { icon = " ", key = "e", desc = "Explore Files", action = ":lua Snacks.picker.explorer()" },
             { icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
-            { icon = " ", key = "/", desc = "Find Text", action = ":Seeker grep" },
+            { icon = " ", key = "/", desc = "Find Text", action = ":lua Snacks.picker.grep()" },
             {
               icon = " ",
               key = "r",
