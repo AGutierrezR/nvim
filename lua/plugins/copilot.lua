@@ -15,7 +15,7 @@ return {
       -- enabled = false,
       auto_trigger = false,
       keymap = {
-        accept = "<M-Tab>",
+        accept = "<C-j>",
         accept_word = false,
         accept_line = false,
         next = "<C-g>", -- '<M-]>'
