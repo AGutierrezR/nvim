@@ -548,5 +548,62 @@
       "}"
     ],
     "description": "CSS Modern Reset"
+  },
+  "Flex": {
+    "prefix": "flex",
+    "body": [
+      "display: flex;",
+      "align-items: ${1:center};",
+      "justify-content: ${2:center};",
+      "gap: ${3:1rem};",
+      "$0"
+    ],
+    "description": "Flexbox"
+  },
+  "Flex Center": {
+    "prefix": "flexc",
+    "body": [
+      "display: flex;",
+      "align-items: center;",
+      "justify-content: center;",
+      "$0"
+    ],
+    "description": "Flex centrado"
+  },
+  "Flex Column": {
+    "prefix": "flexcol",
+    "body": [
+      "display: flex;",
+      "flex-direction: column;",
+      "$0"
+    ],
+    "description": "Flex en columna"
+  },
+  "Flex Space Between": {
+    "prefix": "flexbtw",
+    "body": [
+      "display: flex;",
+      "justify-content: space-between;",
+      "$0"
+    ],
+    "description": "Flex con space-between"
+  },
+  "Flex Wrap": {
+    "prefix": "flexwrap",
+    "body": [
+      "display: flex;",
+      "flex-wrap: wrap;",
+      "$0"
+    ],
+    "description": "Flex con wrap"
+  },
+  "Size": {
+    "prefix": "size",
+    "body": [
+      "width: ${1:size};",
+      "height: ${1:size};",
+      "$0"
+    ],
+    "description": "Width and height"
   }
 }
