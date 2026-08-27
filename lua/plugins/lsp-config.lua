@@ -62,6 +62,9 @@ return {
           map("<leader>cLi", function()
             vim.cmd("checkhealth vim.lsp")
           end, "LspInfo")
+          map("<leader>cLb", function()
+            vim.cmd(":lua vim.print(vim.tbl_map(function(c) return c.name end, vim.lsp.get_clients({ bufnr = 0 })))")
+          end, "LspInfo buffer")
           map("<leader>cLr", function()
             vim.cmd("lsp restart")
           end, "LspRestart")
@@ -201,6 +204,7 @@ return {
         svelte = {},
         jsonls = {},
         cssls = {},
+        css_variables = {},
         cssmodules_ls = {},
         emmet_language_server = {},
         html = {
