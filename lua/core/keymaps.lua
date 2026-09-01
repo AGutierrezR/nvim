@@ -51,8 +51,8 @@ keymap("n", "<C-w>,", ":vertical resize -20<cr>")
 -- ════════════════════════════════════════════════════════════════════════════
 
 -- Wrapped line navigation
-keymap("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, desc = "Up (wrapped)" })
-keymap("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, desc = "Down (wrapped)" })
+keymap({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, desc = "Up (wrapped)" })
+keymap({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, desc = "Down (wrapped)" })
 
 keymap("n", "<C-d>", "<C-d>zz", { desc = "Scroll half page down and center cursor" })
 keymap("n", "<C-u>", "<C-u>zz", { desc = "Scroll half page up and center cursor" })
