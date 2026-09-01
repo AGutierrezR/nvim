@@ -97,6 +97,12 @@ return {
           grep = {
             hidden = true,
           },
+          buffers = {
+            win = {
+              input = { keys = { ["<c-s>"] = "bufwrite" } },
+              list = { keys = { ["<c-s>"] = "bufwrite" } },
+            },
+          },
         },
         win = {
           input = {
@@ -121,6 +127,16 @@ return {
                 dirs = { vim.fn.fnamemodify(path, ":p:h") },
               })
             end
+          end,
+          bufwrite = function(picker)
+            for _, item in ipairs(picker:selected({ fallback = true })) do
+              if item.buf then
+                vim.api.nvim_buf_call(item.buf, function()
+                  vim.cmd("write")
+                end)
+              end
+            end
+            picker:refresh()
           end,
         },
         formatters = {
@@ -196,6 +212,13 @@ return {
           Snacks.picker.grep_buffers()
         end,
         desc = "Grep Buffers",
+      },
+      {
+        "<leader>bm",
+        function()
+          Snacks.picker.buffers({ modified = true })
+        end,
+        desc = "Modified Buffers",
       },
       -- {
       --   "<leader>ff",
