@@ -158,6 +158,13 @@ return {
     },
     keys = {
       {
+        "<leader>/",
+        function()
+          Snacks.picker.grep()
+        end,
+        desc = "Grep",
+      },
+      {
         "<C-/>",
         function()
           Snacks.terminal()
@@ -220,13 +227,13 @@ return {
         end,
         desc = "Modified Buffers",
       },
-      -- {
-      --   "<leader>ff",
-      --   function()
-      --     Snacks.picker.files()
-      --   end,
-      --   desc = "Find Files",
-      -- },
+      {
+        "<leader>ff",
+        function()
+          Snacks.picker.files()
+        end,
+        desc = "Find Files",
+      },
       {
         "<leader>fr",
         function()
@@ -511,14 +518,14 @@ return {
       })
     end,
   },
-  {
-    "2kabhishek/seeker.nvim",
-    dependencies = { "folke/snacks.nvim" },
-    cmd = { "Seeker" },
-    keys = {
-      { "<leader>ff", ":Seeker files<CR>", desc = "Seek Files" },
-      { "<leader>/", ":Seeker grep<CR>", desc = "Seek Grep" },
-    },
-    opts = {}, -- Required unless you call seeker.setup() manually, add your configs here
-  },
+  -- {
+  --   "2kabhishek/seeker.nvim",
+  --   dependencies = { "folke/snacks.nvim" },
+  --   cmd = { "Seeker" },
+  --   keys = {
+  --     { "<leader>ff", ":Seeker files<CR>", desc = "Seek Files" },
+  --     { "<leader>/", ":Seeker grep<CR>", desc = "Seek Grep" },
+  --   },
+  --   opts = {}, -- Required unless you call seeker.setup() manually, add your configs here
+  -- },
 }
