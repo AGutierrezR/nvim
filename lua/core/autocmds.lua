@@ -52,3 +52,12 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.bo.filetype = "markdown"
   end,
 })
+
+-- Don't auto-continue comments on new lines (ftplugins re-add `ro`)
+vim.api.nvim_create_autocmd("FileType", {
+  desc = "Disable comment continuation",
+  group = vim.api.nvim_create_augroup("no_comment_continuation", { clear = true }),
+  callback = function()
+    vim.opt_local.formatoptions:remove({ "r", "o" })
+  end,
+})
