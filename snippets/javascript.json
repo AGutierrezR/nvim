@@ -291,5 +291,187 @@
       " * @returns {${5:type}} ${6:description}",
       " */"
     ]
+  },
+  "Suite": {
+    "prefix": "suite",
+    "body": [
+      "suite('${1}', () => {",
+      "\t${2}",
+      "});"
+    ],
+    "description": "Mocha::Suite"
+  },
+  "Test": {
+    "prefix": "test",
+    "body": [
+      "test('${1}', () => {",
+      "\t${2}",
+      "});"
+    ],
+    "description": "Mocha::Test"
+  },
+  "Test Async": {
+    "prefix": "atest",
+    "body": [
+      "test('${1}', async () => {",
+      "\t${2}",
+      "});"
+    ],
+    "description": "Mocha::Test::Async"
+  },
+  "Suite and Test": {
+    "prefix": "suiteAndTest",
+    "body": [
+      "suite('${1}', () => {",
+      "\ttest('${2}', () => {",
+      "\t\t${3}",
+      "\t});",
+      "});"
+    ],
+    "description": "Mocha::Suite with Test"
+  },
+  "Setup": {
+    "prefix": "setup",
+    "body": [
+      "setup(() => {",
+      "\t${1}",
+      "});"
+    ],
+    "description": "Mocha::Setup"
+  },
+  "Setup Async": {
+    "prefix": "asetup",
+    "body": [
+      "setup(async () => {",
+      "\t${1}",
+      "});"
+    ],
+    "description": "Mocha::Setup::Async::Arrow"
+  },
+  "Teardown": {
+    "prefix": "teardown",
+    "body": [
+      "teardown(() => {",
+      "\t${1}",
+      "});"
+    ],
+    "description": "Mocha::Teardown"
+  },
+  "Teardown Async": {
+    "prefix": "ateardown",
+    "body": [
+      "teardown(async () => {",
+      "\t${1}",
+      "});"
+    ],
+    "description": "Mocha::Teardown::Async"
+  },
+  "Suite Setup": {
+    "prefix": "suiteSetup",
+    "body": [
+      "suiteSetup(() => {",
+      "\t${1}",
+      "});"
+    ],
+    "description": "Mocha::SuiteSetup"
+  },
+  "Suite Setup Async": {
+    "prefix": "asuiteSetup",
+    "body": [
+      "suiteSetup(async () => {",
+      "\t${1}",
+      "});"
+    ],
+    "description": "Mocha::SuiteSetup::Async"
+  },
+  "Suite Teardown": {
+    "prefix": "suiteTeardown",
+    "body": [
+      "suiteTeardown(() => {",
+      "\t${1}",
+      "});"
+    ],
+    "description": "Mocha::SuiteTeardown"
+  },
+  "Suite Teardown Async": {
+    "prefix": "asuiteTeardown",
+    "body": [
+      "suiteTeardown(async () => {",
+      "\t${1}",
+      "});"
+    ],
+    "description": "Mocha::SuiteTeardown::Async"
+  },
+  "Before": {
+    "prefix": "before",
+    "body": [
+      "before(() => {",
+      "\t${1}",
+      "});"
+    ],
+    "description": "Mocha::Before"
+  },
+  "Before Async": {
+    "prefix": "abefore",
+    "body": [
+      "before(async () => {",
+      "\t${1}",
+      "});"
+    ],
+    "description": "Mocha::Before::Async"
+  },
+  "Before Each": {
+    "prefix": "beforeEach",
+    "body": [
+      "beforeEach(() => {",
+      "\t${1}",
+      "});"
+    ],
+    "description": "Mocha::Before Each"
+  },
+  "Before Each Async": {
+    "prefix": "abeforeEach",
+    "body": [
+      "beforeEach(async () => {",
+      "\t${1}",
+      "});"
+    ],
+    "description": "Mocha::Before Each::Async"
+  },
+  "After": {
+    "prefix": "after",
+    "body": [
+      "after(() => {",
+      "\t${1}",
+      "});"
+    ],
+    "description": "Mocha::After"
+  },
+  "After Async": {
+    "prefix": "aafter",
+    "body": [
+      "after(async () => {",
+      "\t${1}",
+      "});"
+    ],
+    "description": "Mocha::After::Async"
+  },
+  "After Each": {
+    "prefix": "afterEach",
+    "body": [
+      "afterEach(() => {",
+      "\t${1}",
+      "});"
+    ],
+    "description": "Mocha::After Each"
+  },
+  "After Each Async": {
+    "prefix": "aafterEach",
+    "body": [
+      "afterEach(async () => {",
+      "\t${1}",
+      "});"
+    ],
+    "description": "Mocha::After Each::Async"
   }
 }

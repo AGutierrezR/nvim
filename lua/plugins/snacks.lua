@@ -381,13 +381,13 @@ return {
         end,
         desc = "Quickfix List",
       },
-      {
-        "<leader>sR",
-        function()
-          Snacks.picker.resume()
-        end,
-        desc = "Resume",
-      },
+      -- {
+      --   "<leader>sR",
+      --   function()
+      --     Snacks.picker.resume()
+      --   end,
+      --   desc = "Resume",
+      -- },
       {
         "<leader><Space>",
         function()

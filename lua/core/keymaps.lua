@@ -13,6 +13,9 @@ keymap("i", "<A-f>", "<Esc>wa")        -- Move forward one word
 keymap("i", "<A-b>", "<Esc>bi")        -- Move backward one word
 keymap({ "i", "x" }, "<C-S>", "<Esc><Cmd>silent! update | redraw<CR>", { desc = "Save and go to Normal mode" })
 
+-- Replace word under cursor globally (confirm each match)
+keymap("n", "<leader>sr", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gcI<Left><Left><Left><Left>]], { desc = "Replace word globally" })
+
 -- Save file
 keymap("n", "<C-S>", "<Cmd>silent! update | redraw<CR>", { desc = "Save" })
 
