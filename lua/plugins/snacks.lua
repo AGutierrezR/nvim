@@ -249,6 +249,19 @@ return {
         desc = "Explorer",
       },
       {
+        "<leader>fE",
+        function()
+          Snacks.picker.explorer({
+            layout = {
+              preset = "sidebar",
+              layout = { position = "right" },
+              preview = false,
+            },
+          })
+        end,
+        desc = "Explorer",
+      },
+      {
         "<leader>fc",
         function()
           Snacks.picker.files({ cwd = vim.fn.stdpath("config") })
