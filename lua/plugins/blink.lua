@@ -39,6 +39,10 @@ return {
         },
         opts = {},
       },
+      {
+        "mikavilpas/blink-ripgrep.nvim",
+        version = "*", -- use the latest stable version
+      },
     },
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
@@ -98,8 +102,9 @@ return {
         default = {
           "lsp",
           "path",
-          "buffer",
           "snippets",
+          "buffer",
+          "ripgrep",
         },
 
         providers = {
@@ -153,6 +158,20 @@ return {
               end
               return items
             end,
+          },
+          ripgrep = {
+            module = "blink-ripgrep",
+            name = "Ripgrep",
+            score_offset = -5,
+            -- see the full configuration below for all available options
+            ---@module "blink-ripgrep"
+            ---@type blink-ripgrep.Options
+            opts = {
+              prefix_min_len = 3,
+              backend = {
+                use = "gitgrep-or-ripgrep",
+              },
+            },
           },
         },
       },
