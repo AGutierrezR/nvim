@@ -32,6 +32,35 @@ keymap("n", "<Esc>", ":nohlsearch<cr>", { silent = true, desc = "Clear search hi
 -- remove Q keymap
 keymap("n", "Q", "<nop>")
 
+-- quickfix list
+keymap("n", "<leader>xq", function()
+  local success, err = pcall(vim.fn.getqflist({ winid = 0 }).winid ~= 0 and vim.cmd.cclose or vim.cmd.copen)
+  if not success and err then
+    vim.notify(err, vim.log.levels.ERROR)
+  end
+end, { desc = "Quickfix List" })
+
+keymap("n", "[q", vim.cmd.cprev, { desc = "Previous Quickfix" })
+keymap("n", "]q", vim.cmd.cnext, { desc = "Next Quickfix" })
+
+-- diagnostic
+local diagnostic_goto = function(next, severity)
+  return function()
+    vim.diagnostic.jump({
+      count = (next and 1 or -1) * vim.v.count1,
+      severity = severity and vim.diagnostic.severity[severity] or nil,
+      float = true,
+    })
+  end
+end
+keymap("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
+keymap("n", "]d", diagnostic_goto(true), { desc = "Next Diagnostic" })
+keymap("n", "[d", diagnostic_goto(false), { desc = "Prev Diagnostic" })
+keymap("n", "]e", diagnostic_goto(true, "ERROR"), { desc = "Next Error" })
+keymap("n", "[e", diagnostic_goto(false, "ERROR"), { desc = "Prev Error" })
+keymap("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Next Warning" })
+keymap("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
+
 -- ════════════════════════════════════════════════════════════════════════════
 -- Window Navigation (no prefix for speed)
 -- ════════════════════════════════════════════════════════════════════════════
