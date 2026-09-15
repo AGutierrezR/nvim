@@ -5,12 +5,30 @@ local keymap = vim.keymap.set
 -- ════════════════════════════════════════════════════════════════════════════
 
 -- Insert mode mappings
-keymap("i", "<C-z>", "<C-o>u")         -- Undo last change
-keymap("i", "<C-d>", '<C-o>"_dw')      -- Delete word in front
-keymap("i", "<C-a>", "<C-o>^")         -- Beginning of a line
-keymap("i", "<C-e>", "<C-o>$")         -- End of a line
-keymap("i", "<A-f>", "<Esc>wa")        -- Move forward one word
-keymap("i", "<A-b>", "<Esc>bi")        -- Move backward one word
+keymap("i", "<C-a>", "<C-o>^", { desc = "Beginning of line" })
+keymap("i", "<C-x><C-a>", "<C-a>", { desc = "Insert previously inserted text" })
+keymap("c", "<C-a>", "<Home>", { desc = "Beginning of line" })
+keymap("c", "<C-x><C-a>", "<C-a>", { desc = "Insert previously inserted text" })
+
+keymap("i", "<C-b>", "<C-o>h", { desc = "Back one character" })
+keymap("c", "<C-b>", "<Left>", { desc = "Move cursor left" })
+
+keymap("i", "<C-d>", '<C-o>"_X', { desc = "Delete character in front" })
+keymap("c", "<C-d>", "<BS>", { desc = "Delete character in front" })
+
+keymap("i", "<A-d>", '<C-o>"_dw', { desc = "Delete word in front" })
+
+keymap("i", "<C-e>", "<C-o>$", { desc = "End of line" })
+
+keymap("i", "<C-f>", "<Right>", { desc = "Move cursor right" })
+keymap("c", "<C-f>", "<Right>", { desc = "Move cursor right" })
+
+keymap("i", "<A-f>", "<Esc>wa", { desc = "Move forward one word" })
+keymap("i", "<A-b>", "<Esc>bi", { desc = "Move backward one word" })
+
+keymap("i", "<C-z>", "<C-o>u", { desc = "Undo last change" })
+
+-- Save and go to Normal mode
 keymap({ "i", "x" }, "<C-S>", "<Esc><Cmd>silent! update | redraw<CR>", { desc = "Save and go to Normal mode" })
 
 -- Replace word under cursor globally (confirm each match)
