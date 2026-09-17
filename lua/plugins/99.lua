@@ -9,6 +9,7 @@ return {
     _99.setup({
       -- provider = _99.Providers.CopilotProvider,
       -- model = "github-copilot/claude-sonnet-5",
+      -- model = "github-copilot/gpt-5.6-luna",
       provider = _99.Providers.OpenCodeProvider,
       model = "opencode/mimo-v2.5-free",
       tmp_dir = "./.99",
