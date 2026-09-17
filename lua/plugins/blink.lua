@@ -1,3 +1,6 @@
+-- https://github.com/saghen/blink.cmp
+-- https://github.com/folke/lazydev.nvim
+
 -- Configuration base on https://github.com/linkarzu/dotfiles-latest/blob/24923656b83aafa9490e966106cb22d0443e1561/neovim/neobean/lua/plugins/blink-cmp.lua
 
 -- NOTE: Specify the trigger character(s) used for luasnip

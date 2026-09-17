@@ -1,3 +1,5 @@
+-- https://github.com/nvim-lualine/lualine.nvim
+
 local mode_map = {
 
   ["NORMAL"] = "N",

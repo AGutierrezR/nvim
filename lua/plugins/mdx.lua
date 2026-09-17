@@ -1,3 +1,5 @@
+-- https://github.com/davidmh/mdx.nvim
+
 return {
   "davidmh/mdx.nvim",
   ft = { "markdown" },

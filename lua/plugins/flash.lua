@@ -1,3 +1,7 @@
+-- https://github.com/folke/flash.nvim
+-- https://github.com/rlane/pounce.nvim
+
+
 -- Pounce is a motion plugin similar to EasyMotion, Sneak, Hop, and Lightspeed. It's based on incremental fuzzy search
 return {
   {
@@ -16,7 +20,7 @@ return {
       { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search", },
     },
   },
-    {
+  {
     "rlane/pounce.nvim",
     event = "LazyFile",
     opts = {},

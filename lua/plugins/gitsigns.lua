@@ -1,3 +1,5 @@
+-- https://github.com/lewis6991/gitsigns.nvim
+
 -- Add git related signs to the gutter, as well as utilities to managing changes
 return {
   "lewis6991/gitsigns.nvim",

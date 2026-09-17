@@ -1,3 +1,5 @@
+-- https://github.com/folke/sidekick.nvim
+
 local haunt_sk = require("haunt.sidekick")
 
 return {

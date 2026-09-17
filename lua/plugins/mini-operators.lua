@@ -1,3 +1,5 @@
+-- https://github.com/echasnovski/mini.operators
+
 return {
   -- Text edit operators
   "echasnovski/mini.operators",

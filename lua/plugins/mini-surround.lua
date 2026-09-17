@@ -1,3 +1,6 @@
+-- https://github.com/echasnovski/mini.surround
+-- https://github.com/olrtg/nvim-emmet
+
 local keys = {
   { "sa", op = "add", desc = "Add Surrounding", mode = { "n", "x" } },
   { "sd", op = "delete", desc = "Delete Surrounding", mode = { "n" } },

@@ -1,3 +1,5 @@
+-- https://github.com/rachartier/tiny-code-action.nvim
+
 return {
   {
     "rachartier/tiny-code-action.nvim",

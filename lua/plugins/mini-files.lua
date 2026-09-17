@@ -1,3 +1,5 @@
+-- https://github.com/echasnovski/mini.files
+
 return {
   -- Navigate and manipulate file system
   "echasnovski/mini.files",

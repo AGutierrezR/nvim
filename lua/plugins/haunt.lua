@@ -1,3 +1,5 @@
+-- https://github.com/TheNoeTrevino/haunt.nvim
+
 return {
   "TheNoeTrevino/haunt.nvim",
   opts = {

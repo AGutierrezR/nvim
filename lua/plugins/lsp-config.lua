@@ -1,4 +1,5 @@
---
+-- https://github.com/neovim/nvim-lspconfig
+
 local snacks_lsp_pickers_filter = require("utils.snacks").lsp_pickers_filter
 
 return {

@@ -1,3 +1,5 @@
+-- https://github.com/echasnovski/mini.ai
+
 return {
   -- Neovim Lua plugin to extend and create `a`/`i` textobjects
   "echasnovski/mini.ai",

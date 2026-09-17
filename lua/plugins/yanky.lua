@@ -1,3 +1,5 @@
+-- https://github.com/gbprod/yanky.nvim
+
 return {
   "gbprod/yanky.nvim",
   -- event = "LazyFile",

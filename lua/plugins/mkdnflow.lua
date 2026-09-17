@@ -1,3 +1,7 @@
+-- https://github.com/preservim/vim-pencil
+-- https://github.com/folke/zen-mode.nvim
+-- https://github.com/jakewvincent/mkdnflow.nvim
+
 local function open_today_journal()
   local today = os.date("%Y-%m-%d")
   local dir = vim.fn.expand("~/vimwiki/journals/")

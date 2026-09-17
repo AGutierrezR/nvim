@@ -1,3 +1,6 @@
+-- https://github.com/lukas-reineke/indent-blankline.nvim
+-- https://github.com/TheGLander/indent-rainbowline.nvim
+
 -- Rainbow-ize your indents in Neovim today!
 return {
   'lukas-reineke/indent-blankline.nvim',

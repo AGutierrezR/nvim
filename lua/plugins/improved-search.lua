@@ -1,3 +1,5 @@
+-- https://github.com/backdround/improved-search.nvim
+
 return {
   {
     "backdround/improved-search.nvim",

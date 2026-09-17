@@ -1,3 +1,5 @@
+-- https://github.com/folke/snacks.nvim
+
 local actions = require("utils.snacks")
 return {
   {
