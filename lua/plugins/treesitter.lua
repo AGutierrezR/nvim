@@ -17,6 +17,7 @@ return {
 				"typescript",
 				"tsx",
 				"svelte",
+				"astro",
 				"json",
 				"html",
 				"markdown",

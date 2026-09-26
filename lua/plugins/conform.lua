@@ -44,6 +44,7 @@ return {
         html = { "prettier" },
         json = { "prettier" },
         yaml = { "prettier" },
+        astro = { "prettier" },
         markdown = { "prettier" },
         lua = { "stylua" },
         md = { "prettier" },
