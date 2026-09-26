@@ -178,26 +178,8 @@ return {
             },
           },
         },
-        vtsls = {
-          settings = {
-            vtsls = {
-              tsserver = {
-                globalPlugins = {
-                  {
-                    name = "ts-lit-plugin",
-                    location = "/Users/asgi/.fnm/node-versions/v18.20.8/installation/lib/node_modules/ts-lit-plugin",
-                    languages = { "javascript", "typescript" },
-                  },
-                  {
-                    name = "typescript-styled-plugin",
-                    location = "/Users/asgi/.fnm/node-versions/v18.20.8/installation/lib/node_modules/typescript-styled-plugin",
-                    languages = { "javascript", "typescript" },
-                  },
-                },
-              },
-            },
-          },
-        },
+        vtsls = {},
+        astro = {},
         svelte = {},
         jsonls = {},
         cssls = {},
@@ -224,7 +206,6 @@ return {
           },
         }, -- Markdown LSP
         gopls = {},
-        astro = {},
         tailwindcss = {},
         cucumber_language_server = {
           settings = {
