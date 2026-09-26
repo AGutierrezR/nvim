@@ -329,13 +329,14 @@ return {
         end,
         desc = "Command History",
       },
-      {
-        "<leader>:",
-        function()
-          Snacks.picker.command_history()
-        end,
-        desc = "Command History",
-      },
+      -- {
+      --   "<C-x><C-f>",
+      --   function()
+      --     Snacks.picker.command_history()
+      --   end,
+      --   desc = "Command History",
+      --   mode = "c"
+      -- },
       {
         "<leader>sC",
         function()
