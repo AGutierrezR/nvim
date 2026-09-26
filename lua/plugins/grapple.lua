@@ -17,7 +17,7 @@ return {
         desc = "Grapple file (toggle)",
       },
       {
-        "gb",
+        "gB",
         function()
           require("grapple").toggle_tags()
         end,
