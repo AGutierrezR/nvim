@@ -1,172 +1,79 @@
+-- https://github.com/mfussenegger/nvim-dap
+-- https://github.com/rcarriga/nvim-dap-ui
+
 return {
-  "mfussenegger/nvim-dap",
-  dependencies = {
-    { "rcarriga/nvim-dap-ui", dependencies = { "nvim-neotest/nvim-nio" }, opts = {} },
-    { "theHamsta/nvim-dap-virtual-text", opts = { commented = true } },
+  {
+    "mfussenegger/nvim-dap",
+    dependencies = {
+      { "rcarriga/nvim-dap-ui" },
+      { "theHamsta/nvim-dap-virtual-text", opts = { commented = true } },
+    },
+    keys = {
+      { "<leader>dB", function() require("dap").set_breakpoint({ condition = vim.fn.input("Breakpoint condition: ") }) end, desc = "Conditional breakpoint", },
+      { "<leader>db", function() require("dap").toggle_breakpoint() end, desc = "Breakpoint", },
+      { "<leader>dd", function() require("dap").continue() end, desc = "Continue", },
+      { "<leader>dC", function() require("dap").run_to_cursor() end, desc = "Run to cursor", },
+      { "<leader>di", function() require("dap").step_into() end, desc = "Step into", },
+      { "<leader>dj", function() require("dap").down() end, desc = "Down", },
+      { "<leader>dk", function() require("dap").up() end, desc = "Up", },
+      { "<leader>dl", function() require("dap").run_last() end, desc = "Run last", },
+      { "<leader>do", function() require("dap").step_out() end, desc = "Step out", },
+      { "<leader>dO", function() require("dap").step_over() end, desc = "Step over", },
+      { "<leader>dP", function() require("dap").pause() end, desc = "Pause", },
+      { "<leader>dr", function() require("dap").repl.toggle() end, desc = "REPL", },
+      { "<leader>ds", function() require("dap").session() end, desc = "Session", },
+      { "<leader>dt", function() require("dap").terminate() end, desc = "Terminate", },
+      { "<leader>dw", function() require("dap.ui.widgets").hover() end, desc = "Widgets", },
+    },
+    config = function()
+      require("config.dap.node").setup()
+    end,
   },
-  keys = {
     {
-      "<leader>dd",
-      function()
-        require("dap").continue()
-      end,
-      desc = "Debug: continue",
+    "rcarriga/nvim-dap-ui",
+    dependencies = { "nvim-neotest/nvim-nio" },
+    -- stylua: ignore
+    keys = {
+      { "<leader>du", function() require("dapui").toggle({ }) end, desc = "Dap UI" },
+      { "<leader>de", function() require("dapui").eval() end, desc = "Eval", mode = {"n", "x"} },
+      { "<leader>dW", function() require("dapui").elements.watches.add() end, mode = { "n", "v" }, desc = "Watch expression under cursor", },
+      { "<leader>dR", function() require("dapui.util").send_to_repl(require("dapui.util").get_current_expr()) end, mode = { "n", "v" }, desc = "Send expression to REPL", }
     },
-    {
-      "<leader>db",
-      function()
-        require("dap").toggle_breakpoint()
-      end,
-      desc = "Debug: breakpoint",
-    },
-    {
-      "<leader>dB",
-      function()
-        require("dap").set_breakpoint({ condition = vim.fn.input("Breakpoint condition: ") })
-      end,
-      desc = "Debug: conditional breakpoint",
-    },
-    {
-      "<leader>dp",
-      function()
-        require("dap").pause()
-      end,
-      desc = "Debug: pause",
-    },
-    {
-      "<leader>di",
-      function()
-        require("dap").step_into()
-      end,
-      desc = "Debug: step into",
-    },
-    {
-      "<leader>do",
-      function()
-        require("dap").step_over()
-      end,
-      desc = "Debug: step over",
-    },
-    {
-      "<leader>dO",
-      function()
-        require("dap").step_out()
-      end,
-      desc = "Debug: step out",
-    },
-    {
-      "<leader>dl",
-      function()
-        require("dap").run_last()
-      end,
-      desc = "Debug: run last",
-    },
-    {
-      "<leader>dt",
-      function()
-        require("dap").terminate()
-      end,
-      desc = "Debug: terminate",
-    },
-    {
-      "<leader>dR",
-      function()
-        require("dap").repl.open()
-      end,
-      desc = "Debug: REPL",
-    },
-    {
-      "<leader>de",
-      function()
-        require("dap").eval()
-      end,
-      mode = { "n", "v" },
-      desc = "Debug: evaluate",
-    },
-    {
-      "<leader>du",
-      function()
-        require("dapui").toggle()
-      end,
-      desc = "Debug: toggle DAP UI",
-    },
-  },
-  config = function()
-    local dap = require("dap")
-    local dapui = require("dapui")
-
-    require("config.dap.node").setup()
-
-    dap.listeners.before.attach["dapui_config"] = function()
-      require("dapui").open()
-    end
-    dap.listeners.before.launch["dapui_config"] = function()
-      require("dapui").open()
-    end
-    dap.listeners.after.event_initialized["dapui_config"] = function()
-      require("dapui").open()
-    end
-    dap.listeners.before.event_terminated["dapui_config"] = function()
-      require("dapui").close()
-    end
-    dap.listeners.before.event_exited["dapui_config"] = function()
-      require("dapui").close()
-    end
-
-    -- ╭──────────────────────────────────────────────────────────╮
-    -- │ DAP UI Setup                                             │
-    -- ╰──────────────────────────────────────────────────────────╯
-    dapui.setup({
-      icons = { expanded = "▾", collapsed = "▸" },
-      mappings = {
-        -- Use a table to apply multiple mappings
-        expand = { "<CR>", "<2-LeftMouse>" },
-        open = "o",
-        remove = "d",
-        edit = "e",
-        repl = "r",
-        toggle = "t",
-      },
-      -- Expand lines larger than the window
-      -- Requires >= 0.7
-      expand_lines = vim.fn.has("nvim-0.7"),
-      -- Layouts define sections of the screen to place windows.
-      -- The position can be "left", "right", "top" or "bottom".
-      -- The size specifies the height/width depending on position. It can be an Int
-      -- or a Float. Integer specifies height/width directly (i.e. 20 lines/columns) while
-      -- Float value specifies percentage (i.e. 0.3 - 30% of available lines/columns)
-      -- Elements are the elements shown in the layout (in order).
-      -- Layouts are opened in order so that earlier layouts take priority in window sizing.
+    opts = {
       layouts = {
         {
           elements = {
-            { id = "watches", size = 0.25 },
-            { id = "breakpoints", size = 0.25 },
+            { id = "watches", size = 1 / 3 },
+            { id = "breakpoints", size = 1 / 3 },
+            { id = "scopes", size = 1 / 3 },
           },
           size = 40, -- 40 columns
-          position = "left",
+          position = "right",
         },
         {
           elements = {
-            "scopes",
-            "repl",
+            {id = "repl", size = 0.5},
+            {id = "stacks", size = 0.5},
           },
           size = 0.25, -- 25% of total lines
           position = "bottom",
         },
       },
-      floating = {
-        max_height = nil, -- These can be integers or a float between 0 and 1.
-        max_width = nil, -- Floats will be treated as percentage of your screen.
-        border = "rounded", -- Border style. Can be "single", "double" or "rounded"
-        mappings = {
-          close = { "q", "<Esc>" },
-        },
-      },
-      windows = { indent = 1 },
-      render = {
-        max_type_length = nil, -- Can be integer or nil.
-      },
-    })
-  end,
+    },
+    config = function(_, opts)
+      local dap = require("dap")
+      local dapui = require("dapui")
+
+      dapui.setup(opts)
+      dap.listeners.after.event_initialized["dapui_config"] = function()
+        dapui.open({})
+      end
+      dap.listeners.before.event_terminated["dapui_config"] = function()
+        dapui.close({})
+      end
+      dap.listeners.before.event_exited["dapui_config"] = function()
+        dapui.close({})
+      end
+    end,
+  },
 }
