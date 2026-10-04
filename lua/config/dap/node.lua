@@ -41,20 +41,28 @@ local alias_adapter = function(alias, target)
   end
 end
 
-local configurations = {
-  {
+-- Shared defaults for every js-debug (pwa-*) launch config.
+local function debug_config(overrides)
+  return vim.tbl_deep_extend("force", {
     type = "pwa-node",
-    request = "launch",
-    name = "Launch file",
-    program = "${file}",
-    cwd = "${workspaceFolder}",
     sourceMaps = true,
+    cwd = "${workspaceFolder}",
     resolveSourceMapLocations = {
       "${workspaceFolder}/**",
       "!**/node_modules/**",
     },
-  },
-  {
+  }, overrides)
+end
+
+local vitest_program = "${workspaceFolder}/node_modules/vitest/vitest.mjs"
+
+local configurations = {
+  debug_config({
+    request = "launch",
+    name = "Launch file",
+    program = "${file}",
+  }),
+  debug_config({
     type = "pwa-chrome",
     request = "launch",
     name = "Launch using Chrome",
@@ -63,8 +71,33 @@ local configurations = {
       return vim.fn.input("URL: ", "http://localhost:3000")
     end,
     webRoot = "${workspaceFolder}",
-    sourceMaps = true,
-  },
+  }),
+  debug_config({
+    request = "launch",
+    name = "Vitest: current test file",
+    program = vitest_program,
+    args = { "run", "${file}", "--no-file-parallelism" },
+  }),
+  debug_config({
+    request = "launch",
+    name = "Vitest: current test by name",
+    program = vitest_program,
+    args = {
+      "run",
+      "-t",
+      function()
+        vim.cmd("redraw")
+        return vim.fn.input("Test name: ")
+      end,
+      "--no-file-parallelism",
+    },
+  }),
+  debug_config({
+    request = "launch",
+    name = "Vitest: all tests",
+    program = vitest_program,
+    args = { "run", "--no-file-parallelism" },
+  }),
 }
 
 function M.setup()
