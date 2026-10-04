@@ -3,7 +3,7 @@
 -- Not UFO in the sky, but an ultra fold in Neovim.
 return {
   "kevinhwang91/nvim-ufo",
-  enabled = true,
+  enabled = false,
   event = "BufRead",
   dependencies = {
     "kevinhwang91/promise-async",
