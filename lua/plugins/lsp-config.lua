@@ -249,9 +249,14 @@ return {
       -- reasonable debug configurations
       automatic_installation = true,
 
+      -- nvim-dap source names, not mason package names (see
+      -- mason-nvim-dap/mappings/source.lua). Unknown names are skipped
+      -- silently, so a wrong name installs nothing and errors nowhere.
+      -- Names usually drop the `-debug-adapter` suffix (e.g. `js`, not
+      -- `js-debug-adapter`).
       ensure_installed = {
         -- Update this to ensure that you have the debuggers for the langs you want
-        "js-debug-adapter",
+        "js",
       },
       handlers = {},
     },
