@@ -11,17 +11,38 @@ return {
   dependencies = { "MunifTanjim/nui.nvim" },
   keys = {
     {
-      "<leader>ci",
-      function() require("meow.yarn").open_tree("call_hierarchy", "callers") end,
+      "<leader>cyi",
+      function()
+        require("meow.yarn").open_tree("call_hierarchy", "callers")
+      end,
       desc = "Call Hierarchy: Callers",
     },
     {
-      "<leader>co",
-      function() require("meow.yarn").open_tree("call_hierarchy", "callees") end,
+      "<leader>cyo",
+      function()
+        require("meow.yarn").open_tree("call_hierarchy", "callees")
+      end,
       desc = "Call Hierarchy: Callees",
     },
+    {
+      "<leader>cyl",
+      function()
+        require("meow.yarn").reopen_last()
+      end,
+      desc = "Call Hierarchy: Re-open last hierarchy",
+    },
   },
-  config = function()
-    require("meow.yarn").setup({})
+  opts = {
+    window = {
+      preview_height_ratio = 0.4,
+      layout = "vertical",
+    },
+    quickfix = {
+      use_trouble = false,
+    },
+    expand_depth = 5,
+  },
+  config = function(_, opts)
+    require("meow.yarn").setup(opts)
   end,
 }

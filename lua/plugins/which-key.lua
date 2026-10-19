@@ -17,6 +17,7 @@ return {
       { "<leader>fy", group = "+yank filepath" },
       { "<leader>c", group = "+Code" },
       { "<leader>cl", group = "+LSP" },
+      { "<leader>cy", group = "+Yarn" },
       { "<leader>s", group = "+Search" },
       { "<leader>u", group = "+UI" },
       { "<leader>w", group = "+Wiki" },
