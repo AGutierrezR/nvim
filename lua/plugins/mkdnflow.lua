@@ -2,35 +2,35 @@
 -- https://github.com/folke/zen-mode.nvim
 -- https://github.com/jakewvincent/mkdnflow.nvim
 
-local function open_today_journal()
-  local today = os.date("%Y-%m-%d")
-  local dir = vim.fn.expand("~/vimwiki/journals/")
-  local path = dir .. today .. ".md"
-
-  -- Crear directorio si no existe
-  vim.fn.mkdir(dir, "p")
-
-  if vim.fn.filereadable(path) == 1 then
-    vim.cmd("edit " .. path)
-  else
-    local file = io.open(path, "w")
-    if file then
-      file:write("# Journal - " .. today .. "\n\n") -- Opcional: Escribe encabezado
-      file:close()
-    end
-    vim.cmd("edit " .. path)
-  end
-end
-
-local function open_wiki()
-  local dir = vim.fn.expand("~/vimwiki/")
-  local path = dir .. "index.md"
-  
-  -- Crear directorio si no existe
-  vim.fn.mkdir(dir, "p")
-  
-  vim.cmd("edit " .. path)
-end
+-- local function open_today_journal()
+--   local today = os.date("%Y-%m-%d")
+--   local dir = vim.fn.expand("~/vimwiki/journals/")
+--   local path = dir .. today .. ".md"
+--
+--   -- Crear directorio si no existe
+--   vim.fn.mkdir(dir, "p")
+--
+--   if vim.fn.filereadable(path) == 1 then
+--     vim.cmd("edit " .. path)
+--   else
+--     local file = io.open(path, "w")
+--     if file then
+--       file:write("# Journal - " .. today .. "\n\n") -- Opcional: Escribe encabezado
+--       file:close()
+--     end
+--     vim.cmd("edit " .. path)
+--   end
+-- end
+--
+-- local function open_wiki()
+--   local dir = vim.fn.expand("~/vimwiki/")
+--   local path = dir .. "index.md"
+--
+--   -- Crear directorio si no existe
+--   vim.fn.mkdir(dir, "p")
+--
+--   vim.cmd("edit " .. path)
+-- end
 
 return {
   { "preservim/vim-pencil" },
@@ -71,62 +71,62 @@ return {
       },
     },
   },
-  {
-    "jakewvincent/mkdnflow.nvim",
-    enabled = true,
-    -- keys = {
-    --   { "<leader>ww", function () open_wiki() end, mode = "n" },
-    --   { "<leader>w<leader>w", function () open_today_journal() end, mode = "n" },
-    -- },
-    config = function()
-      require("mkdnflow").setup({
-        mappings = {
-          MkdnEnter = { { "n", "v" }, "<CR>" },
-          MkdnGoBack = { "n", "<BS>" },
-          MkdnGoForward = { "n", "<Del>" },
-          MkdnMoveSource = { "n", "<F2>" },
-          MkdnNextLink = { "n", "<Tab>" },
-          MkdnPrevLink = { "n", "<S-Tab>" },
-          MkdnFollowLink = false,
-          MkdnDestroyLink = { "n", "<M-CR>" },
-          MkdnTagSpan = { "v", "<M-CR>" },
-          MkdnYankAnchorLink = { "n", "yaa" },
-          MkdnYankFileAnchorLink = { "n", "yfa" },
-          MkdnNextHeading = { "n", "]]" },
-          MkdnPrevHeading = { "n", "[[" },
-          MkdnIncreaseHeading = false, -- Modified
-          MkdnDecreaseHeading = false, -- Modified 
-          MkdnIncreaseHeadingOp = { { "n", "v" }, "g+" },
-          MkdnDecreaseHeadingOp = { { "n", "v" }, "g-" },
-          MkdnToggleToDo = { { "n", "v" }, "<C-Space>" },
-          MkdnNewListItem = false,
-          MkdnNewListItemBelowInsert = { "n", "o" },
-          MkdnNewListItemAboveInsert = { "n", "O" },
-          MkdnExtendList = false,
-          MkdnUpdateNumbering = { "n", "<leader>nn" },
-          MkdnTableNextCell = { "i", "<Tab>" },
-          MkdnTablePrevCell = { "i", "<S-Tab>" },
-          MkdnTableNextRow = false,
-          MkdnTablePrevRow = { "i", "<M-CR>" },
-          MkdnTableNewRowBelow = { "n", "<leader>ir" },
-          MkdnTableNewRowAbove = { "n", "<leader>iR" },
-          MkdnTableNewColAfter = { "n", "<leader>ic" },
-          MkdnTableNewColBefore = { "n", "<leader>iC" },
-          MkdnTableDeleteRow = { "n", "<leader>dr" },
-          MkdnTableDeleteCol = { "n", "<leader>dc" },
-          MkdnFoldSection = { "n", "<leader>f" },
-          MkdnUnfoldSection = { "n", "<leader>F" },
-          MkdnTab = false,
-          MkdnSTab = false,
-          MkdnIndentListItem = { "i", "<C-t>" },
-          MkdnDedentListItem = { "i", "<C-d>" },
-          MkdnCreateLink = false,
-          MkdnCreateLinkFromClipboard = { { "n", "v" }, "<leader>p" },
-        },
-      })
-
-      vim.keymap.set("n", "<leader>ww", open_wiki, { desc = "Open wiki" })
-      vim.keymap.set("n", "<leader>w<leader>w", open_today_journal, { desc = "Open today diary" })
-    end,
-  },
+  -- {
+  --   "jakewvincent/mkdnflow.nvim",
+  --   enabled = false,
+  --   -- keys = {
+  --   --   { "<leader>ww", function () open_wiki() end, mode = "n" },
+  --   --   { "<leader>w<leader>w", function () open_today_journal() end, mode = "n" },
+  --   -- },
+  --   config = function()
+  --     require("mkdnflow").setup({
+  --       mappings = {
+  --         MkdnEnter = { { "n", "v" }, "<CR>" },
+  --         MkdnGoBack = { "n", "<BS>" },
+  --         MkdnGoForward = { "n", "<Del>" },
+  --         MkdnMoveSource = { "n", "<F2>" },
+  --         MkdnNextLink = { "n", "<Tab>" },
+  --         MkdnPrevLink = { "n", "<S-Tab>" },
+  --         MkdnFollowLink = false,
+  --         MkdnDestroyLink = { "n", "<M-CR>" },
+  --         MkdnTagSpan = { "v", "<M-CR>" },
+  --         MkdnYankAnchorLink = { "n", "yaa" },
+  --         MkdnYankFileAnchorLink = { "n", "yfa" },
+  --         MkdnNextHeading = { "n", "]]" },
+  --         MkdnPrevHeading = { "n", "[[" },
+  --         MkdnIncreaseHeading = false, -- Modified
+  --         MkdnDecreaseHeading = false, -- Modified 
+  --         MkdnIncreaseHeadingOp = { { "n", "v" }, "g+" },
+  --         MkdnDecreaseHeadingOp = { { "n", "v" }, "g-" },
+  --         MkdnToggleToDo = { { "n", "v" }, "<C-Space>" },
+  --         MkdnNewListItem = false,
+  --         MkdnNewListItemBelowInsert = { "n", "o" },
+  --         MkdnNewListItemAboveInsert = { "n", "O" },
+  --         MkdnExtendList = false,
+  --         MkdnUpdateNumbering = { "n", "<leader>nn" },
+  --         MkdnTableNextCell = { "i", "<Tab>" },
+  --         MkdnTablePrevCell = { "i", "<S-Tab>" },
+  --         MkdnTableNextRow = false,
+  --         MkdnTablePrevRow = { "i", "<M-CR>" },
+  --         MkdnTableNewRowBelow = { "n", "<leader>ir" },
+  --         MkdnTableNewRowAbove = { "n", "<leader>iR" },
+  --         MkdnTableNewColAfter = { "n", "<leader>ic" },
+  --         MkdnTableNewColBefore = { "n", "<leader>iC" },
+  --         MkdnTableDeleteRow = { "n", "<leader>dr" },
+  --         MkdnTableDeleteCol = { "n", "<leader>dc" },
+  --         MkdnFoldSection = { "n", "<leader>f" },
+  --         MkdnUnfoldSection = { "n", "<leader>F" },
+  --         MkdnTab = false,
+  --         MkdnSTab = false,
+  --         MkdnIndentListItem = { "i", "<C-t>" },
+  --         MkdnDedentListItem = { "i", "<C-d>" },
+  --         MkdnCreateLink = false,
+  --         MkdnCreateLinkFromClipboard = { { "n", "v" }, "<leader>p" },
+  --       },
+  --     })
+  --
+  --     vim.keymap.set("n", "<leader>ww", open_wiki, { desc = "Open wiki" })
+  --     vim.keymap.set("n", "<leader>w<leader>w", open_today_journal, { desc = "Open today diary" })
+  --   end,
+  -- },
 }
