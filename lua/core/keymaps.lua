@@ -249,3 +249,12 @@ keymap("t", "<esc><esc>", "<c-\\><c-n>")
 -- These two keymaps go together because some terminals may register <C-/> as <C-_>
 keymap("t", "<C-/>", "<cmd>close<cr>", { desc = "Hide Terminal" })
 keymap("t", "<c-_>", "<cmd>close<cr>", { desc = "which_key_ignore" })
+
+-- ════════════════════════════════════════════════════════════════════════════
+-- Emacs-style keybindings
+-- ════════════════════════════════════════════════════════════════════════════
+
+-- File operations
+vim.keymap.set("n", "<C-x><C-s>", ":w<CR>", { desc = "Save file (Emacs style)" })
+vim.keymap.set("n", "<C-x><C-c>", ":q<CR>", { desc = "Quit (Emacs style)" })
+
