@@ -42,8 +42,8 @@ keymap("n", "<C-S>", "<Cmd>silent! update | redraw<CR>", { desc = "Save" })
 keymap("n", "<leader>re", "<cmd>restart<cr>", { desc = "Restart Neovim" })
 
 -- Quit
-keymap("n", "<leader>qq", "<cmd>q<cr>", { desc = "Quit" })
-keymap("n", "<leader>qQ", "<cmd>qa<cr>", { desc = "Quit All" })
+-- keymap("n", "<leader>Qq", "<cmd>q<cr>", { desc = "Quit" })
+-- keymap("n", "<leader>QQ", "<cmd>qa<cr>", { desc = "Quit All" })
 
 -- Clear search highlighting
 keymap("n", "<Esc>", ":nohlsearch<cr>", { silent = true, desc = "Clear search highlighting" })

@@ -25,7 +25,7 @@ return {
       { "<leader>f", group = "+Files/Find" },
       { "<leader>b", group = "+Buffers" },
       { "<leader>x", group = "+diagnostics/quickfix" },
-      { "<leader>q", group = "+quit/session" },
+      { "<leader>Q", group = "+quit/session" },
       { "<leader>h", group = "+haunt" },
       { "[", group = "prev" },
       { "]", group = "next" },
