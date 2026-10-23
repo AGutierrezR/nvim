@@ -51,13 +51,21 @@ keymap("n", "<Esc>", ":nohlsearch<cr>", { silent = true, desc = "Clear search hi
 -- remove Q keymap
 keymap("n", "Q", "<nop>")
 
--- quickfix list
-keymap("n", "<leader>xq", function()
-  local success, err = pcall(vim.fn.getqflist({ winid = 0 }).winid ~= 0 and vim.cmd.cclose or vim.cmd.copen)
-  if not success and err then
-    vim.notify(err, vim.log.levels.ERROR)
+-- quickfix list (toggle open/close)
+local function toggle_quickfix()
+  local ok = pcall(function()
+    if vim.fn.getqflist({ winid = 0 }).winid ~= 0 then
+      vim.cmd.cclose()
+    else
+      vim.cmd.copen()
+    end
+  end)
+  if not ok then
+    vim.notify("Quickfix list is empty", vim.log.levels.WARN)
   end
-end, { desc = "Quickfix List" })
+end
+keymap("n", "<leader>q", toggle_quickfix, { desc = "Toggle Quickfix List" })
+-- keymap("n", "<leader>xq", toggle_quickfix, { desc = "Toggle Quickfix List" })
 
 -- Quickfix (Unimpaird style)
 keymap("n", "[q", "<cmd>cprev<CR>", { desc = "Go to prev quickfix item" })
