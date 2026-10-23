@@ -59,8 +59,9 @@ keymap("n", "<leader>xq", function()
   end
 end, { desc = "Quickfix List" })
 
-keymap("n", "[q", vim.cmd.cprev, { desc = "Previous Quickfix" })
-keymap("n", "]q", vim.cmd.cnext, { desc = "Next Quickfix" })
+-- Quickfix (Unimpaird style)
+keymap("n", "[q", "<cmd>cprev<CR>", { desc = "Go to prev quickfix item" })
+keymap("n", "]q", "<cmd>cnext<CR>", { desc = "Go to next quickfix item" })
 
 -- diagnostic
 local diagnostic_goto = function(next, severity)
@@ -232,9 +233,6 @@ keymap("n", "<leader><tab>[", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
 
 keymap("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
 
--- Quickfix (Unimpaird style)
-keymap("n", "[q", "<cmd>cprev<CR>", { desc = "Go to prev quickfix item" })
-keymap("n", "]q", "<cmd>cnext<CR>", { desc = "Go to next quickfix item" })
 
 -- ════════════════════════════════════════════════════════════════════════════
 -- Terminal
