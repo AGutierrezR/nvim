@@ -1,16 +1,29 @@
 -- https://github.com/xheisenbugx/org.nvim
 
+local function open_refile()
+  local dir = vim.fn.expand("~/org/")
+  local path = dir .. "refile.org"
+
+  -- Create directory if it does not exist
+  vim.fn.mkdir(dir, "p")
+
+  vim.cmd("edit " .. path)
+end
+
 return {
   {
     "xheisenbugx/org.nvim",
     main = "org",
     lazy = false,
+    keys = {
+      { "<leader>ww", function () open_refile() end, mode = "n", desc = "org: Open refile" },
+    },
     opts = {
       org_directory = "~/org",
       agenda_files = { "~/org/**/*.org" },
       default_notes_file = "~/org/refile.org",
       mappings = {
-        prefix = "<leader>O",
+        prefix = "<leader>w",
       },
       capture = {
         templates = {
