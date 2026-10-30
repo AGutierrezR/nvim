@@ -98,6 +98,7 @@ return {
           },
           grep = {
             hidden = true,
+            exclude = { "package-lock.json", "yarn.lock", "pnpm-lock.yaml" },
           },
           buffers = {
             win = {
