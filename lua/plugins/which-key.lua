@@ -20,7 +20,6 @@ return {
       { "<leader>cy", group = "+Yarn" },
       { "<leader>s", group = "+Search" },
       { "<leader>u", group = "+UI" },
-      { "<leader>w", group = "+Wiki" },
       { "<leader><Tab>", group = "+Tabs" },
       { "<leader>f", group = "+Files/Find" },
       { "<leader>b", group = "+Buffers" },
