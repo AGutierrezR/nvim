@@ -77,6 +77,21 @@ M.search_in_directory = {
   end,
 }
 
+M.grep_exclude = {
+  "package-lock.json",
+  "yarn.lock",
+  "pnpm-lock.yaml",
+  "bun.lock",
+  "bun.lockb",
+
+  "*.snap",
+  "*.snapshot",
+  "*.snap.js",
+  "snap.js",
+  "snapshots/",
+  "__snapshots__/",
+}
+
 M.lsp_pickers_filter = {
   filter = {
     default = true,

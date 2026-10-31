@@ -1,6 +1,7 @@
 -- https://github.com/folke/snacks.nvim
 
-local actions = require("utils.snacks")
+local snacks_utils = require("utils.snacks")
+
 return {
   {
     "folke/snacks.nvim",
@@ -88,8 +89,8 @@ return {
             },
             layout = "default",
             actions = {
-              copy_path = actions.copy_action,
-              search_in_directory = actions.search_in_directory,
+              copy_path = snacks_utils.copy_action,
+              search_in_directory = snacks_utils.search_in_directory,
             },
           },
 
@@ -98,7 +99,6 @@ return {
           },
           grep = {
             hidden = true,
-            exclude = { "package-lock.json", "yarn.lock", "pnpm-lock.yaml" },
           },
           buffers = {
             win = {
@@ -163,7 +163,9 @@ return {
       {
         "<leader>/",
         function()
-          Snacks.picker.grep()
+          Snacks.picker.grep({
+            exclude = snacks_utils.grep_exclude,
+          })
         end,
         desc = "Grep",
       },
@@ -362,7 +364,9 @@ return {
       {
         "<leader>sg",
         function()
-          Snacks.picker.grep()
+          Snacks.picker.grep({
+            exclude = snacks_utils.grep_exclude,
+          })
         end,
         desc = "Grep",
       },
@@ -415,7 +419,9 @@ return {
       {
         "<leader>sw",
         function()
-          Snacks.picker.grep_word()
+          Snacks.picker.grep_word({
+            exclude = snacks_utils.grep_exclude,
+          })
         end,
         desc = "Search word",
         mode = { "n", "x" },
