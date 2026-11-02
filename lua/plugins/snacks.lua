@@ -537,6 +537,35 @@ return {
               vim.lsp.document_color.enable(state)
             end,
           }):map("<leader>uD")
+
+          -- Track spell corrections made through Snacks spelling picker
+          -- so they can be repeated on all instances with <leader>Sr.
+          local ok, vim_source = pcall(require, "snacks.picker.source.vim")
+          if ok and vim_source and vim_source.spelling then
+            local orig_spelling = vim_source.spelling
+            vim_source.spelling = function(...)
+              local items = orig_spelling(...)
+              local bad = vim.fn.spellbadword()[1]
+              if bad == "" then bad = vim.fn.expand("<cword>") end
+              for idx, item in ipairs(items or {}) do
+                item.action = function(...)
+                  -- Use native {count}z= so Vim registers the correction
+                  -- and :spellrepall keeps working (snacks' ciw did not).
+                  local cursor = vim.api.nvim_win_get_cursor(0)
+                  local line = vim.api.nvim_buf_get_lines(0, cursor[1] - 1, cursor[1], false)[1] or ""
+                  local col = cursor[2] + 1
+                  while line:sub(col, col):match("%s") and col < #line do
+                    col = col + 1
+                    vim.api.nvim_win_set_cursor(0, { cursor[1], col - 1 })
+                  end
+                  vim.cmd("normal! " .. idx .. "z=")
+                  vim.g.last_spell_bad = bad
+                  vim.g.last_spell_good = vim.fn.expand("<cword>")
+                end
+              end
+              return items
+            end
+          end
         end,
       })
     end,
