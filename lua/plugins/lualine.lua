@@ -27,6 +27,23 @@ local function place()
   return string.format("%s%s", linePre, line)
 end
 
+local spell_filetypes = {
+  markdown = true,
+  org = true,
+}
+
+local function spell_lang()
+  local ft = vim.bo.filetype
+  if not spell_filetypes[ft] or not vim.wo.spell then
+    return ""
+  end
+  local langs = vim.bo.spelllang
+  if langs == "" then
+    return ""
+  end
+  return "󰓆 " .. langs
+end
+
 -- Normalize path (similar to LazyVim's norm function)
 local function norm(path)
   if path:sub(1, 1) == "~" then
@@ -165,6 +182,7 @@ return {
         },
       },
       lualine_x = {
+        { spell_lang, color = { bg = "#89B4FA", fg = "#1a1b26", gui = "bold" } },
         "encoding",
         "filetype",
       },
