@@ -110,6 +110,8 @@ return {
           "ripgrep",
         },
 
+        per_filetype = { org = { inherit_defaults = true, "org" } },
+
         providers = {
           -- lsp = {
           --   -- markdown_oxide wiki-link completion: include [ ] / # space in keyword
@@ -176,6 +178,7 @@ return {
               },
             },
           },
+          org = { name = "Org", module = "org.completion.blink" },
         },
       },
 
