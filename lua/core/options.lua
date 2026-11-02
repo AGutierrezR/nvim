@@ -42,8 +42,31 @@ vim.opt.shiftwidth = 2 -- 2 spaces for indent width
 vim.opt.expandtab = true -- expand tab to space
 vim.opt.autoindent = true -- copy indent from current line when starting new one
 
-vim.opt.spelllang = "en_us"
+vim.opt.spelllang = { "en" }
 vim.opt.spell = true
+
+-- sessionoptions: what `:mksession` (and persistence.nvim) saves/restores.
+-- persistence.nvim auto-saves/restores sessions; see its config.
+-- Defaults from a typical session setup + `localoptions` added so per-buffer
+-- spell language (en/es) is remembered across sessions.
+-- Defaults would also include `blank` and `terminal`; omitted on purpose.
+-- See :help sessionoptions
+--   buffers       open buffers
+--   curdir        current working directory
+--   tabpages      tab pages
+--   winsize       window sizes
+--   help          help windows
+--   folds         folds
+--   localoptions  window/buffer-local options & mappings (e.g. spelllang)
+vim.opt.sessionoptions = {
+  "buffers",
+  "curdir",
+  "tabpages",
+  "winsize",
+  "help",
+  "folds",
+  "localoptions",
+}
 
 -- Split windows behavior
 vim.opt.splitright = true --split vertical window to the right

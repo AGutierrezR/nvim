@@ -241,7 +241,6 @@ keymap("n", "<leader><tab>[", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
 
 keymap("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
 
-
 -- ════════════════════════════════════════════════════════════════════════════
 -- Terminal
 -- ════════════════════════════════════════════════════════════════════════════
@@ -261,6 +260,61 @@ keymap("t", "<c-_>", "<cmd>close<cr>", { desc = "which_key_ignore" })
 -- ════════════════════════════════════════════════════════════════════════════
 
 -- File operations
-vim.keymap.set("n", "<C-x><C-s>", ":w<CR>", { desc = "Save file (Emacs style)" })
-vim.keymap.set("n", "<C-x><C-c>", ":q<CR>", { desc = "Quit (Emacs style)" })
+keymap("n", "<C-x><C-s>", ":w<CR>", { desc = "Save file (Emacs style)" })
+keymap("n", "<C-x><C-c>", ":q<CR>", { desc = "Quit (Emacs style)" })
+
+-- ════════════════════════════════════════════════════════════════════════════
+-- Spelling
+-- https://youtu.be/uLFAMYFmpkE
+-- ════════════════════════════════════════════════════════════════════════════
+
+-- Keymap to switch spelling language to English
+-- To save the language settings configured on each buffer, you need to add
+-- "localoptions" to vim.opt.sessionoptions in the `lua/core/options.lua` file
+keymap("n", "<leader>Sle", function()
+  vim.opt_local.spelllang = "en"
+  vim.cmd("echo 'Spell language set to English'")
+end, { desc = "Spelling language English" })
+
+-- Keymap to switch spelling language to Spanish
+keymap("n", "<leader>Sls", function()
+  vim.opt_local.spelllang = "es"
+  vim.cmd("echo 'Spell language set to Spanish'")
+end, { desc = "Spelling language Spanish" })
+
+-- Keymap to switch spelling language to both spanish and english
+keymap("n", "<leader>Slb", function()
+  vim.opt_local.spelllang = "en,es"
+  vim.cmd("echo 'Spell language set to Spanish and English'")
+end, { desc = "Spelling language Spanish and English" })
+
+-- Accept the first spelling suggestion
+keymap("n", "<leader>Ss", function()
+  -- Simulate pressing "z=" with "m" option using feedkeys
+  -- vim.api.nvim_replace_termcodes ensures "z=" is correctly interpreted
+  -- 'm' is the {mode}, which in this case is 'Remap keys'. This is default.
+  -- If {mode} is absent, keys are remapped.
+  --
+  -- I tried this keymap as usually with
+  vim.cmd("normal! 1z=")
+  -- But didn't work, only with nvim_feedkeys
+  -- vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("z=", true, false, true), "m", true)
+end, { desc = "Spelling suggestions" })
+
+-- Add word under the cursor as a good word
+keymap("n", "<leader>Sg", function()
+  vim.cmd("normal! zg")
+  -- I do a write so that harper is updated
+  vim.cmd("silent write")
+end, { desc = "Spelling add word to spellfile" })
+
+-- Undo zw, remove the word from the entry in 'spellfile'.
+keymap("n", "<leader>Su", function()
+  vim.cmd("normal! zug")
+end, { desc = "Spelling undo, remove word from list" })
+
+-- Repeat the last spell correction on all instances of the corrected word
+keymap("n", "<leader>Sr", function()
+  vim.cmd("spellrepall")
+end, { desc = "Spelling repeat correction all instances" })
 
