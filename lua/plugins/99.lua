@@ -16,31 +16,51 @@ return {
       md_files = { "AGENTS.md" },
     })
 
-    vim.keymap.set("v", "<leader>av", _99.visual, { desc = "99: Visual selection" })
-    vim.keymap.set("n", "<leader>al", function()
-      vim.cmd("normal! V")
-      _99.visual()
-    end, { desc = "99: Current line" })
-    vim.keymap.set("n", "<leader>af", function()
-      vim.cmd("normal! vaf")
-      _99.visual()
-    end, { desc = "99: Function" })
+    local scopes = {
+      { key = "l", cmd = "V", desc = "Current line" },
+      { key = "f", cmd = "vaf", desc = "Function" },
+      { key = "b", cmd = "vab", desc = "Block" },
+    }
 
-    vim.keymap.set("n", "<leader>ab", function()
-      vim.cmd("normal! vab")
-      _99.visual()
-    end, { desc = "99: Block" })
+    local keymap = function(mode, lhs, rhs, opts)
+      vim.keymap.set(mode, lhs, rhs, opts or {})
+    end
 
-    vim.keymap.set("n", "<leader>as", _99.search, { desc = "99: Search" })
-    vim.keymap.set("n", "<leader>ax", _99.stop_all_requests, { desc = "99: Stop all requests" })
-    vim.keymap.set("n", "<leader>ac", _99.clear_previous_requests, { desc = "99: Clear chat history" })
-    vim.keymap.set("v", "<leader>ao", _99.open, { desc = "99: Open prompt with selection" })
-    vim.keymap.set({ "v", "n" }, "<leader>a.", _99.repeat_last, { desc = "99: Repeat last operation" })
+    keymap("v", "<leader>av", _99.visual, { desc = "99: Visual selection" })
+    for _, scope in ipairs(scopes) do
+      keymap("n", "<leader>a" .. scope.key, function()
+        vim.cmd("normal! " .. scope.cmd)
+        _99.visual()
+      end, { desc = "99: " .. scope.desc })
+    end
 
-    vim.keymap.set("v", "<leader>ap", function()
+    keymap("v", "<leader>a.", _99.pick_saved_prompt, { desc = "99: Saved prompts" })
+    for _, scope in ipairs(scopes) do
+      keymap("n", "<leader>a." .. scope.key, function()
+        vim.cmd("normal! " .. scope.cmd)
+        _99.pick_saved_prompt()
+      end, { desc = "99: Saved prompts (" .. scope.desc .. ")" })
+    end
+
+    keymap("v", "<leader>ap", function()
       require("utils.99").select_prompt(function(prompt)
         _99.visual({ additional_prompt = prompt })
       end)
     end, { desc = "99: Prompts" })
+    for _, scope in ipairs(scopes) do
+      keymap("n", "<leader>ap" .. scope.key, function()
+        vim.cmd("normal! " .. scope.cmd)
+        require("utils.99").select_prompt(function(prompt)
+          _99.visual({ additional_prompt = prompt })
+        end)
+      end, { desc = "99: Prompts (" .. scope.desc .. ")" })
+    end
+
+    keymap("n", "<leader>aD", _99.delete_saved_prompt, { desc = "99: Delete saved prompts" })
+
+    keymap("n", "<leader>as", _99.search, { desc = "99: Search" })
+    keymap("n", "<leader>ax", _99.stop_all_requests, { desc = "99: Stop all requests" })
+    keymap("n", "<leader>ac", _99.clear_previous_requests, { desc = "99: Clear chat history" })
+    keymap("v", "<leader>ao", _99.open, { desc = "99: Open prompt with selection" })
   end,
 }
