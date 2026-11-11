@@ -10,6 +10,9 @@ return {
       -- provider = _99.Providers.CopilotProvider,
       -- model = "github-copilot/claude-sonnet-5",
       -- model = "github-copilot/gpt-5.6-luna",
+      -- provider_extra_args = {
+      --   "--silent",
+      -- },
       provider = _99.Providers.OpenCodeProvider,
       model = "opencode/beam-free", -- run `opencode models` to see list
       tmp_dir = "./.99",
@@ -61,6 +64,8 @@ return {
     keymap("n", "<leader>as", _99.search, { desc = "99: Search" })
     keymap("n", "<leader>ax", _99.stop_all_requests, { desc = "99: Stop all requests" })
     keymap("n", "<leader>ac", _99.clear_previous_requests, { desc = "99: Clear chat history" })
-    keymap("v", "<leader>ao", _99.open, { desc = "99: Open prompt with selection" })
+    keymap("n", "<leader>ao", _99.open, { desc = "99: Open prompt with selection" })
+
+    keymap({ "n", "x" }, "<leader>at", _99.tutorial, { desc = "99: Open tutorial" })
   end,
 }
