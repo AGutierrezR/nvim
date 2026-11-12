@@ -169,6 +169,27 @@ M.snippets = {
   end,
 }
 
+---Patch Snacks image placement so an image buffer is shown again
+---after switching away and back (placement stays `hidden` otherwise).
+---See: snacks.nvim placement.update
+---@return nil
+M.patch_image_placement = function()
+  local ok, Placement = pcall(require, "snacks.image.placement")
+  if not (ok and Placement and Placement.update) then
+    return
+  end
+  local orig_update = Placement.update
+  Placement.update = function(self)
+    if self and type(self.wins) == "function" then
+      local wok, wins = pcall(self.wins, self)
+      if wok and type(wins) == "table" and #wins > 0 then
+        self.hidden = false
+      end
+    end
+    return orig_update(self)
+  end
+end
+
 ---Patch Snacks spelling source so corrections use native z=,
 ---keeping :spellrepall working (Snacks' default ciw does not register it).
 ---@return nil

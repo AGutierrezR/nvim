@@ -54,6 +54,7 @@ return {
         },
       },
       indent = { enabled = false },
+      image = { enabled = true },
       input = { enabled = false },
       picker = {
         layouts = {
@@ -541,6 +542,9 @@ return {
           -- Track spell corrections made through Snacks spelling picker
           -- so they can be repeated on all instances with <leader>Sr.
           snacks_utils.patch_spelling()
+
+          -- Fix: image placement stays hidden after switching buffers back.
+          snacks_utils.patch_image_placement()
         end,
       })
     end,
