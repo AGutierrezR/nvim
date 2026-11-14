@@ -545,6 +545,8 @@ return {
 
           -- Fix: image placement stays hidden after switching buffers back.
           snacks_utils.patch_image_placement()
+          -- Avoid inline image rendering in HTML/CSS buffers.
+          snacks_utils.patch_image_doc_langs()
         end,
       })
     end,

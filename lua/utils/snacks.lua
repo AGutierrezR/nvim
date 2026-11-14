@@ -190,6 +190,34 @@ M.patch_image_placement = function()
   end
 end
 
+---Languages whose inline image rendering should be disabled in docs.
+---Languages where inline image rendering IS allowed in docs (allowlist).
+---Extend this list to enable more (e.g. table.insert(require("utils.snacks").image_doc_allowed, "latex")).
+M.image_doc_allowed = { "markdown" }
+
+---Render inline images only for languages in `M.image_doc_allowed` (snacks image doc).
+---Pass `langs` to override the allowlist for a single call.
+---@param langs? string[]
+---@return nil
+M.patch_image_doc_langs = function(langs)
+  local allowed = langs or M.image_doc_allowed
+  local allowed_set = {}
+  for _, lang in ipairs(allowed) do
+    allowed_set[lang] = true
+  end
+  local ok, Image = pcall(require, "snacks.image")
+  if not (ok and Image and type(Image.langs) == "function") then
+    return
+  end
+  local orig_langs = Image.langs
+  Image.langs = function()
+    local langs_list = orig_langs()
+    return vim.tbl_filter(function(lang)
+      return allowed_set[lang] == true
+    end, langs_list or {})
+  end
+end
+
 ---Patch Snacks spelling source so corrections use native z=,
 ---keeping :spellrepall working (Snacks' default ciw does not register it).
 ---@return nil
