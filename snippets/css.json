@@ -605,5 +605,32 @@
       "$0"
     ],
     "description": "Width and height"
+  },
+  "Media Query Max": {
+    "prefix": "@max",
+    "body": [
+      "@media (width < ${1|640px,768px,1024px,1280px|}) {",
+      "  $0",
+      "}"
+    ],
+    "description": "Media query max-width (range syntax)"
+  },
+  "Media Query Min": {
+    "prefix": "@min",
+    "body": [
+      "@media (width > ${1|640px,768px,1024px,1280px|}) {",
+      "  $0",
+      "}"
+    ],
+    "description": "Media query min-width (range syntax)"
+  },
+  "Media Query MinMax": {
+    "prefix": "@minmax",
+    "body": [
+      "@media (width > ${1|640px,768px,1024px,1280px|}) and (width < ${2|768px,1024px,1280px,1535px|}) {",
+      "  $0",
+      "}"
+    ],
+    "description": "Media query min and max width (range syntax)"
   }
 }
