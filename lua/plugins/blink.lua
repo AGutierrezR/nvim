@@ -130,7 +130,7 @@ return {
               local col = vim.api.nvim_win_get_cursor(0)[2]
               local before_cursor = vim.api.nvim_get_current_line():sub(1, col)
               -- NOTE: remember that `trigger_text` is modified at the top of the file
-              return before_cursor:match(trigger_text .. "%w*$") ~= nil
+              return before_cursor:match(trigger_text .. "[^" .. trigger_text .. "]*$") ~= nil
             end,
             -- After accepting the completion, delete the trigger_text characters
             -- from the final inserted text
